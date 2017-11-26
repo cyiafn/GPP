@@ -11,19 +11,16 @@
 #include "textDX.h"
 #include "constants.h"
 
-class ThreeCsDX : public Game
+class dontdie : public Game
 {
 private:
     // game items	
-    TextDX  *dxFontSmall;       // DirectX fonts
-    TextDX  *dxFontMedium;
-    TextDX  *dxFontLarge;
 
     // game variables
 
 public:
-    ThreeCsDX();
-    virtual ~ThreeCsDX();
+	dontdie();
+    virtual ~dontdie();
     void initialize(HWND hwnd);
     void reset();
     void update();
