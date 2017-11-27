@@ -1,5 +1,7 @@
-﻿  winmain.cpp
+﻿  player.cpp
+  Generating Code...
+  Compiling...
+  winmain.cpp
   dontdie.cpp
   Generating Code...
-audio.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
+  ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe

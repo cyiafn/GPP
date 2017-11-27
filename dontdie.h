@@ -12,13 +12,18 @@
 #include "image.h"
 
 #include "textDX.h"
+#include "player.h"
 #include "constants.h"
 
 class dontdie : public Game
 {
 private:
     // game items	
+	TextureManager mapTexture;   // map texture
+	TextureManager playerTexture;     // player texture
 
+	Image   map;                 // map image
+	Image   player;                 // player image
     // game variables
 
 public:
