@@ -7,15 +7,15 @@
 
 namespace zombieNS
 {
-	const int WIDTH = 1024;                   // image width
-	const int HEIGHT = 1024;                  // image height
+	const int WIDTH = 64;                   // image width
+	const int HEIGHT = 64;                  // image height
 	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
 	const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
-	const float SPEED = 100;                // 100 pixels per second
-	const int   TEXTURE_COLS = 1;           // texture has 2 columns
+	const float SPEED = 0;                // 100 pixels per second
+	const int   TEXTURE_COLS = 1;           // texture has 1 columns
 	const int   ZOMBIE_START_FRAME = 0;       // ship starts at frame 0
-	const int   ZOMBIE_END_FRAME = 0;         // ship animation frames 0,1,2,3
-	const float ZOMBIE_ANIMATION_DELAY = 0; // time between frames
+	const int   ZOMBIE_END_FRAME = 1;         // ship animation frames 0,1,2,3
+	const float ZOMBIE_ANIMATION_DELAY = 0.2f; // time between frames
 	const int DAMAGE = 1;
 	const int HEALTH = 4;
 }
@@ -35,6 +35,7 @@ public:
 		TextureManager *textureM);
 	// inherited member functions
 	void update(float frameTime);
+	void ai(float frameTime, Zombie &ent);
 };
 #endif
 

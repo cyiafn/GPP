@@ -19,7 +19,8 @@ Zombie::Zombie() : Entity()
 	currentFrame = startFrame;
 	radius = zombieNS::WIDTH / 2.0;
 	health = zombieNS::HEALTH;
-	collisionType = entityNS::CIRCLE;
+	collisionType = entityNS::BOX;
+	attack = false;
 }
 
 bool Zombie::initialize(Game *gamePtr, int width, int height, int ncols,
@@ -35,12 +36,16 @@ bool Zombie::initialize(Game *gamePtr, int width, int height, int ncols,
 
 void Zombie::draw()
 {
-	Image::draw();              // draw ship
+	Image::draw();              // draw zombie
 }
 
 void Zombie::update(float frameTime)
 {
 	Entity::update(frameTime);
-	spriteData.x += frameTime * velocity.x;         // move ship along X 
-	spriteData.y += frameTime * velocity.y;         // move ship along Y
+	spriteData.x += frameTime * velocity.x;         
+	spriteData.y += frameTime * velocity.y;
+}
+void Zombie::ai(float frameTime, Zombie &ent)
+{
+
 }

@@ -1,7 +1,3 @@
-// Programming 2D Games
-// Copyright (c) 2011 by: 
-// Charles Kelly
-// Chapter 8 threeCsDX.cpp v1.0
 
 #include "dontdie.h"
 
@@ -29,11 +25,11 @@ void dontdie::initialize(HWND hwnd)
     Game::initialize(hwnd);
     graphics->setBackColor(graphicsNS::WHITE);
 	if (!zombieTexture.initialize(graphics, ZOMBIE_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing game textures"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing zombie textures"));
     // initialize DirectX fonts
     // 15 pixel high Arial
 	if (!zombie1.initialize(this, zombieNS::WIDTH, zombieNS::HEIGHT, zombieNS::TEXTURE_COLS, &zombieTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ship1"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing zombie texture"));
 	zombie1.setFrames(zombieNS::ZOMBIE_START_FRAME, zombieNS::ZOMBIE_END_FRAME);
 	zombie1.setCurrentFrame(zombieNS::ZOMBIE_START_FRAME);
 	zombie1.setX(GAME_WIDTH / 4);
@@ -43,7 +39,6 @@ void dontdie::initialize(HWND hwnd)
     
 
     reset();            // reset all game variables
-    fpsOn = true;       // display frames per second
     return;
 }
 
