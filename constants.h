@@ -24,12 +24,18 @@
 #define SAFE_ON_RESET_DEVICE(ptr)   { if(ptr) { ptr->onResetDevice(); } }
 #define TRANSCOLOR  SETCOLOR_ARGB(0,255,0,255)  // transparent color (magenta)
 
+// Safely call onLostDevice
+#define SAFE_ON_LOST_DEVICE(ptr)    { if(ptr) { ptr->onLostDevice(); } }
+// Safely call onResetDevice
+#define SAFE_ON_RESET_DEVICE(ptr)   { if(ptr) { ptr->onResetDevice(); } }
+#define TRANSCOLOR  SETCOLOR_ARGB(0,255,0,255)  // transparent color (magenta)
+
 //-----------------------------------------------
 //                  Constants
 //-----------------------------------------------
 // window
-const char CLASS_NAME[] = "ThreeCsDX";
-const char GAME_TITLE[] = "Three Cs DirectX";
+const char CLASS_NAME[] = "dontdie";
+const char GAME_TITLE[] = "Don't Die";
 const bool FULLSCREEN = false;          // windowed or fullscreen
 const UINT GAME_WIDTH = 640;			// width of game in pixels
 const UINT GAME_HEIGHT = 480;			// height of game in pixels

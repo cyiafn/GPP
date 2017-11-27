@@ -8,6 +8,9 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "game.h"
+#include "textureManager.h"
+#include "image.h"
+
 #include "textDX.h"
 #include "constants.h"
 
