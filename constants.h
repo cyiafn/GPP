@@ -49,7 +49,7 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 
 // graphic images
 const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
-const char PLAYER_IMAGE[] = "pictures\\zombie.png"; // picture of Player
+const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
 
 // player animation
 const int  PLAYER_START_FRAME = 0;         // starting frame of player animation

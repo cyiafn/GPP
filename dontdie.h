@@ -24,6 +24,8 @@ private:
 
 	Image   map;                 // map image
 	Image   player;                 // player image
+
+	Player player1;
     // game variables
 
 public:

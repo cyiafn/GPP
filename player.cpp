@@ -10,7 +10,7 @@
 //=============================================================================
 Player::Player() : Entity()
 {
-    spriteData.width = playerNS::WIDTH;           // size of Ship1
+    spriteData.width = playerNS::WIDTH;           // size of player
     spriteData.height = playerNS::HEIGHT;
     spriteData.x = playerNS::X;                   // location on screen
     spriteData.y = playerNS::Y;
@@ -53,8 +53,8 @@ void Player::draw()
 void Player::update(float frameTime)
 {
     Entity::update(frameTime);
-    spriteData.x += frameTime * velocity.x;         // move player along X 
-    spriteData.y += frameTime * velocity.y;         // move player along Y
+    //spriteData.x += frameTime * velocity.x;         // move player along X 
+    //spriteData.y += frameTime * velocity.y;         // move player along Y
 
     // Bounce off walls
     if (spriteData.x > GAME_WIDTH- playerNS::WIDTH)    // if hit right screen edge
