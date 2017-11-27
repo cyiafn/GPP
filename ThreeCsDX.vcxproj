@@ -101,6 +101,7 @@
     <ClCompile Include="dontdie.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
+    <ClCompile Include="zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="textDX.h" />
     <ClInclude Include="dontdie.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

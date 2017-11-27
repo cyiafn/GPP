@@ -13,12 +13,14 @@
 
 #include "textDX.h"
 #include "constants.h"
+#include "zombie.h"
 
 class dontdie : public Game
 {
 private:
     // game items	
-
+	TextureManager zombieTexture;    // game texture
+	Zombie zombie1;
     // game variables
 
 public:

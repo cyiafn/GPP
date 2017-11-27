@@ -37,8 +37,8 @@
 const char CLASS_NAME[] = "dontdie";
 const char GAME_TITLE[] = "Don't Die";
 const bool FULLSCREEN = false;          // windowed or fullscreen
-const UINT GAME_WIDTH = 640;			// width of game in pixels
-const UINT GAME_HEIGHT = 480;			// height of game in pixels
+const UINT GAME_WIDTH = 1280;			// width of game in pixels
+const UINT GAME_HEIGHT = 720;			// height of game in pixels
 
 // game
 const double PI = 3.14159265;
@@ -47,7 +47,7 @@ const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 
-
+const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
 
 // audio files
 const char WAVE_BANK[] = "";

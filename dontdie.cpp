@@ -28,10 +28,17 @@ void dontdie::initialize(HWND hwnd)
 {
     Game::initialize(hwnd);
     graphics->setBackColor(graphicsNS::WHITE);
-
+	if (!zombieTexture.initialize(graphics, ZOMBIE_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing game textures"));
     // initialize DirectX fonts
     // 15 pixel high Arial
-    
+	if (!zombie1.initialize(this, zombieNS::WIDTH, zombieNS::HEIGHT, zombieNS::TEXTURE_COLS, &zombieTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ship1"));
+	zombie1.setFrames(zombieNS::ZOMBIE_START_FRAME, zombieNS::ZOMBIE_END_FRAME);
+	zombie1.setCurrentFrame(zombieNS::ZOMBIE_START_FRAME);
+	zombie1.setX(GAME_WIDTH / 4);
+	zombie1.setY(GAME_HEIGHT / 4);
+	zombie1.setVelocity(VECTOR2(zombieNS::SPEED, -zombieNS::SPEED)); // VECTOR2(X, Y)
 
     
 
@@ -55,6 +62,7 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
+	zombie1.update(frameTime);
 }
 
 //=============================================================================
@@ -62,18 +70,10 @@ void dontdie::update()
 //=============================================================================
 void dontdie::render()
 {
-	const int BUF_SIZE = 20;
-    static char buffer[BUF_SIZE];
 
     graphics->spriteBegin();
 
- 
-    if(fpsOn)           // if fps display requested
-    {
-            // convert fps to Cstring
-            _snprintf_s(buffer, BUF_SIZE, "fps %d ", (int)fps);
-            dxFont.print(buffer,GAME_WIDTH-200,GAME_HEIGHT-50);
-     }
+	zombie1.draw();
 	 
     graphics->spriteEnd();
 
@@ -86,6 +86,7 @@ void dontdie::render()
 //=============================================================================
 void dontdie::releaseAll()
 {
+	zombieTexture.onResetDevice();
     Game::releaseAll();
     return;
 }
@@ -96,6 +97,7 @@ void dontdie::releaseAll()
 //=============================================================================
 void dontdie::resetAll()
 {
+	zombieTexture.onResetDevice();
     Game::resetAll();
     return;
 }
