@@ -33,17 +33,22 @@ void dontdie::initialize(HWND hwnd)
 	// Map texture
 	if (!mapTexture.initialize(graphics, MAP_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
+	//Wall texture
+	if (!wallTexture.initialize(graphics, WALL_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Wall texture"));
 	// Player texture
 	if (!playerTexture.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-
+	
 	// Map 
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
-
+	// Wall 
+	if (!wall1.initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	// Player
 	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
@@ -54,6 +59,19 @@ void dontdie::initialize(HWND hwnd)
 	return;
 }
 
+//=============================================================================
+// Handle collisions
+//=============================================================================
+void dontdie::collisions()
+{
+	VECTOR2 collisionVector;
+	// if collision between ship and planet
+	if (player1.collidesWith(wall1, collisionVector))
+	{
+		// bounce off planet
+		player1.bounce(collisionVector, wall1);
+	}
+}
 
 //=============================================================================
 // Reset the game to begin play and after a score
@@ -69,6 +87,7 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
+	wall1.update(frameTime);
 	player1.update(frameTime);
 	if (input->isKeyDown(PLAYER_RIGHT_KEY) || input->isKeyDown(PLAYER_LEFT_KEY) || input->isKeyDown(PLAYER_UP_KEY) || input->isKeyDown(PLAYER_DOWN_KEY))
 	{
@@ -91,7 +110,16 @@ void dontdie::update()
 			player1.setY(player1.getY() - frameTime * PLAYER_SPEED);
 			if (player1.getY() < -player1.getHeight())        // if off screen top
 				player1.setY((float)GAME_HEIGHT);     // position off screen bottom
-			player1.setDegrees(0.0f);
+			if(input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				player1.setDegrees(45.0f);
+			}
+			else if(input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				player1.setDegrees(315.0f);
+			}
+			else
+				player1.setDegrees(0.0f);
 		}
 
 		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
@@ -99,6 +127,15 @@ void dontdie::update()
 			player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
 			if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
 				player1.setY((float)-player1.getHeight());    // position off screen top
+			if (input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				player1.setDegrees(135.0f);
+			}
+			else if (input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				player1.setDegrees(225.0f);
+			}
+			else
 			player1.setDegrees(180.0f);
 		}
 		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
@@ -120,7 +157,8 @@ void dontdie::render()
 	graphics->spriteBegin();
 
 	map.draw();         //adds the map to the scene
-	player1.draw();      //adds the player into the scene
+	wall1.draw();		//adds the wall to the scene
+	player1.draw();     //adds the player into the scene
 
 	if (fpsOn)           // if fps display requested
 	{
@@ -141,6 +179,7 @@ void dontdie::render()
 void dontdie::releaseAll()
 {
 	mapTexture.onLostDevice();
+	wallTexture.onLostDevice();
 	playerTexture.onLostDevice();
 	Game::releaseAll();
 	return;
@@ -153,6 +192,7 @@ void dontdie::releaseAll()
 void dontdie::resetAll()
 {
 	mapTexture.onResetDevice();
+	wallTexture.onResetDevice();
 	playerTexture.onResetDevice();
 	Game::resetAll();
 	return;

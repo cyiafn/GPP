@@ -13,6 +13,7 @@
 
 #include "textDX.h"
 #include "player.h"
+#include "wall.h"
 #include "constants.h"
 
 class dontdie : public Game
@@ -21,11 +22,14 @@ private:
     // game items	
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
+	TextureManager wallTexture; //wall texture
 
 	Image   map;                 // map image
-	Image   player;                 // player image
+	Image   player;              // player image
+	Image	wall;				 // wall image	
 
 	Player player1;
+	Wall wall1;
     // game variables
 
 public:
@@ -35,7 +39,7 @@ public:
     void reset();
     void update();
     void ai() {};
-    void collisions() {};
+    void collisions() ;
     void render();
     void releaseAll();
     void resetAll();
