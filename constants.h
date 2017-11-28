@@ -51,13 +51,13 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
 
-// player animation
-const int  PLAYER_START_FRAME = 0;         // starting frame of player animation
-const int  PLAYER_END_FRAME = 3;           // last frame of player animation
-const float PLAYER_ANIMATION_DELAY = 0.2f; // time between frames of player animation
-const int  PLAYER_COLS = 2;                // player texture has 2 columns
-const int  PLAYER_WIDTH = 32;              // width of player image
-const int  PLAYER_HEIGHT = 32;             // height of player image
+//// player animation
+//const int  PLAYER_START_FRAME = 0;         // starting frame of player animation
+//const int  PLAYER_END_FRAME = 3;           // last frame of player animation
+//const float PLAYER_ANIMATION_DELAY = 0.2f; // time between frames of player animation
+//const int  PLAYER_COLS = 2;                // player texture has 2 columns
+//const int  PLAYER_WIDTH = 32;              // width of player image
+//const int  PLAYER_HEIGHT = 32;             // height of player image
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second
