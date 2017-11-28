@@ -12,13 +12,13 @@
 
 namespace playerNS
 {
-    const int WIDTH = 64;                   // image width
-    const int HEIGHT = 64;                  // image height
+    const int WIDTH = 26;                   // image width
+    const int HEIGHT = 18;                  // image height
     const int X = GAME_WIDTH/2 - WIDTH/2;   // location on screen
     const int Y = GAME_HEIGHT/2 - HEIGHT/2;
     const float SPEED = 100;                // 100 pixels per second
     const float MASS = 250.0f;              // mass
-    const int   TEXTURE_COLS = 2;           // texture has 2 columns
+    const int   TEXTURE_COLS = 1;           // texture has 2 columns
     const int   PLAYER_START_FRAME = 0;      // player starts at frame 0
     const int   PLAYER_END_FRAME = 2;        // player animation frames 0,1,2
     const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
