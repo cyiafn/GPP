@@ -31,8 +31,8 @@ void dontdie::initialize(HWND hwnd)
 	graphics->setBackColor(graphicsNS::WHITE);
 
 	// Map texture
-	//if (!mapTexture.initialize(graphics, MAP_IMAGE))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
+	if (!mapTexture.initialize(graphics, MAP_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
 	// Player texture
 	if (!playerTexture.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
@@ -77,18 +77,21 @@ void dontdie::update()
 			player1.setX(player1.getX() + frameTime * PLAYER_SPEED);
 			if (player1.getX() > GAME_WIDTH)               // if off screen right
 				player1.setX((float)-player1.getWidth());  // position off screen left
+			player1.setDegrees(90.0f);
 		}
 		if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
 		{
 			player1.setX(player1.getX() - frameTime * PLAYER_SPEED);
 			if (player1.getX() < -player1.getWidth())         // if off screen left
 				player1.setX((float)GAME_WIDTH);      // position off screen right
+			player1.setDegrees(270.0f);
 		}
 		if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
 		{
 			player1.setY(player1.getY() - frameTime * PLAYER_SPEED);
 			if (player1.getY() < -player1.getHeight())        // if off screen top
 				player1.setY((float)GAME_HEIGHT);     // position off screen bottom
+			player1.setDegrees(0.0f);
 		}
 
 		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
@@ -96,6 +99,7 @@ void dontdie::update()
 			player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
 			if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
 				player1.setY((float)-player1.getHeight());    // position off screen top
+			player1.setDegrees(180.0f);
 		}
 		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
 	}
