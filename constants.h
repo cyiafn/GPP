@@ -50,6 +50,7 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 // graphic images
 //const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
+const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second

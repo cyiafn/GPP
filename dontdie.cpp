@@ -1,7 +1,3 @@
-// Programming 2D Games
-// Copyright (c) 2011 by: 
-// Charles Kelly
-// Chapter 8 threeCsDX.cpp v1.0
 
 #include "dontdie.h"
 #include "input.h"

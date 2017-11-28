@@ -14,6 +14,7 @@
 #include "textDX.h"
 #include "player.h"
 #include "constants.h"
+#include "zombie.h"
 
 class dontdie : public Game
 {

@@ -1,7 +1,12 @@
 ﻿  dontdie.cpp
   Generating Code...
   Compiling...
+<<<<<<< HEAD
   winmain.cpp
   player.cpp
+=======
+  zombie.cpp
+  winmain.cpp
+>>>>>>> yifan
   Generating Code...
   ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
