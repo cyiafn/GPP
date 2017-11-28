@@ -31,8 +31,8 @@ void dontdie::initialize(HWND hwnd)
 	graphics->setBackColor(graphicsNS::WHITE);
 
 	// Map texture
-	//if (!mapTexture.initialize(graphics, MAP_IMAGE))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
+	if (!mapTexture.initialize(graphics, MAP_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
 	// Player texture
 	if (!playerTexture.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
