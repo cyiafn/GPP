@@ -31,8 +31,8 @@ void dontdie::initialize(HWND hwnd)
 	graphics->setBackColor(graphicsNS::WHITE);
 
 	// Map texture
-	if (!mapTexture.initialize(graphics, MAP_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
+	//if (!mapTexture.initialize(graphics, MAP_IMAGE))
+	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
 	// Player texture
 	if (!playerTexture.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
@@ -46,14 +46,8 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player texture"));
 	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
 	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
-	//if (!player.initialize(graphics, 0, 0, 0, &playerTexture))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player"));
-	//player.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);   // animation frames ship.setCurrentFrame(SHIP_START_FRAME);             
-	//player.setCurrentFrame(playerNS::PLAYER_START_FRAME);																	  // starting frame
-	//player.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
-	////player.setDegrees((atan2(ship.getY - getMouseY() , ship.getX - getMouseX()) * 180) / M_PI);                             // angle of ship
-	//player.setColorFilter(SETCOLOR_ARGB(255, 230, 230, 255));   // light blue, used for shield and torpedo
-
+	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
+	//player1.setDegrees((atan2(ship.getY - getMouseY() , ship.getX - getMouseX()) * 180) / M_PI);     //angle of player
 
 	reset();            // reset all game variables
 	fpsOn = true;       // display frames per second
@@ -84,7 +78,7 @@ void dontdie::update()
 	}
 	if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
 	{
-		player1.setX(player.getX() - frameTime * PLAYER_SPEED);
+		player1.setX(player1.getX() - frameTime * PLAYER_SPEED);
 		if (player1.getX() < -player1.getWidth())         // if off screen left
 			player1.setX((float)GAME_WIDTH);      // position off screen right
 	}
@@ -97,7 +91,7 @@ void dontdie::update()
 
 	if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
 	{
-		player1.setY(player.getY() + frameTime * PLAYER_SPEED);
+		player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
 		if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
 			player1.setY((float)-player1.getHeight());    // position off screen top
 	}
