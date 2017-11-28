@@ -1,16 +1,10 @@
-﻿  winmain.cpp
-  dontdie.cpp
-  textDX.cpp
-  input.cpp
-  graphics.cpp
-  game.cpp
+﻿  boss1.cpp
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   boss.cpp
-  audio.cpp
   Generating Code...
   Compiling...
-  textureManager.cpp
-  image.cpp
-  entity.cpp
+  winmain.cpp
+  dontdie.cpp
   Generating Code...
-audio.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

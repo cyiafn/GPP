@@ -35,21 +35,21 @@ void dontdie::initialize(HWND hwnd)
 	// if hp >66%
 	if (!bossTexture.initialize(graphics, BOSS_IMAGE1))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 1 texture"));
+	// boss form 1 image
+	if (!boss1.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
+    
+	boss1.setFrames(bossNS::BOSS_START_FRAME, bossNS::BOSS_END_FRAME);
+	boss1.setCurrentFrame(bossNS::BOSS_START_FRAME);
+	boss1.setX(GAME_WIDTH / 4);
+	boss1.setY(GAME_HEIGHT / 4);
+	boss1.setVisible(true);
 	//// if hp >33% <66%
 	//if (!bossTexture.initialize(graphics, BOSS_IMAGE2))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 2 texture"));
 	//// if hp <33%
 	//if (!bossTexture.initialize(graphics, BOSS_IMAGE3))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 3 texture"));
-	// boss form 1 image
-	if (!boss.initialize(this, boss::WIDTH, boss::HEIGHT, boss::TEXTURE_COLS, &bossTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
-    
-	boss.setFrames(boss::BOSS_START_FRAME, boss::BOSS_END_FRAME);
-	boss.setCurrentFrame(boss::BOSS_START_FRAME);
-	boss.setX(GAME_WIDTH / 4);
-	boss.setY(GAME_HEIGHT / 4);
-
     reset();            // reset all game variables
     fpsOn = true;       // display frames per second
     return;
@@ -70,7 +70,7 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
-	boss.update(frameTime);
+	boss1.update(frameTime);
 
 }
 
@@ -83,7 +83,8 @@ void dontdie::render()
     static char buffer[BUF_SIZE];
 
     graphics->spriteBegin();
-	boss.draw();
+	if (boss1.getVisible())
+	boss1.draw();
  
     if(fpsOn)           // if fps display requested
     {

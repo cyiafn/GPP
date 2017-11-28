@@ -51,6 +51,7 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const char BOSS_IMAGE1[] = "pictures\\Boss form 1.png";
 const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
 const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
+const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
 
 // audio files
 const char WAVE_BANK[] = "";

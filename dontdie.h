@@ -20,7 +20,9 @@ class dontdie : public Game
 private:
     // game items
 	TextureManager bossTexture;
-	Boss boss;
+	Boss boss1;
+	Boss boss2;
+	Boss boss3;
     // game variables
 
 public:
