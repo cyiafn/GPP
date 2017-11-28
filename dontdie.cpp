@@ -1,12 +1,14 @@
 
 #include "dontdie.h"
 #include "input.h"
+#include <string>
 
 //=============================================================================
 // Constructor
 //=============================================================================
 dontdie::dontdie()
 {
+
 }
 
 //=============================================================================
@@ -26,12 +28,19 @@ void dontdie::initialize(HWND hwnd)
 	Game::initialize(hwnd);
 	graphics->setBackColor(graphicsNS::WHITE);
 
+
 	// Map texture
 	//if (!mapTexture.initialize(graphics, MAP_IMAGE))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
 	// Player texture
 	if (!playerTexture.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
+
+	// Zombie Texture
+	if (!zombieTexture.initialize(graphics, ZOMBIE_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Zombie texture"));
+	}
 
 	// Map 
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
@@ -45,8 +54,17 @@ void dontdie::initialize(HWND hwnd)
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
 	//player1.setDegrees((atan2(ship.getY - getMouseY() , ship.getX - getMouseX()) * 180) / M_PI);     //angle of player
 
+	if (!zombie1.initialize(this, zombieNS::WIDTH, zombieNS::HEIGHT, zombieNS::TEXTURE_COLS, &zombieTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing zombie texture"));
+	}
+	zombie1.setFrames(zombieNS::ZOMBIE_START_FRAME, zombieNS::ZOMBIE_START_FRAME);
+	zombie1.setCurrentFrame(zombieNS::ZOMBIE_START_FRAME);
+	zombie1.setFrameDelay(zombieNS::ZOMBIE_ANIMATION_DELAY);
+
+
+
 	reset();            // reset all game variables
-	fpsOn = true;       // display frames per second
 	return;
 }
 
@@ -65,39 +83,12 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
+	player1.setPrev(player1.getX(), player1.getY());
+	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 	player1.update(frameTime);
-	if (input->isKeyDown(PLAYER_RIGHT_KEY) || input->isKeyDown(PLAYER_LEFT_KEY) || input->isKeyDown(PLAYER_UP_KEY) || input->isKeyDown(PLAYER_DOWN_KEY))
-	{
-		if (input->isKeyDown(PLAYER_RIGHT_KEY))            // if move right
-		{
-			player1.setX(player1.getX() + frameTime * PLAYER_SPEED);
-			if (player1.getX() > GAME_WIDTH)               // if off screen right
-				player1.setX((float)-player1.getWidth());  // position off screen left
-		}
-		if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
-		{
-			player1.setX(player1.getX() - frameTime * PLAYER_SPEED);
-			if (player1.getX() < -player1.getWidth())         // if off screen left
-				player1.setX((float)GAME_WIDTH);      // position off screen right
-		}
-		if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
-		{
-			player1.setY(player1.getY() - frameTime * PLAYER_SPEED);
-			if (player1.getY() < -player1.getHeight())        // if off screen top
-				player1.setY((float)GAME_HEIGHT);     // position off screen bottom
-		}
-
-		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
-		{
-			player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
-			if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
-				player1.setY((float)-player1.getHeight());    // position off screen top
-		}
-		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
-	}
-
-	else
-		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
+	zombie1.update(frameTime);
+	
+	
 	map.update(frameTime);
 }
 
@@ -111,15 +102,10 @@ void dontdie::render()
 
 	graphics->spriteBegin();
 
+	zombie1.draw();
 	map.draw();         //adds the map to the scene
 	player1.draw();      //adds the player into the scene
 
-	if (fpsOn)           // if fps display requested
-	{
-		// convert fps to Cstring
-		_snprintf_s(buffer, BUF_SIZE, "fps %d ", (int)fps);
-		dxFont.print(buffer, GAME_WIDTH - 200, GAME_HEIGHT - 50);
-	}
 
 	graphics->spriteEnd();
 
@@ -132,6 +118,7 @@ void dontdie::render()
 //=============================================================================
 void dontdie::releaseAll()
 {
+	zombieTexture.onLostDevice();
 	mapTexture.onLostDevice();
 	playerTexture.onLostDevice();
 	Game::releaseAll();
@@ -144,8 +131,26 @@ void dontdie::releaseAll()
 //=============================================================================
 void dontdie::resetAll()
 {
+	zombieTexture.onLostDevice();
 	mapTexture.onResetDevice();
 	playerTexture.onResetDevice();
 	Game::resetAll();
 	return;
+}
+
+
+void dontdie::collisions()
+{
+	VECTOR2 tempVector;
+	if (player1.collidesWith(zombie1, tempVector))
+	{
+		player1.revertLocation();
+		zombie1.revertLocation();
+		player1.damageMe(zombie1.getDamage());
+		if (player1.getHp() == 0)
+		{
+			player1.setX(GAME_WIDTH / 2);
+			player1.setY(GAME_HEIGHT / 2);
+		}
+	}
 }

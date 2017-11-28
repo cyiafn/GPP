@@ -72,10 +72,10 @@ const UCHAR CONSOLE_KEY  = VK_OEM_3;    // `~ key for U.S.
 const UCHAR ESC_KEY      = VK_ESCAPE;   // escape key
 const UCHAR ALT_KEY      = VK_MENU;     // Alt key
 const UCHAR ENTER_KEY    = VK_RETURN;   // Enter key
-const UCHAR PLAYER_RIGHT_KEY = VK_RIGHT; //Right arrow key
-const UCHAR PLAYER_LEFT_KEY = VK_LEFT; //Left Arrow key
-const UCHAR PLAYER_UP_KEY = VK_UP; //Up Arrow key
-const UCHAR PLAYER_DOWN_KEY = VK_DOWN; //Down Arrow key
+const UCHAR PLAYER_RIGHT_KEY = 0x44; //Right arrow key
+const UCHAR PLAYER_LEFT_KEY = 0x41; //Left Arrow key
+const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
+const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
 
 
 #endif

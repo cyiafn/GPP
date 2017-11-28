@@ -22,13 +22,18 @@ private:
     // game items	
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
+	TextureManager zombieTexture;
 
 	Image   map;                 // map image
 	Image   player;                 // player image
+	Image zombie;
 
 	Player player1;
+	Zombie zombie1;
     // game variables
 
+	//tempHP
+	TextDX  *dxFontSmall;       // DirectX fonts
 public:
 	dontdie();
     virtual ~dontdie();
@@ -36,7 +41,7 @@ public:
     void reset();
     void update();
     void ai() {};
-    void collisions() {};
+    void collisions();
     void render();
     void releaseAll();
     void resetAll();

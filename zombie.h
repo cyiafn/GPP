@@ -7,10 +7,12 @@
 
 namespace zombieNS
 {
-	const int WIDTH = 64;                   // image width
-	const int HEIGHT = 64;                  // image height
-	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
-	const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
+	const int WIDTH = 22;                   // image width
+	const int HEIGHT = 14;                  // image height
+	//const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
+	//const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
+	const int X = GAME_WIDTH / 3 - WIDTH / 2;
+	const int Y = GAME_HEIGHT / 3 - WIDTH / 2;
 	const float SPEED = 0;                // 100 pixels per second
 	const int   TEXTURE_COLS = 1;           // texture has 1 columns
 	const int   ZOMBIE_START_FRAME = 0;       // ship starts at frame 0
@@ -26,6 +28,8 @@ class Zombie : public Entity
 private:
 	bool attack;
 	Image zomb;
+	float prevX;
+	float prevY;
 
 public:
 	// constructor
@@ -36,6 +40,9 @@ public:
 	// inherited member functions
 	void update(float frameTime);
 	void ai(float frameTime, Zombie &ent);
+	void setPrev(float x, float y);
+	void revertLocation();
+	int getDamage();
 };
 #endif
 
