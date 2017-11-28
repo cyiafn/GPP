@@ -30,14 +30,6 @@ void dontdie::initialize(HWND hwnd)
 	Game::initialize(hwnd);
 	graphics->setBackColor(graphicsNS::WHITE);
 
-	//// initialize DirectX fonts
-	//// 15 pixel high Arial
-	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player texture"));
-	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
-	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
-
-	// throws GameError
 	// Map texture
 	if (!mapTexture.initialize(graphics, MAP_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
@@ -49,13 +41,17 @@ void dontdie::initialize(HWND hwnd)
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
 
-	//// Player
+	// Player
+	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player texture"));
+	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
+	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
 	//if (!player.initialize(graphics, 0, 0, 0, &playerTexture))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player"));
 	//player.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);   // animation frames ship.setCurrentFrame(SHIP_START_FRAME);             
 	//player.setCurrentFrame(playerNS::PLAYER_START_FRAME);																	  // starting frame
 	//player.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
-	////ship.setDegrees((atan2(ship.getY - getMouseY() , ship.getX - getMouseX()) * 180) / M_PI);                             // angle of ship
+	////player.setDegrees((atan2(ship.getY - getMouseY() , ship.getX - getMouseX()) * 180) / M_PI);                             // angle of ship
 	//player.setColorFilter(SETCOLOR_ARGB(255, 230, 230, 255));   // light blue, used for shield and torpedo
 
 
@@ -82,7 +78,7 @@ void dontdie::update()
 	player1.update(frameTime);
 	if (input->isKeyDown(PLAYER_RIGHT_KEY))            // if move right
 	{
-		player1.setX(player.getX() + frameTime * PLAYER_SPEED);
+		player1.setX(player1.getX() + frameTime * PLAYER_SPEED);
 		if (player1.getX() > GAME_WIDTH)               // if off screen right
 			player1.setX((float)-player1.getWidth());  // position off screen left
 	}
