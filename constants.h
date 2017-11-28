@@ -47,7 +47,10 @@ const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 
-
+//graphics images
+const char BOSS_IMAGE1[] = "pictures\\Boss form 1.png";
+const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
+const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
 
 // audio files
 const char WAVE_BANK[] = "";

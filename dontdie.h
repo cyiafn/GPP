@@ -13,17 +13,24 @@
 
 #include "textDX.h"
 #include "constants.h"
+#include "boss.h"
 
 class dontdie : public Game
 {
 private:
-    // game items	
-
+    // game items
+	TextureManager bossTexture;
+	Boss boss;
     // game variables
 
 public:
+	//Constructor
 	dontdie();
+
+	//Deconstructor
     virtual ~dontdie();
+
+	//Initialize the game
     void initialize(HWND hwnd);
     void reset();
     void update();

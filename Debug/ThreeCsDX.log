@@ -1,5 +1,16 @@
 ﻿  winmain.cpp
   dontdie.cpp
+  textDX.cpp
+  input.cpp
+  graphics.cpp
+  game.cpp
+  boss.cpp
+  audio.cpp
+  Generating Code...
+  Compiling...
+  textureManager.cpp
+  image.cpp
+  entity.cpp
   Generating Code...
 audio.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
+  ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe
