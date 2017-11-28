@@ -77,6 +77,7 @@ int TextDX::print(const std::string &str, int x, int y)
     return dxFont->DrawText(graphics->getSprite(), str.c_str(), -1, &fontRect, DT_LEFT, color);
 }
 
+
 //=============================================================================
 // Print text inside RECT using DirectX text format
 // Return 0 on fail, height of text on success
