@@ -44,7 +44,7 @@ void dontdie::initialize(HWND hwnd)
 	// Player
 	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player texture"));
-	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
+	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
 	//player1.setDegrees((atan2(ship.getY - getMouseY() , ship.getX - getMouseX()) * 180) / M_PI);     //angle of player
@@ -70,31 +70,38 @@ void dontdie::reset()
 void dontdie::update()
 {
 	player1.update(frameTime);
-	if (input->isKeyDown(PLAYER_RIGHT_KEY))            // if move right
+	if (input->isKeyDown(PLAYER_RIGHT_KEY) || input->isKeyDown(PLAYER_LEFT_KEY) || input->isKeyDown(PLAYER_UP_KEY) || input->isKeyDown(PLAYER_DOWN_KEY))
 	{
-		player1.setX(player1.getX() + frameTime * PLAYER_SPEED);
-		if (player1.getX() > GAME_WIDTH)               // if off screen right
-			player1.setX((float)-player1.getWidth());  // position off screen left
-	}
-	if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
-	{
-		player1.setX(player1.getX() - frameTime * PLAYER_SPEED);
-		if (player1.getX() < -player1.getWidth())         // if off screen left
-			player1.setX((float)GAME_WIDTH);      // position off screen right
-	}
-	if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
-	{
-		player1.setY(player1.getY() - frameTime * PLAYER_SPEED);
-		if (player1.getY() < -player1.getHeight())        // if off screen top
-			player1.setY((float)GAME_HEIGHT);     // position off screen bottom
+		if (input->isKeyDown(PLAYER_RIGHT_KEY))            // if move right
+		{
+			player1.setX(player1.getX() + frameTime * PLAYER_SPEED);
+			if (player1.getX() > GAME_WIDTH)               // if off screen right
+				player1.setX((float)-player1.getWidth());  // position off screen left
+		}
+		if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
+		{
+			player1.setX(player1.getX() - frameTime * PLAYER_SPEED);
+			if (player1.getX() < -player1.getWidth())         // if off screen left
+				player1.setX((float)GAME_WIDTH);      // position off screen right
+		}
+		if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
+		{
+			player1.setY(player1.getY() - frameTime * PLAYER_SPEED);
+			if (player1.getY() < -player1.getHeight())        // if off screen top
+				player1.setY((float)GAME_HEIGHT);     // position off screen bottom
+		}
+
+		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
+		{
+			player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
+			if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
+				player1.setY((float)-player1.getHeight());    // position off screen top
+		}
+		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
 	}
 
-	if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
-	{
-		player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
-		if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
-			player1.setY((float)-player1.getHeight());    // position off screen top
-	}
+	else
+		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	map.update(frameTime);
 }
 
