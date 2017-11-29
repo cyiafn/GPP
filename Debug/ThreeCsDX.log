@@ -1,10 +1,4 @@
-﻿  boss1.cpp
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  boss.cpp
-  Generating Code...
-  Compiling...
-  winmain.cpp
-  dontdie.cpp
-  Generating Code...
+﻿  dontdie.cpp
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(83): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(84): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

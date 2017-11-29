@@ -66,6 +66,9 @@
     <ClCompile Include="boss3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bossShield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">
@@ -120,6 +123,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="boss3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bossShield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

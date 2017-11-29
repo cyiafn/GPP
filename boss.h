@@ -14,7 +14,7 @@
 
 namespace bossNS
 {
-	const float HP = 900;
+	const int MAXHP = 2700;
 	const int WIDTH = 128;                   // image width
 	const int HEIGHT = 128;                  // image height
 	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
@@ -24,26 +24,59 @@ namespace bossNS
 	const int   BOSS_START_FRAME = 0;      // boss starts at frame 0
 	const int   BOSS_END_FRAME = 2;        // boss animation frames 0,1,2 //frame 3 is used for attack
 	const float BOSS_ANIMATION_DELAY = 0.5f;    // time between frames
-	const int form = 0;
-	const float damage = 0;
+	const int form = 1;
+	const int damage = 1;
 	const int BOSS_ATTACK_DURATION = 0;
 	const int RELOAD_TIME = 0;
 	const int COLLISION_RADIUS = 0;
+	const int CHANNEL_TIME = 2;
+	const float ATTACK_DURATION = 3.0f;
+	//1
+	
+	//2
 
+	//3
+	const int MOVEMENT_SPEED = 40;
 }
 
 class Boss : public Entity
 { 
 protected:
-
+	int HP = 2700;
+	int form = 1;
+	int damage = 1;
+	bool form1Spawn = false;
+	bool form1Dead = false;
+	bool form2Spawn = false;
+	bool form2Dead = false;
+	bool form3Spawn = false;
+	bool form3Dead = false;
+	Image boss_form1;
+	Image shield;
+	Image boss_form2;
+	Image boss_form3;
+	bool shieldOn = false;
 public:
 	// constructor
 	Boss();
 	
-	//// inherited member functions
-	//virtual void draw();
-	//virtual bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
-	//void update(float frameTime);
+	//common functions
+	int getDamage();
+	void setDamage(int dmg);
+	int getHP();
+	int getForm();
+	void setForm(int form);
+
+	// inherited member functions
+	virtual void draw();
+	virtual bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM, int form);
+	void update(float frameTime);
+
+	
+	//1
+
+	//2
+	//3
 };
 
 

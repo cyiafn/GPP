@@ -16,19 +16,21 @@
 #include "constants.h"
 #include "zombie.h"
 #include "boss.h"
+#include "bossShield.h"
 
 class dontdie : public Game
 {
 private:
     // game items
-	TextureManager bossTexture;
-	Boss boss1;
-	Boss boss2;
-	Boss boss3;
+	
+	Boss boss1, boss2, boss3;
+	BossShield shield;
     // game items	
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
 	TextureManager zombieTexture;
+	TextureManager bossTexture;
+	TextureManager shieldTexture;
 
 	Image   map;                 // map image
 	Image   player;                 // player image

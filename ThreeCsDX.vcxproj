@@ -97,6 +97,7 @@
     <ClCompile Include="boss2.cpp" />
     <ClCompile Include="boss3.cpp" />
     <ClCompile Include="bossCannon.cpp" />
+    <ClCompile Include="bossShield.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="boss2.h" />
     <ClInclude Include="boss3.h" />
     <ClInclude Include="bossCannon.h" />
+    <ClInclude Include="bossShield.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
