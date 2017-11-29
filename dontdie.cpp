@@ -149,7 +149,8 @@ void dontdie::collisions()
 		player1.damageMe(zombie1.getDamage());
 		if (player1.getHp() == 0)
 		{
-			player1.setX(GAME_WIDTH / 2);
+			//player1.setX(GAME_WIDTH / 2);
+			
 			player1.setY(GAME_HEIGHT / 2);
 		}
 	}

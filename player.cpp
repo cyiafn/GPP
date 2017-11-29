@@ -64,25 +64,47 @@ void Player::update(float frameTime)
 			spriteData.x = spriteData.x + frameTime * PLAYER_SPEED;
 			if (spriteData.x > GAME_WIDTH)               // if off screen right
 				spriteData.x =((float)-spriteData.width);  // position off screen left
+			spriteData.angle = 90.0f;
 		}
 		if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
 		{
 			spriteData.x = spriteData.x - frameTime * PLAYER_SPEED;
 			if (spriteData.x < -spriteData.width)         // if off screen left
 				spriteData.x = ((float)GAME_WIDTH);      // position off screen right
+			spriteData.angle = 270.0f;
 		}
 		if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
 		{
 			spriteData.y = spriteData.y - frameTime * PLAYER_SPEED;
 			if (spriteData.y < -spriteData.height)        // if off screen top
 				spriteData.y = (float)GAME_HEIGHT;     // position off screen bottom
-		}
+			if (input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				spriteData.angle = 45.0f;
+			}
+			else if (input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				spriteData.angle = 315.0f;
+			}
+			else
+				spriteData.angle = 0.0f;
+			}
 
 		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
 		{
 			spriteData.y = spriteData.y + frameTime * PLAYER_SPEED;
 			if (spriteData.y > GAME_HEIGHT)              // if off screen bottom
 				spriteData.y = ((float)-spriteData.height);    // position off screen top
+			if (input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				spriteData.angle = 135.0f;
+			}
+			else if (input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				spriteData.angle = 225.0f;
+			}
+			else
+			spriteData.angle = 180.0f;
 		}
 		startFrame = playerNS::PLAYER_START_FRAME;
 		endFrame = playerNS::PLAYER_END_FRAME;
