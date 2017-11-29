@@ -92,6 +92,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
+    <ClCompile Include="boss.cpp" />
+    <ClCompile Include="boss1.cpp" />
+    <ClCompile Include="boss2.cpp" />
+    <ClCompile Include="boss3.cpp" />
+    <ClCompile Include="bossCannon.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
@@ -106,6 +111,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h" />
+    <ClInclude Include="boss.h" />
+    <ClInclude Include="boss1.h" />
+    <ClInclude Include="boss2.h" />
+    <ClInclude Include="boss3.h" />
+    <ClInclude Include="bossCannon.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />

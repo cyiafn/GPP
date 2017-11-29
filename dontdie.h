@@ -15,10 +15,16 @@
 #include "player.h"
 #include "constants.h"
 #include "zombie.h"
+#include "boss.h"
 
 class dontdie : public Game
 {
 private:
+    // game items
+	TextureManager bossTexture;
+	Boss boss1;
+	Boss boss2;
+	Boss boss3;
     // game items	
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
@@ -35,8 +41,13 @@ private:
 	//tempHP
 	TextDX  *dxFontSmall;       // DirectX fonts
 public:
+	//Constructor
 	dontdie();
+
+	//Deconstructor
     virtual ~dontdie();
+
+	//Initialize the game
     void initialize(HWND hwnd);
     void reset();
     void update();
