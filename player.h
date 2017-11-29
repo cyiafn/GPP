@@ -28,16 +28,21 @@ namespace playerNS
 class Player : public Entity
 {
 private:
-
+	float prevX;
+	float prevY;
+	int hp;
 public:
     // constructor
     Player();
-
     // inherited member functions
     virtual void draw();
     virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
                             TextureManager *textureM);
     void update(float frameTime);
+	void setPrev(float x, float y);
+	void revertLocation();
+	void damageMe(int damageValue);
+	int getHp();
 };
 #endif
 

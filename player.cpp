@@ -25,6 +25,7 @@ Player::Player() : Entity()
     radius = playerNS::WIDTH/2.0;
     mass = playerNS::MASS;
     collisionType = entityNS::CIRCLE;
+	hp = 20;
 }
 
 //=============================================================================
@@ -56,6 +57,68 @@ void Player::update(float frameTime)
     //spriteData.x += frameTime * velocity.x;         // move player along X 
     //spriteData.y += frameTime * velocity.y;         // move player along Y
 
+	if (input->isKeyDown(PLAYER_RIGHT_KEY) || input->isKeyDown(PLAYER_LEFT_KEY) || input->isKeyDown(PLAYER_UP_KEY) || input->isKeyDown(PLAYER_DOWN_KEY))
+	{
+		if (input->isKeyDown(PLAYER_RIGHT_KEY))            // if move right
+		{
+			spriteData.x = spriteData.x + frameTime * PLAYER_SPEED;
+			if (spriteData.x > GAME_WIDTH)               // if off screen right
+				spriteData.x =((float)-spriteData.width);  // position off screen left
+			spriteData.angle = 90.0f;
+		}
+		if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
+		{
+			spriteData.x = spriteData.x - frameTime * PLAYER_SPEED;
+			if (spriteData.x < -spriteData.width)         // if off screen left
+				spriteData.x = ((float)GAME_WIDTH);      // position off screen right
+			spriteData.angle = 270.0f;
+		}
+		if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
+		{
+			spriteData.y = spriteData.y - frameTime * PLAYER_SPEED;
+			if (spriteData.y < -spriteData.height)        // if off screen top
+				spriteData.y = (float)GAME_HEIGHT;     // position off screen bottom
+			if (input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				spriteData.angle = 45.0f;
+			}
+			else if (input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				spriteData.angle = 315.0f;
+			}
+			else
+				spriteData.angle = 0.0f;
+			}
+
+		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
+		{
+			spriteData.y = spriteData.y + frameTime * PLAYER_SPEED;
+			if (spriteData.y > GAME_HEIGHT)              // if off screen bottom
+				spriteData.y = ((float)-spriteData.height);    // position off screen top
+			if (input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				spriteData.angle = 135.0f;
+			}
+			else if (input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				spriteData.angle = 225.0f;
+			}
+			else
+			spriteData.angle = 180.0f;
+		}
+		startFrame = playerNS::PLAYER_START_FRAME;
+		endFrame = playerNS::PLAYER_END_FRAME;
+		//player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
+	}
+
+	else
+	{
+		startFrame = playerNS::PLAYER_START_FRAME;
+		endFrame = playerNS::PLAYER_START_FRAME;
+		//player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
+	}
+		
+
     // Bounce off walls
     if (spriteData.x > GAME_WIDTH- playerNS::WIDTH)    // if hit right screen edge
     {
@@ -77,5 +140,25 @@ void Player::update(float frameTime)
     }
 }
 
+void Player::setPrev(float x, float y)
+{
+	this->prevX = x;
+	this->prevY = y;
+}
+
+void Player::revertLocation()
+{
+	this->spriteData.x = prevX;
+	this->spriteData.y = prevY;
+}
+
+void Player::damageMe(int damageValue)
+{
+	this->hp = this->hp - damageValue;
+}
+int Player::getHp()
+{
+	return this->hp;
+}
 
 

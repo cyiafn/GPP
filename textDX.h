@@ -43,7 +43,6 @@ public:
     // Pre: &str contains text to display
     //      x, y = screen location
     virtual int print(const std::string &str, int x, int y);
-
     // Print inside rect using format. Call between spriteBegin()/spriteEnd()
     // Return 0 on fail, height of text on success
     // Pre: &str = text to display

@@ -15,31 +15,48 @@
 #include "player.h"
 #include "wall.h"
 #include "constants.h"
+#include "zombie.h"
+#include "boss.h"
 
 class dontdie : public Game
 {
 private:
+    // game items
+	TextureManager bossTexture;
+	Boss boss1;
+	Boss boss2;
+	Boss boss3;
     // game items	
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
 	TextureManager wallTexture; //wall texture
+	TextureManager zombieTexture;
 
 	Image   map;                 // map image
-	Image   player;              // player image
+	Image   player;                 // player image
+	Image zombie;
 	Image	wall;				 // wall image	
 
 	Player player1;
+	Zombie zombie1;
 	Wall wall1;
     // game variables
 
+	//tempHP
+	TextDX  *dxFontSmall;       // DirectX fonts
 public:
+	//Constructor
 	dontdie();
+
+	//Deconstructor
     virtual ~dontdie();
+
+	//Initialize the game
     void initialize(HWND hwnd);
     void reset();
     void update();
     void ai() {};
-    void collisions() ;
+    void collisions();
     void render();
     void releaseAll();
     void resetAll();
