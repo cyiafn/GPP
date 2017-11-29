@@ -18,6 +18,20 @@
 #include "zombie.h"
 #include "boss.h"
 
+namespace astarNS
+{
+	const int n = 1280; //x of the map
+	const int m = 720; //y of the map
+	static int map[n][m]; //use map cause x and y graph has 2 axis
+	static int closed_nodes_map[n][m]; // map of checked nodes
+	static int open_nodes_map[n][m]; // map of not tried nodes
+	static int dir_map[n][m]; // map of directions
+	const int dir = 8; // this is the number of possible directions to go to at any position, can be 4
+	static int dx[dir] = { 1, 1, 0, -1, -1, -1, 0, 1 }; // direction x axis
+	static int dy[dir] = { 0, 1, 1, 1, 0, -1, -1, -1 }; // direction y axis
+}
+
+
 class dontdie : public Game
 {
 private:
@@ -55,7 +69,7 @@ public:
     void initialize(HWND hwnd);
     void reset();
     void update();
-	void ai() {};
+	void ai();
     void collisions();
     void render();
     void releaseAll();

@@ -3,6 +3,8 @@
 #include "input.h"
 #include "wall.h"
 #include <string>
+#include "astar.h"
+#include "zombie.h"
 
 //=============================================================================
 // Constructor
@@ -28,6 +30,9 @@ void dontdie::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd);
 	graphics->setBackColor(graphicsNS::WHITE);
+	//ASTAR Algorithm MAP generation
+	
+
 
 
 	// Map texture
@@ -100,6 +105,8 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[9].setX(GAME_WIDTH / 10 * 10);
 	wallArray[9].setY(GAME_HEIGHT / 4 * 2);
+
+
 	// Player
 	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
@@ -115,6 +122,7 @@ void dontdie::initialize(HWND hwnd)
 	zombie1.setFrames(zombieNS::ZOMBIE_START_FRAME, zombieNS::ZOMBIE_START_FRAME);
 	zombie1.setCurrentFrame(zombieNS::ZOMBIE_START_FRAME);
 	zombie1.setFrameDelay(zombieNS::ZOMBIE_ANIMATION_DELAY);
+	//zombie1.setPlayerLoc(player1.getX(), player1.getY());
 
 
 
@@ -140,6 +148,7 @@ void dontdie::update()
 	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 
 	player1.update(frameTime);
+	//zombie1.setPlayerLoc(player1.getX(), player1.getY());
 	zombie1.update(frameTime);
 	for (int i = 0; i < 10; i++)
 	{
@@ -228,3 +237,99 @@ void dontdie::collisions()
 		}
 	}
 }
+
+void dontdie::ai()
+{
+	//zombie AI
+	VECTOR2 dir, tempVec;
+	int voronoi;
+	bool failCheck = false;
+	dir.x = player1.getX() - zombie1.getX();
+	dir.y = player1.getY() - zombie1.getY();
+	float hyp = sqrt(dir.x * dir.x + dir.y * dir.y);
+	dir.x /= hyp;
+	dir.y /= hyp;
+	dir.x *= zombieNS::ZOMBIE_SPEED;
+	dir.y *= zombieNS::ZOMBIE_SPEED;
+	zombie1.setVelocity(dir);
+	float angle = atan2(player1.getY() - zombie1.getY(), player1.getX() - zombie1.getX()) * (180 / PI) + 90;
+	zombie1.setDegrees(angle);
+	for (int i = 0; i < 10; i++)
+	{
+		if (zombie1.collidesWith(wallArray[i], tempVec))
+		{
+			failCheck = true;
+
+			if (failCheck == true)
+			{ 
+				zombie1.revertLocation();
+				zombie1.setX(zombie1.getX() + 1);
+				for (int i = 0; i < 10; i++)
+				{
+					if (zombie1.collidesWith(wallArray[i], tempVec))
+					{
+						zombie1.revertLocation();
+						failCheck = true;
+					}
+					else
+					{
+						failCheck = false;
+					}
+				}
+			}
+			if (failCheck == true)
+			{
+				zombie1.setX(zombie1.getX() - 1);
+				for (int i = 0; i < 10; i++)
+				{
+					if (zombie1.collidesWith(wallArray[i], tempVec))
+					{
+						zombie1.revertLocation();
+						failCheck = true;
+					}
+					else
+					{
+						failCheck = false;
+					}
+				}
+			}
+			if (failCheck == true)
+			{
+				zombie1.setY(zombie1.getY() + 1);
+				for (int i = 0; i < 10; i++)
+				{
+					if (zombie1.collidesWith(wallArray[i], tempVec))
+					{
+						zombie1.revertLocation();
+						failCheck = true;
+					}
+					else
+					{
+						failCheck = false;
+					}
+				}
+			}
+			if (failCheck == true)
+			{
+				zombie1.setY(zombie1.getY() - 1);
+				for (int i = 0; i < 10; i++)
+				{
+					if (zombie1.collidesWith(wallArray[i], tempVec))
+					{
+						zombie1.revertLocation();
+						failCheck = true;
+					}
+					else
+					{
+						failCheck = false;
+					}
+				}
+			}
+		}
+	}
+
+	
+	zombie1.setPrev(zombie1.getX(), zombie1.getY());
+}
+	
+	

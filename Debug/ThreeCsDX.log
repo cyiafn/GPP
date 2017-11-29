@@ -1,2 +1,4 @@
-﻿  player.cpp
-  ThreeCsDX.vcxproj -> C:\Users\chenyifan\Desktop\gpp\Debug\ThreeCsDX.exe
+﻿  dontdie.cpp
+d:\visual studio projects\gpp project\dontdie.cpp(255): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(245): warning C4101: 'voronoi': unreferenced local variable
+  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe

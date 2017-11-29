@@ -91,6 +91,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="astar.cpp" />
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="boss1.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="astar.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="boss.h" />
     <ClInclude Include="boss1.h" />
