@@ -92,11 +92,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
+    <ClCompile Include="boss.cpp" />
+    <ClCompile Include="boss1.cpp" />
+    <ClCompile Include="boss2.cpp" />
+    <ClCompile Include="boss3.cpp" />
+    <ClCompile Include="bossCannon.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="dontdie.cpp" />
     <ClCompile Include="textureManager.cpp" />
@@ -105,6 +111,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h" />
+    <ClInclude Include="boss.h" />
+    <ClInclude Include="boss1.h" />
+    <ClInclude Include="boss2.h" />
+    <ClInclude Include="boss3.h" />
+    <ClInclude Include="bossCannon.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
@@ -112,6 +123,7 @@
     <ClInclude Include="graphics.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="dontdie.h" />
     <ClInclude Include="textureManager.h" />

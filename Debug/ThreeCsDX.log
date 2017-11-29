@@ -1,7 +1,10 @@
-﻿  dontdie.cpp
+﻿  boss1.cpp
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  boss.cpp
   Generating Code...
   Compiling...
-  zombie.cpp
   winmain.cpp
+  dontdie.cpp
   Generating Code...
-  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
+  ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

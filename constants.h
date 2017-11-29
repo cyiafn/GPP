@@ -47,7 +47,22 @@ const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 
+//graphics images
+const char BOSS_IMAGE1[] = "pictures\\Boss form 1.png";
+const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
+const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
+const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
+// graphic images
+//const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
+const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
+
+// player movement
+const float ROTATION_RATE = 180.0f;             // degrees per second
+const float SCALE_RATE = 0.2f;                  // % change per second
+const float PLAYER_SPEED = 100.0f;                // pixels per second
+const float PLAYER_SCALE = 1.5f;                  // starting player scale
+
 
 // audio files
 const char WAVE_BANK[] = "";
@@ -62,7 +77,11 @@ const UCHAR CONSOLE_KEY  = VK_OEM_3;    // `~ key for U.S.
 const UCHAR ESC_KEY      = VK_ESCAPE;   // escape key
 const UCHAR ALT_KEY      = VK_MENU;     // Alt key
 const UCHAR ENTER_KEY    = VK_RETURN;   // Enter key
-
+const UCHAR PLAYER_RIGHT_KEY = 0x44; //Right arrow key
+const UCHAR PLAYER_LEFT_KEY = 0x41; //Left Arrow key
+const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
+const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
 
 
 #endif
+

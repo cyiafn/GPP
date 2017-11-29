@@ -19,7 +19,7 @@ Zombie::Zombie() : Entity()
 	currentFrame = startFrame;
 	radius = zombieNS::WIDTH / 2.0;
 	health = zombieNS::HEALTH;
-	collisionType = entityNS::BOX;
+	collisionType = entityNS::CIRCLE;
 	attack = false;
 }
 
@@ -48,4 +48,18 @@ void Zombie::update(float frameTime)
 void Zombie::ai(float frameTime, Zombie &ent)
 {
 
+}
+void Zombie::setPrev(float x, float y)
+{
+	this->prevX = x;
+	this->prevY = y;
+}
+void Zombie::revertLocation()
+{
+	this->spriteData.x = prevX;
+	this->spriteData.y = prevY;
+}
+int Zombie::getDamage()
+{
+	return zombieNS::DAMAGE;
 }
