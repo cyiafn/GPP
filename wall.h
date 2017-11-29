@@ -12,8 +12,8 @@
 
 namespace wallNS
 {
-	const int   WIDTH = 960;                // image width
-	const int   HEIGHT = 960;               // image height
+	const int   WIDTH = 64;                // image width
+	const int   HEIGHT = 14;               // image height
 	const int   COLLISION_RADIUS = 120 / 2;   // for circular collision
 	const int   X = GAME_WIDTH / 2 - WIDTH / 2; // location on screen
 	const int   Y = GAME_HEIGHT / 2 - HEIGHT / 2;

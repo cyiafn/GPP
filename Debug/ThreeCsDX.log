@@ -1,25 +1,8 @@
-﻿  boss1.cpp
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  boss.cpp
+﻿  dontdie.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(151): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
   Compiling...
   winmain.cpp
-<<<<<<< HEAD
   wall.cpp
-  textureManager.cpp
-  textDX.cpp
-  player.cpp
-  input.cpp
-  image.cpp
-  graphics.cpp
-  game.cpp
-  entity.cpp
-  audio.cpp
   Generating Code...
   ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe
-=======
-  dontdie.cpp
-  Generating Code...
-  ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe
->>>>>>> master
