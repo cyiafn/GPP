@@ -1,8 +1,2 @@
-﻿  dontdie.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(151): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-  Compiling...
-  winmain.cpp
-  wall.cpp
-  Generating Code...
-  ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe
+﻿  player.cpp
+  ThreeCsDX.vcxproj -> C:\Users\chenyifan\Desktop\gpp\Debug\ThreeCsDX.exe

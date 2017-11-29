@@ -1,6 +1,7 @@
 
 #include "dontdie.h"
 #include "input.h"
+#include "wall.h"
 #include <string>
 
 //=============================================================================
@@ -8,7 +9,7 @@
 //=============================================================================
 dontdie::dontdie()
 {
-
+	
 }
 
 //=============================================================================
@@ -33,6 +34,7 @@ void dontdie::initialize(HWND hwnd)
 	if (!mapTexture.initialize(graphics, MAP_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
 	//Wall texture
+
 	if (!wallTexture.initialize(graphics, WALL_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Wall texture"));
 	// Player texture
@@ -49,8 +51,55 @@ void dontdie::initialize(HWND hwnd)
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
 	// Wall 
-	if (!wall1.initialize(this, 0, 0, 0, &wallTexture))
+	if (!wallArray[0].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[0].setX(GAME_WIDTH / 10 * 2);
+	wallArray[0].setY(GAME_HEIGHT / 4);
+
+	if (!wallArray[1].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[1].setX(GAME_WIDTH / 10 * 4);
+	wallArray[1].setY(GAME_HEIGHT / 4);
+
+	if (!wallArray[2].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[2].setX(GAME_WIDTH / 10 * 6);
+	wallArray[2].setY(GAME_HEIGHT / 4);
+
+	if (!wallArray[3].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[3].setX(GAME_WIDTH / 10 * 7);
+	wallArray[3].setY(GAME_HEIGHT / 4);
+
+	if (!wallArray[4].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[4].setX(GAME_WIDTH / 10 * 10);
+	wallArray[4].setY(GAME_HEIGHT / 4);
+
+	if (!wallArray[5].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[5].setX(GAME_WIDTH / 10 * 2);
+	wallArray[5].setY(GAME_HEIGHT / 4 * 2);
+
+	if (!wallArray[6].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[6].setX(GAME_WIDTH / 10 * 4);
+	wallArray[6].setY(GAME_HEIGHT / 4 * 2);
+
+	if (!wallArray[7].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[6].setX(GAME_WIDTH / 10 * 6);
+	wallArray[6].setY(GAME_HEIGHT / 4 * 2);
+
+	if (!wallArray[8].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[8].setX(GAME_WIDTH / 10 * 8);
+	wallArray[8].setY(GAME_HEIGHT / 4 * 2);
+
+	if (!wallArray[9].initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+	wallArray[9].setX(GAME_WIDTH / 10 * 10);
+	wallArray[9].setY(GAME_HEIGHT / 4 * 2);
 	// Player
 	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
@@ -89,66 +138,14 @@ void dontdie::update()
 {
 	player1.setPrev(player1.getX(), player1.getY());
 	zombie1.setPrev(zombie1.getX(), zombie1.getY());
+
 	player1.update(frameTime);
 	zombie1.update(frameTime);
-	
-	
-	if (input->isKeyDown(PLAYER_RIGHT_KEY) || input->isKeyDown(PLAYER_LEFT_KEY) || input->isKeyDown(PLAYER_UP_KEY) || input->isKeyDown(PLAYER_DOWN_KEY))
+	for (int i = 0; i < 10; i++)
 	{
-		if (input->isKeyDown(PLAYER_RIGHT_KEY))            // if move right
-		{
-			player1.setX(player1.getX() + frameTime * PLAYER_SPEED);
-			if (player1.getX() > GAME_WIDTH)               // if off screen right
-				player1.setX((float)-player1.getWidth());  // position off screen left
-			player1.setDegrees(90.0f);
-		}
-		if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
-		{
-			player1.setX(player1.getX() - frameTime * PLAYER_SPEED);
-			if (player1.getX() < -player1.getWidth())         // if off screen left
-				player1.setX((float)GAME_WIDTH);      // position off screen right
-			player1.setDegrees(270.0f);
-		}
-		if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
-		{
-			player1.setY(player1.getY() - frameTime * PLAYER_SPEED);
-			if (player1.getY() < -player1.getHeight())        // if off screen top
-				player1.setY((float)GAME_HEIGHT);     // position off screen bottom
-			if(input->isKeyDown(PLAYER_RIGHT_KEY))
-			{
-				player1.setDegrees(45.0f);
-			}
-			else if(input->isKeyDown(PLAYER_LEFT_KEY))
-			{
-				player1.setDegrees(315.0f);
-			}
-			else
-				player1.setDegrees(0.0f);
-		}
-
-		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
-		{
-			player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
-			if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
-				player1.setY((float)-player1.getHeight());    // position off screen top
-			if (input->isKeyDown(PLAYER_RIGHT_KEY))
-			{
-				player1.setDegrees(135.0f);
-			}
-			else if (input->isKeyDown(PLAYER_LEFT_KEY))
-			{
-				player1.setDegrees(225.0f);
-			}
-			else
-			player1.setDegrees(180.0f);
-		}
-		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
+		wallArray[i].update(frameTime);
 	}
-
-	else
-		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
-
-	player1.setDegrees((atan2(player1.getY() - input->getMouseY(), player1.getX() - input->getMouseX()) * 180) / PI);     //angle of player
+	
 	map.update(frameTime);
 }
 
@@ -162,9 +159,13 @@ void dontdie::render()
 
 	graphics->spriteBegin();
 
-	zombie1.draw();
+	
 	map.draw();         //adds the map to the scene
-	wall1.draw();		//adds the wall to the scene
+	zombie1.draw();
+	for (int i = 0; i < 10; i++)
+	{
+		wallArray[i].draw();
+	}
 	player1.draw();     //adds the player into the scene
 
 
@@ -210,11 +211,20 @@ void dontdie::collisions()
 		player1.revertLocation();
 		zombie1.revertLocation();
 		player1.damageMe(zombie1.getDamage());
+		
 		if (player1.getHp() == 0)
 		{
 			//player1.setX(GAME_WIDTH / 2);
 			
 			player1.setY(GAME_HEIGHT / 2);
+		}
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		if (player1.collidesWith(wallArray[i], tempVector))
+		{
+			player1.revertLocation();
+			zombie1.revertLocation();
 		}
 	}
 }

@@ -25,7 +25,7 @@ Player::Player() : Entity()
     radius = playerNS::WIDTH/2.0;
     mass = playerNS::MASS;
     collisionType = entityNS::CIRCLE;
-	hp = 20;
+	hp = 2000;
 }
 
 //=============================================================================

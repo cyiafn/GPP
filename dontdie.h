@@ -39,7 +39,7 @@ private:
 
 	Player player1;
 	Zombie zombie1;
-	Wall wall1;
+	Wall wallArray[10];
     // game variables
 
 	//tempHP
