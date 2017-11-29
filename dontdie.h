@@ -13,6 +13,7 @@
 
 #include "textDX.h"
 #include "player.h"
+#include "wall.h"
 #include "constants.h"
 #include "zombie.h"
 #include "boss.h"
@@ -28,14 +29,17 @@ private:
     // game items	
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
+	TextureManager wallTexture; //wall texture
 	TextureManager zombieTexture;
 
 	Image   map;                 // map image
 	Image   player;                 // player image
 	Image zombie;
+	Image	wall;				 // wall image	
 
 	Player player1;
 	Zombie zombie1;
+	Wall wall1;
     // game variables
 
 	//tempHP

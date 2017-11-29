@@ -53,9 +53,10 @@ const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
 const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
 const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
 // graphic images
-//const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
+const char MAP_IMAGE[] = "pictures\\newMap.png";  // Picture of background
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
+const char WALL_IMAGE[] = "pictures\\Testwall.png"; //picture of a wall
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second

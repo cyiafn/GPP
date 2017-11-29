@@ -30,8 +30,11 @@ void dontdie::initialize(HWND hwnd)
 
 
 	// Map texture
-	//if (!mapTexture.initialize(graphics, MAP_IMAGE))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
+	if (!mapTexture.initialize(graphics, MAP_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
+	//Wall texture
+	if (!wallTexture.initialize(graphics, WALL_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Wall texture"));
 	// Player texture
 	if (!playerTexture.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
@@ -45,10 +48,12 @@ void dontdie::initialize(HWND hwnd)
 	// Map 
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
-
+	// Wall 
+	if (!wall1.initialize(this, 0, 0, 0, &wallTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	// Player
 	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
@@ -68,6 +73,19 @@ void dontdie::initialize(HWND hwnd)
 	return;
 }
 
+//=============================================================================
+// Handle collisions
+//=============================================================================
+void dontdie::collisions()
+{
+	VECTOR2 collisionVector;
+	// if collision between ship and planet
+	if (player1.collidesWith(wall1, collisionVector))
+	{
+		// bounce off planet
+		player1.bounce(collisionVector, wall1);
+	}
+}
 
 //=============================================================================
 // Reset the game to begin play and after a score
@@ -104,7 +122,8 @@ void dontdie::render()
 
 	zombie1.draw();
 	map.draw();         //adds the map to the scene
-	player1.draw();      //adds the player into the scene
+	wall1.draw();		//adds the wall to the scene
+	player1.draw();     //adds the player into the scene
 
 
 	graphics->spriteEnd();
@@ -120,6 +139,7 @@ void dontdie::releaseAll()
 {
 	zombieTexture.onLostDevice();
 	mapTexture.onLostDevice();
+	wallTexture.onLostDevice();
 	playerTexture.onLostDevice();
 	Game::releaseAll();
 	return;
@@ -133,6 +153,7 @@ void dontdie::resetAll()
 {
 	zombieTexture.onLostDevice();
 	mapTexture.onResetDevice();
+	wallTexture.onResetDevice();
 	playerTexture.onResetDevice();
 	Game::resetAll();
 	return;

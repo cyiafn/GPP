@@ -5,6 +5,21 @@ c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\boss1.cpp(45): warning
   Generating Code...
   Compiling...
   winmain.cpp
+<<<<<<< HEAD
+  wall.cpp
+  textureManager.cpp
+  textDX.cpp
+  player.cpp
+  input.cpp
+  image.cpp
+  graphics.cpp
+  game.cpp
+  entity.cpp
+  audio.cpp
+  Generating Code...
+  ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe
+=======
   dontdie.cpp
   Generating Code...
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe
+>>>>>>> master
