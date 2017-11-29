@@ -55,7 +55,7 @@ public:
     void initialize(HWND hwnd);
     void reset();
     void update();
-    void ai() {};
+	void ai() {};
     void collisions();
     void render();
     void releaseAll();

@@ -57,7 +57,7 @@ void dontdie::initialize(HWND hwnd)
 	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
-	//player1.setDegrees((atan2(ship.getY - getMouseY() , ship.getX - getMouseX()) * 180) / M_PI);     //angle of player
+	//player1.setDegrees((atan2(player1.getY - input->getMouseY() , player1.getX - input->getMouseX()) * 180) / PI);     //angle of player
 
 	if (!zombie1.initialize(this, zombieNS::WIDTH, zombieNS::HEIGHT, zombieNS::TEXTURE_COLS, &zombieTexture))
 	{
@@ -71,20 +71,6 @@ void dontdie::initialize(HWND hwnd)
 
 	reset();            // reset all game variables
 	return;
-}
-
-//=============================================================================
-// Handle collisions
-//=============================================================================
-void dontdie::collisions()
-{
-	VECTOR2 collisionVector;
-	// if collision between ship and planet
-	if (player1.collidesWith(wall1, collisionVector))
-	{
-		// bounce off planet
-		player1.bounce(collisionVector, wall1);
-	}
 }
 
 //=============================================================================
@@ -107,6 +93,62 @@ void dontdie::update()
 	zombie1.update(frameTime);
 	
 	
+	if (input->isKeyDown(PLAYER_RIGHT_KEY) || input->isKeyDown(PLAYER_LEFT_KEY) || input->isKeyDown(PLAYER_UP_KEY) || input->isKeyDown(PLAYER_DOWN_KEY))
+	{
+		if (input->isKeyDown(PLAYER_RIGHT_KEY))            // if move right
+		{
+			player1.setX(player1.getX() + frameTime * PLAYER_SPEED);
+			if (player1.getX() > GAME_WIDTH)               // if off screen right
+				player1.setX((float)-player1.getWidth());  // position off screen left
+			player1.setDegrees(90.0f);
+		}
+		if (input->isKeyDown(PLAYER_LEFT_KEY))             // if move left
+		{
+			player1.setX(player1.getX() - frameTime * PLAYER_SPEED);
+			if (player1.getX() < -player1.getWidth())         // if off screen left
+				player1.setX((float)GAME_WIDTH);      // position off screen right
+			player1.setDegrees(270.0f);
+		}
+		if (input->isKeyDown(PLAYER_UP_KEY))               // if move up
+		{
+			player1.setY(player1.getY() - frameTime * PLAYER_SPEED);
+			if (player1.getY() < -player1.getHeight())        // if off screen top
+				player1.setY((float)GAME_HEIGHT);     // position off screen bottom
+			if(input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				player1.setDegrees(45.0f);
+			}
+			else if(input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				player1.setDegrees(315.0f);
+			}
+			else
+				player1.setDegrees(0.0f);
+		}
+
+		if (input->isKeyDown(PLAYER_DOWN_KEY))             // if move down
+		{
+			player1.setY(player1.getY() + frameTime * PLAYER_SPEED);
+			if (player1.getY() > GAME_HEIGHT)              // if off screen bottom
+				player1.setY((float)-player1.getHeight());    // position off screen top
+			if (input->isKeyDown(PLAYER_RIGHT_KEY))
+			{
+				player1.setDegrees(135.0f);
+			}
+			else if (input->isKeyDown(PLAYER_LEFT_KEY))
+			{
+				player1.setDegrees(225.0f);
+			}
+			else
+			player1.setDegrees(180.0f);
+		}
+		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_END_FRAME);
+	}
+
+	else
+		player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
+
+	player1.setDegrees((atan2(player1.getY() - input->getMouseY(), player1.getX() - input->getMouseX()) * 180) / PI);     //angle of player
 	map.update(frameTime);
 }
 
