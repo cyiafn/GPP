@@ -34,6 +34,7 @@ private:
 	//float playerX;
 	//float playerY;
 	bool wallCheck;
+	VECTOR2 wallVector;
 
 public:
 	// constructor
@@ -49,6 +50,9 @@ public:
 	int getDamage();
 	//void setPlayerLoc(float x, float y) { playerX = x; playerY = y; };
 	int checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector);
+	void setWallVector(VECTOR2 vector);
+	int getWallVectorX();
+	int getWallVectorY();
 };
 #endif
 

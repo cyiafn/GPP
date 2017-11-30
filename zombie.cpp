@@ -22,6 +22,8 @@ Zombie::Zombie() : Entity()
 	collisionType = entityNS::CIRCLE;
 	attack = false;
 	wallCheck = false;
+	wallVector.x = 0;
+	wallVector.y = 0;
 }
 
 bool Zombie::initialize(Game *gamePtr, int width, int height, int ncols,
@@ -95,4 +97,18 @@ int Zombie::checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector)
 	if (center01 < edge01Min && center03 > edge03Max)    // if circle in Voronoi3
 		return 3;
 
+}
+
+
+int Zombie::getWallVectorX()
+{
+	return this->wallVector.x;
+}
+int Zombie::getWallVectorY()
+{
+	return this->wallVector.y;
+}
+void Zombie::setWallVector(VECTOR2 vector)
+{
+	this->wallVector = vector;
 }

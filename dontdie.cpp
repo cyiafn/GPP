@@ -241,7 +241,9 @@ void dontdie::collisions()
 void dontdie::ai()
 {
 	//zombie AI
-	VECTOR2 dir, tempVec;
+	VECTOR2 dir, tempVec, wallVec;
+	float up,down,left,right;
+	string failDirection = "";
 	int voronoi;
 	bool failCheck = false;
 	dir.x = player1.getX() - zombie1.getX();
@@ -254,82 +256,213 @@ void dontdie::ai()
 	zombie1.setVelocity(dir);
 	float angle = atan2(player1.getY() - zombie1.getY(), player1.getX() - zombie1.getX()) * (180 / PI) + 90;
 	zombie1.setDegrees(angle);
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < ARRAYSIZE(wallArray); i++)
 	{
 		if (zombie1.collidesWith(wallArray[i], tempVec))
 		{
-			failCheck = true;
-
-			if (failCheck == true)
-			{ 
-				zombie1.revertLocation();
-				zombie1.setX(zombie1.getX() + 1);
-				for (int i = 0; i < 10; i++)
-				{
-					if (zombie1.collidesWith(wallArray[i], tempVec))
-					{
-						zombie1.revertLocation();
-						failCheck = true;
-					}
-					else
-					{
-						failCheck = false;
-					}
-				}
+			zombie1.revertLocation();
+			zombie1.setX(zombie1.getX() + 1);
+			if (zombie1.collidesWith(wallArray[i], tempVec))
+			{
+				failDirection = "right";
+				//zombie1.revertLocation();
 			}
-			if (failCheck == true)
+			zombie1.revertLocation();
+			if (failDirection == "")
 			{
 				zombie1.setX(zombie1.getX() - 1);
-				for (int i = 0; i < 10; i++)
+				if (zombie1.collidesWith(wallArray[i], tempVec))
 				{
-					if (zombie1.collidesWith(wallArray[i], tempVec))
-					{
-						zombie1.revertLocation();
-						failCheck = true;
-					}
-					else
-					{
-						failCheck = false;
-					}
+					failDirection = "left";
+					//zombie1.revertLocation();
 				}
+				zombie1.revertLocation();
 			}
-			if (failCheck == true)
-			{
-				zombie1.setY(zombie1.getY() + 1);
-				for (int i = 0; i < 10; i++)
-				{
-					if (zombie1.collidesWith(wallArray[i], tempVec))
-					{
-						zombie1.revertLocation();
-						failCheck = true;
-					}
-					else
-					{
-						failCheck = false;
-					}
-				}
-			}
-			if (failCheck == true)
+			if (failDirection == "")
 			{
 				zombie1.setY(zombie1.getY() - 1);
-				for (int i = 0; i < 10; i++)
+				if (zombie1.collidesWith(wallArray[i], tempVec))
 				{
-					if (zombie1.collidesWith(wallArray[i], tempVec))
-					{
-						zombie1.revertLocation();
-						failCheck = true;
-					}
-					else
-					{
-						failCheck = false;
-					}
+					failDirection = "up";
+					//zombie1.revertLocation();
+				}
+				zombie1.revertLocation();
+			}
+			if (failDirection == "")
+			{
+				zombie1.setY(zombie1.getY() + 1);
+				if (zombie1.collidesWith(wallArray[i], tempVec))
+				{
+					failDirection = "down";
+					//zombie1.revertLocation();
+				}
+				zombie1.revertLocation();
+			}
+			if (failDirection == "right")
+			{
+
+				float xValue = player1.getX() - zombie1.getX();
+				if (xValue < 0)
+				{
+					xValue *= -1;
+				}
+				float yValue = player1.getY() - zombie1.getY();
+				if (yValue < 0)
+				{
+					yValue *= -1;
+				}
+
+				up = sqrt(xValue * xValue + (yValue-1) * (yValue - 1));
+				down = sqrt(xValue * xValue + (yValue + 1) * (yValue + 1));
+				//left = sqrt((xValue-1) * (xValue-1) + (yValue) * (yValue));
+				if (up < down)
+				{
+					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				else if (down < up)
+				{
+					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = 1 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				else if (down == up)
+				{
+					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				//else if (left <= up && left <= down)
+				//{
+				//	wallVec.x = -1 * zombieNS::ZOMBIE_SPEED;
+				//	wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;
+				//	zombie1.setVelocity(wallVec);
+				//}
+			}
+			else if (failDirection == "left")
+			{
+				float xValue = player1.getX() - zombie1.getX();
+				if (xValue < 0)
+				{
+					xValue *= -1;
+				}
+				float yValue = player1.getY() - zombie1.getY();
+				if (yValue < 0)
+				{
+					yValue *= -1;
+				}
+
+				up = sqrt(xValue * xValue + (yValue - 1)* (yValue -1));
+				down = sqrt(xValue * xValue + (yValue + 1)* (yValue + 1));
+				//right = sqrt((xValue + 1) * (xValue + 1) + (yValue) * (yValue));
+				if (up < down)
+				{
+					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				else if (down < up)
+				{
+					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = 1 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				else if (down == up)
+				{
+					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = 1 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				//else if (right <= up && right <= down)
+				//{
+				//	wallVec.x = 1 * zombieNS::ZOMBIE_SPEED;
+				//	wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;
+				//	zombie1.setVelocity(wallVec);
+				//}
+			}
+			else if (failDirection == "up")
+			{
+				float xValue = player1.getX() - zombie1.getX();
+				if (xValue < 0)
+				{
+					xValue *= -1;
+				}
+				float yValue = player1.getY() - zombie1.getY();
+				if (yValue < 0)
+				{
+					yValue *= -1;
+				}
+				left = sqrt((xValue - 1) * (xValue - 1) + (yValue) * (yValue));
+				//down = sqrt(xValue * xValue + (yValue + 1)* (yValue + 1));
+				right = sqrt((xValue + 1) * (xValue + 1) + (yValue) * (yValue));
+				if (left < right)
+				{
+					wallVec.x = -1 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				else if (right < left)
+				{
+					wallVec.x = 1 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+				else if (right == left)
+				{
+					wallVec.x = 1 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
 				}
 			}
+			else if (failDirection == "down")
+			{
+				float xValue = player1.getX() - zombie1.getX();
+				if (xValue < 0)
+				{
+					xValue *= -1;
+				}
+				float yValue = player1.getY() - zombie1.getY();
+				if (yValue < 0)
+				{
+					yValue *= -1;
+				}
+				left = sqrt((xValue - 1) * (xValue - 1) + (yValue) * (yValue));
+				//up = sqrt(xValue * xValue + (yValue - 1)* (yValue - 1));
+				right = sqrt((xValue + 1) * (xValue + 1) + (yValue) * (yValue));
+				if (left < right)
+				{
+					wallVec.x = -1 * zombieNS::ZOMBIE_SPEED;;
+					wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;;
+					zombie1.setVelocity(wallVec);
+				}
+				//else if (up <= left && up <= right)
+				//{
+				//	wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;;
+				//	wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;;
+				//	zombie1.setVelocity(wallVec);
+				//}
+				else if (right < left)
+				{
+					wallVec.x = 1 * zombieNS::ZOMBIE_SPEED;;
+					wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;;
+					zombie1.setVelocity(wallVec);
+				}
+				else if (right == left)
+				{
+					wallVec.x = 1 * zombieNS::ZOMBIE_SPEED;
+					wallVec.y = 0 * zombieNS::ZOMBIE_SPEED;
+					zombie1.setVelocity(wallVec);
+				}
+					
+			}
+			
 		}
 	}
+	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 
 	
-	zombie1.setPrev(zombie1.getX(), zombie1.getY());
+
 }
 	
 	
