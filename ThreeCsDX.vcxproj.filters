@@ -57,16 +57,16 @@
     <ClCompile Include="bossCannon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="boss1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="boss2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="boss3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="bossShield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="abilityRange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="abilityMelee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -114,15 +114,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bossCannon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="boss1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="boss2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="boss3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bossShield.h">

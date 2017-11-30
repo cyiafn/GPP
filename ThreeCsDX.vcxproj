@@ -91,11 +91,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ability.cpp" />
+    <ClCompile Include="abilityMelee.cpp" />
+    <ClCompile Include="abilityRange.cpp" />
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="boss.cpp" />
-    <ClCompile Include="boss1.cpp" />
-    <ClCompile Include="boss2.cpp" />
-    <ClCompile Include="boss3.cpp" />
     <ClCompile Include="bossCannon.cpp" />
     <ClCompile Include="bossShield.cpp" />
     <ClCompile Include="entity.cpp" />
@@ -113,9 +113,6 @@
   <ItemGroup>
     <ClInclude Include="audio.h" />
     <ClInclude Include="boss.h" />
-    <ClInclude Include="boss1.h" />
-    <ClInclude Include="boss2.h" />
-    <ClInclude Include="boss3.h" />
     <ClInclude Include="bossCannon.h" />
     <ClInclude Include="bossShield.h" />
     <ClInclude Include="constants.h" />

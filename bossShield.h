@@ -12,8 +12,8 @@ namespace ShieldNS
 	const int   WIDTH = 64;                // image width
 	const int   HEIGHT = 64;               // image height
 	const int   COLLISION_RADIUS = 60 / 2;   // for circular collision
-	const int   SHIELDX = bossNS::X + 150;
-	const int   SHIELDY = bossNS::Y + 150;
+	const int   X = GAME_WIDTH / 2 - WIDTH / 2 +150;
+	const int   Y = GAME_HEIGHT / 2 - HEIGHT / 2 + 150;
 	const int   TEXTURE_COLS = 2;       // texture has 2 columns
 	const int   START_FRAME = 1;        // starts at frame 1
 	const int   END_FRAME = 1;          // no animation

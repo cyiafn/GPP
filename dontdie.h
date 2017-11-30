@@ -23,7 +23,7 @@ class dontdie : public Game
 private:
     // game items
 	
-	Boss boss1, boss2, boss3;
+	Boss boss;
 	BossShield shield;
     // game items	
 	TextureManager mapTexture;   // map texture
@@ -31,6 +31,8 @@ private:
 	TextureManager zombieTexture;
 	TextureManager bossTexture;
 	TextureManager shieldTexture;
+	int fpscounter = 0;
+	int seconds = 0;
 
 	Image   map;                 // map image
 	Image   player;                 // player image

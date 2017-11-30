@@ -47,10 +47,9 @@ const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 
+
 //graphics images
-const char BOSS_IMAGE1[] = "pictures\\Boss form 1.png";
-const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
-const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
+const char BOSS_IMAGE[] = "pictures\\Boss form.png";
 const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
 const char BOSS1_SHIELD[] = "pictures\\Boss form 1 Shield.png";
 // graphic images
@@ -84,7 +83,6 @@ const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
 const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
 const UCHAR BOSS_STAGE1 = VK_SNAPSHOT; //skip to boss stage 1 cheat
 const UCHAR BOSS_STAGE2 = VK_INSERT; //skip to boss stage 2 cheat
-const UCHAR BOSS_STAGE3 = VK_DELETE; //skip to boss stage 3 cheat
-const UCHAR BOSS_CLEAR = VK_BACK; //skip to win cheat
+const UCHAR BOSS_CLEAR = VK_DELETE; //skip to win cheat
 #endif
 

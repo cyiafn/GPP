@@ -1,4 +1,4 @@
 ﻿  dontdie.cpp
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(83): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(84): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(81): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(82): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

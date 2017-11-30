@@ -64,36 +64,22 @@ void dontdie::initialize(HWND hwnd)
 
 	// boss form 1 texture
 	// if hp >66%
-	if (!bossTexture.initialize(graphics, BOSS_IMAGE1))
+	if (!bossTexture.initialize(graphics, BOSS_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 1 texture"));
+	// boss form 1 image
+	if (!boss.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
 	if (!shieldTexture.initialize(graphics, BOSS1_SHIELD))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shield texture"));
 	}
-	// boss form 1 image
-	if (!boss1.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture, 1))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
-	
-	boss1.setFrames(bossNS::BOSS_START_FRAME, bossNS::BOSS_END_FRAME);
-	boss1.setCurrentFrame(bossNS::BOSS_START_FRAME);
 	if (!shield.initialize(this, ShieldNS::WIDTH, ShieldNS::HEIGHT, 2, &shieldTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing shield"));
+
 	shield.setFrames(ShieldNS::SHIELD_START_FRAME, ShieldNS::SHIELD_END_FRAME);
 	shield.setCurrentFrame(ShieldNS::SHIELD_START_FRAME);
-	shield.setX(ShieldNS::SHIELDX);
-	shield.setY(ShieldNS::SHIELDY);
-	////boss 2? if hp > 33% < 66%
-	//if (!bossTexture.initialize(graphics, BOSS_IMAGE2))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 2 texture"));
-	//if (!boss2.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
-
-	//boss2.setFrames(bossNS::BOSS_START_FRAME, bossNS::BOSS_END_FRAME);
-	//boss2.setCurrentFrame(bossNS::BOSS_START_FRAME);
-
-	//// if hp <33%
-	//if (!bossTexture.initialize(graphics, BOSS_IMAGE3))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 3 texture"));
+	shield.setX(ShieldNS::X);
+	shield.setY(ShieldNS::Y);
 
 	reset();            // reset all game variables
 	return;
@@ -114,13 +100,46 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
+	fpscounter++;
 	player1.setPrev(player1.getX(), player1.getY());
 	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 	player1.update(frameTime);
 	zombie1.update(frameTime);
-	boss1.update(frameTime);
-	
 	map.update(frameTime);
+	boss.update(frameTime);
+	if (boss.getHP() < bossNS::MAXHP/2)
+	{
+		boss.setForm(2);
+		if (!bossTexture.initialize(graphics, BOSS_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 1 texture"));
+		// boss form 2 image
+		if (!boss.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
+		boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
+		boss.setCurrentFrame(bossNS::NORAB_START_FRAME);
+	}
+	if (fpscounter % 60 == 0)
+	{
+		seconds++;
+		if (seconds % 5 == 0 && boss.getStatus() == 1) //after 5 secs, transitiion ATTACK to RELOAD
+		{
+			seconds = 0;
+			boss.changeStatus();
+			boss.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
+			boss.setCurrentFrame(bossNS::BARON_START_FRAME);
+			boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+			boss.setLoop(true);
+		}
+		else if (seconds % 5 == 0 && boss.getStatus() == 0) //after 5 secs, transition RELOAD to ATTACK
+		{
+			seconds = 0;
+			boss.changeStatus();
+			boss.setFrames(bossNS::BARON_CHANNEL_FRAME, bossNS::BARON_ATTACK_FRAME);
+			boss.setCurrentFrame(bossNS::BARON_CHANNEL_FRAME);
+			boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+			boss.setLoop(true);
+		}
+	}
 }
 
 //=============================================================================
@@ -136,7 +155,7 @@ void dontdie::render()
 	zombie1.draw();
 	map.draw();         //adds the map to the scene
 	player1.draw();      //adds the player into the scene
-	boss1.draw();
+	boss.draw();
 
 
 	graphics->spriteEnd();
@@ -153,6 +172,7 @@ void dontdie::releaseAll()
 	zombieTexture.onLostDevice();
 	mapTexture.onLostDevice();
 	playerTexture.onLostDevice();
+	bossTexture.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -166,6 +186,7 @@ void dontdie::resetAll()
 	zombieTexture.onLostDevice();
 	mapTexture.onResetDevice();
 	playerTexture.onResetDevice();
+	bossTexture.onResetDevice();
 	Game::resetAll();
 	return;
 }
@@ -184,6 +205,17 @@ void dontdie::collisions()
 			//player1.setX(GAME_WIDTH / 2);
 			
 			player1.setY(GAME_HEIGHT / 2);
+		}
+	}
+	if (player1.collidesWith(boss, tempVector))
+	{
+		player1.revertLocation();
+		player1.damageMe(boss.getDamage());
+		if (player1.getHp() == 0)
+		{
+			player1.setX(GAME_WIDTH / 2);
+
+			player1.setY(GAME_HEIGHT / 4);
 		}
 	}
 }

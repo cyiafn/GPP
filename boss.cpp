@@ -8,52 +8,31 @@ Boss::Boss() : Entity()
 	spriteData.y = bossNS::Y;
 	spriteData.rect.bottom = bossNS::HEIGHT;    // rectangle to select parts of an image
 	spriteData.rect.right = bossNS::WIDTH;
-	frameDelay = bossNS::BOSS_ANIMATION_DELAY;
-	startFrame = bossNS::BOSS_START_FRAME;     // first frame of boss animation
-	endFrame = bossNS::BOSS_END_FRAME;     // last frame of boss animation
+	frameDelay = bossNS::BARON_ANIMATION_DELAY;
+	startFrame = bossNS::BARON_START_FRAME;     // first frame of boss animation
+	endFrame = bossNS::BARON_END_FRAME;     // last frame of boss animation
 	currentFrame = startFrame;
-	radius = bossNS::WIDTH / 2.0;
+	radius = bossNS::COLLISION_RADIUS;
 	collisionType = entityNS::CIRCLE;
+	this->status = 0;
 }
 
 
-bool Boss::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM, int bossform)
+bool Boss::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
 {
-	if (bossform == 1)
-	{
-		boss_form1.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
-		boss_form1.setFrames(bossNS::BOSS_START_FRAME, bossNS::BOSS_END_FRAME);
-		boss_form1.setCurrentFrame(bossNS::BOSS_START_FRAME);
-		boss_form1.setFrameDelay(bossNS::BOSS_ANIMATION_DELAY);
-		boss_form1.setLoop(true);                  // do not loop animation
+		boss_form.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
+		boss_form.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
+		boss_form.setCurrentFrame(bossNS::BARON_START_FRAME);
+		boss_form.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+		boss_form.setLoop(true);                  // do not loop animation
 		shieldOn = true;
-
-	}
-	else if (bossform == 2)
-	{
-		shieldOn = false;
-		boss_form2.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
-		boss_form2.setFrames(bossNS::BOSS_START_FRAME, bossNS::BOSS_END_FRAME);
-		boss_form2.setCurrentFrame(bossNS::BOSS_START_FRAME);
-		boss_form2.setFrameDelay(bossNS::BOSS_ANIMATION_DELAY);
-		boss_form2.setLoop(true);                  // do not loop animation
-	}
-	else if (bossform == 3)
-	{
-		shieldOn = false;
-		boss_form3.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
-		boss_form3.setFrames(bossNS::BOSS_START_FRAME, bossNS::BOSS_END_FRAME);
-		boss_form3.setCurrentFrame(bossNS::BOSS_START_FRAME);
-		boss_form3.setFrameDelay(bossNS::BOSS_ANIMATION_DELAY);
-		boss_form3.setLoop(true);
-	}
-	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
+		return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
 void Boss::draw()
 {
 	Image::draw();              // draw boss
-	if (shieldOn)
+	if (this->shieldOn)
 		// draw shield using colorFilter 50% alpha
 		shield.draw(spriteData, graphicsNS::ALPHA50 & colorFilter);
 }
@@ -61,81 +40,6 @@ void Boss::draw()
 void Boss::update(float frameTime)
 {
 	Entity::update(frameTime);
-	///////////////////////////
-	// CHEAT CODE :PogChamp: //
-	///////////////////////////
-	if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
-	{
-		form = 1;
-		shieldOn = true;
-		form1Spawn = true;
-		HP = bossNS::MAXHP;
-		form1Dead = false;
-		form2Spawn = false;
-		form3Spawn = false;
-		
-	}
-	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
-	{
-		form = 2;
-		shieldOn = false;
-		form2Spawn = true;
-		HP = bossNS::MAXHP;
-		form1Dead = true;
-		form2Dead = false;
-		form1Spawn = false;
-		form3Spawn = false;
-	}
-	else if (input->isKeyDown(BOSS_STAGE3)) //cheat code stage 3
-	{
-		form = 3;
-		shieldOn = false;
-		form3Spawn = true;
-		HP = bossNS::MAXHP;
-		form3Dead = false;
-		form1Spawn = false;
-		form2Spawn = false;
-		
-	}
-	else if (input->isKeyDown(BOSS_CLEAR)) //clear boss = win game
-	{
-		form1Spawn = false;
-		form2Spawn = false;
-		form3Spawn = false;
-		form1Dead = true;
-		form2Dead = true;
-		form3Dead = true;
-	}
-	//////////////////////////////////
-	// Boss Health Tracking :kappa: //
-	//////////////////////////////////
-	if ((HP <= bossNS::MAXHP*(2/3)) && (HP > (bossNS::MAXHP/3)) && form1Spawn == true) //>33%HP <=66% HP
-	{
-		form1Dead = true; //boss 1 is defeated
-		form1Spawn = false; //no longer spawn boss 1
-		form2Spawn = true; //spawn boss 2
-	}
-	else if (HP <= bossNS::MAXHP && form2Spawn == true) //<=33% HP
-	{
-		form2Dead = true; //boss 2 is defeated
-		form1Dead = true; //assuming: boss 1 is defeated
-		form1Spawn = false; //no longer spawn boss 1
-		form2Spawn = false; //no longer spawn boss 2
-		form3Spawn = true;
-	}
-	else if (HP = 0 && form3Spawn == true) //dieded
-	{
-		form3Dead = true;
-		form3Spawn = false;
-	}
-	/////////////////////////////
-	// WIN CONDITION :kreyGASM://
-	/////////////////////////////
-	if (form1Dead == true && form2Dead == true && form3Dead == true) //if 3 forms are dead
-	{
-		//WIN
-		MessageBox(nullptr, TEXT("YOU WIN!!"), TEXT(""), MB_OK);
-	}
 	//////////////////////////////
 	//rotating shield :cmonBruh://
 	//////////////////////////////
@@ -145,7 +49,75 @@ void Boss::update(float frameTime)
 		//shieldX = bossNS::X + cos(angle)*radius;
 		//shieldY = bossNS::Y + sin(angle)*radius;
 	}
+	///////////////////////////
+	// CHEAT CODE :PogChamp: //
+	///////////////////////////
+	if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
+	{
+		form = 1;
+		HP = bossNS::MAXHP;
+		shieldOn = true;
+		BARON_Spawn = true;
+		BARON_Dead = false;
+		NORAB_Spawn = false;
+		NORAB_Dead = false;
+		
+	}
+	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
+	{
+		form = 2;
+		shieldOn = false;
+		NORAB_Spawn = true;
+		HP = 1000;
+		BARON_Dead = true;
+		NORAB_Dead = false;
+		BARON_Spawn = false;
+	}
+	else if (input->isKeyDown(BOSS_CLEAR)) //clear boss = win game
+	{
+		BARON_Dead = true;
+		NORAB_Dead = true;
+		BARON_Spawn = false;
+		NORAB_Spawn = false;
+	}
+	//////////////////////////////////
+	// Boss Health Tracking :kappa: //
+	//////////////////////////////////
+	if (form = 1) // BARON SPAWN, and more than half health
+	{
+		BARON_Spawn == true;
+		BARON_Dead = false; //boss 1 is defeated
+		NORAB_Spawn = false; //ensure NORAB doesn't spawn
+		NORAB_Dead = false; //ensure NORAB isnt dead
+	}
+	else if (form = 2) //<=33% HP
+	{
+		shieldOn = false;
+		BARON_Spawn = false; //de-spawn BARON
+		BARON_Dead = true; //state BARON has died
+		NORAB_Spawn = true; //NORAB SPAWN, less than half health
+		NORAB_Dead = false; //ensure NORAB isn't dead
+	}
+
+
+	if (HP <= 0) //dieded && ensure NORAB is the one that died
+	{
+		NORAB_Dead = true;
+		NORAB_Spawn = false;
+		BARON_Dead = true;
+		BARON_Spawn = false;
+	}
+	/////////////////////////////
+	// WIN CONDITION :kreyGASM://
+	/////////////////////////////
+	if (BARON_Dead == true && NORAB_Dead == true) //if 2 forms are dead
+	{
+		//WIN
+		MessageBox(nullptr, TEXT("YOU WIN!!"), TEXT(""), MB_OK);
+	}
 	
+	
+	//this->HP -= 10;
 }
 
 int Boss::getDamage()
@@ -171,4 +143,26 @@ int Boss::getForm()
 void Boss::setForm(int newform)
 {
 	form = newform;
+}
+
+void Boss::takesDamage(int dmgValue)
+{
+	this->HP -= dmgValue;
+}
+
+int Boss::getStatus()
+{
+	return this->status;
+}
+
+void Boss::changeStatus()
+{
+	if (this->status == 0)
+	{
+		this->status = 1;
+	}
+	else if (this->status == 1)
+	{
+		this->status = 0;
+	}
 }
