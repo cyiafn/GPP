@@ -8,8 +8,7 @@
 #include "entity.h"
 #include "constants.h"
 #include <string>
-#include "abilityRange.h"
-
+#include "bossShield.h"
 
 
 namespace bossNS
@@ -59,7 +58,6 @@ protected:
 	bool NORAB_Spawn = false;
 	bool NORAB_Dead = false;
 	Image boss_form;
-	Entity shield;
 	bool shieldOn = false;
 public:
 	// constructor
@@ -74,6 +72,8 @@ public:
 	void takesDamage(int dmgValue);
 	int getStatus();
 	void changeStatus();
+	bool hasShield();
+	void setNoShield();
 
 	// inherited member functions
 	virtual void draw();

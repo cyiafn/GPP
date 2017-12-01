@@ -60,15 +60,6 @@
     <ClCompile Include="bossShield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ability.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="abilityRange.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="abilityMelee.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">

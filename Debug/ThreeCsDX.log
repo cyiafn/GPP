@@ -1,4 +1,7 @@
-﻿  dontdie.cpp
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(81): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(82): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+﻿  bossShield.cpp
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bossshield.cpp(10): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bossshield.cpp(11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bossshield.cpp(38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bossshield.cpp(39): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bossshield.cpp(40): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

@@ -69,18 +69,17 @@ void dontdie::initialize(HWND hwnd)
 	// boss form 1 image
 	if (!boss.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
-	if (!shieldTexture.initialize(graphics, BOSS1_SHIELD))
+	if (!shieldTexture.initialize(graphics, BOSS_SHIELD))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shield texture"));
 	}
-	if (!shield.initialize(this, ShieldNS::WIDTH, ShieldNS::HEIGHT, 2, &shieldTexture))
+	if (!shield.initialize(this, ShieldNS::WIDTH, ShieldNS::HEIGHT, ShieldNS::TEXTURE_COLS, &shieldTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing shield"));
 
 	shield.setFrames(ShieldNS::SHIELD_START_FRAME, ShieldNS::SHIELD_END_FRAME);
 	shield.setCurrentFrame(ShieldNS::SHIELD_START_FRAME);
-	shield.setX(ShieldNS::X);
-	shield.setY(ShieldNS::Y);
-
+	shield.setX(shield.getprevX());
+	shield.setY(shield.getprevY());
 	reset();            // reset all game variables
 	return;
 }
@@ -107,38 +106,55 @@ void dontdie::update()
 	zombie1.update(frameTime);
 	map.update(frameTime);
 	boss.update(frameTime);
-	if (boss.getHP() < bossNS::MAXHP/2)
+	if (boss.getForm() == 1)
+	{
+		if (fpscounter % 60 == 0)
+		{
+			seconds++;
+			if (seconds % 5 == 0 && boss.getStatus() == 1) //after 5 secs, transitiion ATTACK to RELOAD
+			{
+				boss.changeStatus();
+				boss.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
+				boss.setCurrentFrame(bossNS::BARON_START_FRAME);
+				boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+				boss.setLoop(true);
+			}
+			else if (seconds % 5 == 0 && boss.getStatus() == 0) //after 5 secs, transition RELOAD to ATTACK
+			{
+				boss.changeStatus();
+				boss.setFrames(bossNS::BARON_CHANNEL_FRAME, bossNS::BARON_ATTACK_FRAME);
+				boss.setCurrentFrame(bossNS::BARON_CHANNEL_FRAME);
+				boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+				boss.setLoop(true);
+			}
+		}
+	}
+
+	if (boss.getHP() < bossNS::MAXHP / 2)
 	{
 		boss.setForm(2);
+		bossTexture.onLostDevice();
+		bossTexture.onResetDevice();
 		if (!bossTexture.initialize(graphics, BOSS_IMAGE))
-			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 1 texture"));
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 2 texture"));
 		// boss form 2 image
 		if (!boss.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
 		boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
 		boss.setCurrentFrame(bossNS::NORAB_START_FRAME);
+		boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
+		boss.setLoop(true);
+		boss.setNoShield();
 	}
-	if (fpscounter % 60 == 0)
+	if (boss.hasShield() == true)
 	{
-		seconds++;
-		if (seconds % 5 == 0 && boss.getStatus() == 1) //after 5 secs, transitiion ATTACK to RELOAD
-		{
-			seconds = 0;
-			boss.changeStatus();
-			boss.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
-			boss.setCurrentFrame(bossNS::BARON_START_FRAME);
-			boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
-			boss.setLoop(true);
-		}
-		else if (seconds % 5 == 0 && boss.getStatus() == 0) //after 5 secs, transition RELOAD to ATTACK
-		{
-			seconds = 0;
-			boss.changeStatus();
-			boss.setFrames(bossNS::BARON_CHANNEL_FRAME, bossNS::BARON_ATTACK_FRAME);
-			boss.setCurrentFrame(bossNS::BARON_CHANNEL_FRAME);
-			boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
-			boss.setLoop(true);
-		}
+		shield.update(frameTime);
+		shield.setX(shield.getprevX());
+		shield.setY(shield.getprevY());
+	}
+	else
+	{
+		//get rid of it
 	}
 }
 
@@ -156,7 +172,7 @@ void dontdie::render()
 	map.draw();         //adds the map to the scene
 	player1.draw();      //adds the player into the scene
 	boss.draw();
-
+	shield.draw();
 
 	graphics->spriteEnd();
 

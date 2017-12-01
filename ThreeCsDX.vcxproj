@@ -91,9 +91,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ability.cpp" />
-    <ClCompile Include="abilityMelee.cpp" />
-    <ClCompile Include="abilityRange.cpp" />
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="bossCannon.cpp" />

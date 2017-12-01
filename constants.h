@@ -50,8 +50,8 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 
 //graphics images
 const char BOSS_IMAGE[] = "pictures\\Boss form.png";
-const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
-const char BOSS1_SHIELD[] = "pictures\\Boss form 1 Shield.png";
+const char BOSSCANNON_IMAGE[] = "pictures\\Boss Cannon Ball.png";
+const char BOSS_SHIELD[] = "pictures\\Boss Shield.png";
 // graphic images
 //const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player

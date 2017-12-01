@@ -32,23 +32,19 @@ bool Boss::initialize(Game *gamePtr, int width, int height, int ncols, TextureMa
 void Boss::draw()
 {
 	Image::draw();              // draw boss
-	if (this->shieldOn)
-		// draw shield using colorFilter 50% alpha
-		shield.draw(spriteData, graphicsNS::ALPHA50 & colorFilter);
 }
 
 void Boss::update(float frameTime)
 {
 	Entity::update(frameTime);
+
 	//////////////////////////////
 	//rotating shield :cmonBruh://
 	//////////////////////////////
-	if (shieldOn)
+	/*if (shieldOn)
 	{
-		//angle += frameTime*rotation_rate;
-		//shieldX = bossNS::X + cos(angle)*radius;
-		//shieldY = bossNS::Y + sin(angle)*radius;
-	}
+		shield->update(frameTime);
+	}*/
 	///////////////////////////
 	// CHEAT CODE :PogChamp: //
 	///////////////////////////
@@ -92,13 +88,11 @@ void Boss::update(float frameTime)
 	}
 	else if (form = 2) //<=33% HP
 	{
-		shieldOn = false;
 		BARON_Spawn = false; //de-spawn BARON
 		BARON_Dead = true; //state BARON has died
 		NORAB_Spawn = true; //NORAB SPAWN, less than half health
 		NORAB_Dead = false; //ensure NORAB isn't dead
 	}
-
 
 	if (HP <= 0) //dieded && ensure NORAB is the one that died
 	{
@@ -117,7 +111,7 @@ void Boss::update(float frameTime)
 	}
 	
 	
-	//this->HP -= 10;
+	this->HP -= 1;
 }
 
 int Boss::getDamage()
@@ -152,17 +146,26 @@ void Boss::takesDamage(int dmgValue)
 
 int Boss::getStatus()
 {
-	return this->status;
+	return status;
 }
 
 void Boss::changeStatus()
 {
-	if (this->status == 0)
+	if (status == 0)
 	{
-		this->status = 1;
+		status = 1;
 	}
-	else if (this->status == 1)
+	else if (status == 1)
 	{
-		this->status = 0;
+		status = 0;
 	}
+}
+
+bool Boss::hasShield()
+{
+	return shieldOn;
+}
+void Boss::setNoShield()
+{
+	shieldOn = false;
 }
