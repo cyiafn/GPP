@@ -1,22 +1,2 @@
-﻿  zombie.cpp
-  winmain.cpp
-  wall.cpp
-  textureManager.cpp
-  textDX.cpp
-  player.cpp
-  input.cpp
-  image.cpp
-  graphics.cpp
-  game.cpp
-  entity.cpp
-  dontdie.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(151): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  boss1.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\boss1.cpp(44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\boss1.cpp(45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  boss.cpp
-  audio.cpp
-  Generating Code...
-  LINK : C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe not found or not built by the last incremental link; performing full link
-audio.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+﻿  wall.cpp
   ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe

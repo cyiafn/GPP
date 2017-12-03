@@ -10,6 +10,8 @@
 #include "entity.h"
 #include "constants.h"
 
+#include "bullet.h"
+
 namespace playerNS
 {
     const int WIDTH = 26;                   // image width
@@ -31,6 +33,7 @@ private:
 	float prevX;
 	float prevY;
 	int hp;
+
 public:
     // constructor
     Player();

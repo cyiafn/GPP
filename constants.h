@@ -42,23 +42,29 @@ const UINT GAME_HEIGHT = 720;			// height of game in pixels
 
 // game
 const double PI = 3.14159265;
-const float FRAME_RATE = 200.0f;                // the target frame rate (frames/sec)
+const float FRAME_RATE = 60.0f;                // the target frame rate (frames/sec)
 const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 const UINT  TILE_MAP_WIDTH = 100;           // width of tile map in tiles
 const UINT  TILE_MAP_HEIGHT = 20;           // height of tile map in tiles
 
-//graphics images
+// boss images
 const char BOSS_IMAGE1[] = "pictures\\Boss form 1.png";
 const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
 const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
 const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
-// graphic images
-const char MAP_IMAGE[] = "pictures\\tile.png";  // Picture of background
+
+// player images
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
+//const char PISTOLBULLET_IMAGE[] = "pictures\\player.png"; //picture of Pistol Bullet
+
+// zombie images
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
-const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
+
+//environment images
+const char MAP_IMAGE[] = "pictures\\maptile.png";  // Picture of background
+const char WALL_IMAGE[] = "pictures\\woodentile.png"; //picture of a wall
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second
@@ -84,6 +90,7 @@ const UCHAR PLAYER_RIGHT_KEY = 0x44; //Right arrow key
 const UCHAR PLAYER_LEFT_KEY = 0x41; //Left Arrow key
 const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
 const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
+const UCHAR PLAYER_SHOOT_KEY = VK_SPACE;
 
 
 #endif
