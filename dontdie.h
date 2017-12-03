@@ -18,6 +18,23 @@
 #include "zombie.h"
 #include "boss.h"
 
+namespace dontdieNS
+{
+	const int TEXTURE_SIZE = 64;
+	const int TEXTURE_COLS = 1;
+	const int MAP_HEIGHT = 8;
+	const int MAP_WIDTH = 16;
+	const float SCROLL_RATE = 10;
+	const int __ = -1;                  // empty tile
+
+	const int tileMap[MAP_HEIGHT][MAP_WIDTH] = {
+		__, 0,__,__, 1,__,__,__,12,13,__,__,__,__, 0,__,
+		__,__,__,__,__,__,__,11,__,__,__,__,__,__,__,__,
+		__,__,__, 2,__,__,__,15,__, 3,__,__,__,__, 3, 2,
+		5, 4, 5, 6, 4, 4, 5,15, 4, 7, 5,__,14, 5, 7, 6
+	};
+}
+
 class dontdie : public Game
 {
 private:
