@@ -2,6 +2,7 @@
 
 Boss::Boss() : Entity()
 {
+
 	spriteData.width = bossNS::WIDTH;           // size of boss
 	spriteData.height = bossNS::HEIGHT;
 	spriteData.x = bossNS::X;                   // location on screen
@@ -12,102 +13,81 @@ Boss::Boss() : Entity()
 	startFrame = bossNS::BARON_START_FRAME;     // first frame of boss animation
 	endFrame = bossNS::BARON_END_FRAME;     // last frame of boss animation
 	currentFrame = startFrame;
-	radius = bossNS::COLLISION_RADIUS;
-	collisionType = entityNS::CIRCLE;
-	this->status = 0;
+	edge.left = -64;
+	edge.top = -64;
+	edge.right = 64;
+	edge.bottom = 64;
+	collisionType = entityNS::BOX;
+	shield = new BossShield();
 }
 
 
 bool Boss::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
 {
-		boss_form.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
-		boss_form.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
-		boss_form.setCurrentFrame(bossNS::BARON_START_FRAME);
-		boss_form.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
-		boss_form.setLoop(true);                  // do not loop animation
-		shieldOn = true;
-		return(Entity::initialize(gamePtr, width, height, ncols, textureM));
+	boss_form.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
+	boss_form.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
+	boss_form.setCurrentFrame(bossNS::BARON_START_FRAME);
+	boss_form.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+	boss_form.setLoop(true);                  // do not loop animation
+	shieldOn = true;
+	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
 void Boss::draw()
 {
-	Image::draw();              // draw boss
+	Image::draw();
 }
 
 void Boss::update(float frameTime)
 {
 	Entity::update(frameTime);
-
-	//////////////////////////////
-	//rotating shield :cmonBruh://
-	//////////////////////////////
-	/*if (shieldOn)
-	{
-		shield->update(frameTime);
-	}*/
+	
 	///////////////////////////
 	// CHEAT CODE :PogChamp: //
 	///////////////////////////
 	if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
 	{
+		spawn = true;
 		form = 1;
 		HP = bossNS::MAXHP;
 		shieldOn = true;
-		BARON_Spawn = true;
-		BARON_Dead = false;
-		NORAB_Spawn = false;
-		NORAB_Dead = false;
-		
+		bossTimer = 0; //reset bossTimer
 	}
 	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
 	{
+		spawn = true;
 		form = 2;
 		shieldOn = false;
-		NORAB_Spawn = true;
 		HP = 1000;
-		BARON_Dead = true;
-		NORAB_Dead = false;
-		BARON_Spawn = false;
+		bossTimer = 0; //reset bossTimer
 	}
 	else if (input->isKeyDown(BOSS_CLEAR)) //clear boss = win game
 	{
-		BARON_Dead = true;
-		NORAB_Dead = true;
-		BARON_Spawn = false;
-		NORAB_Spawn = false;
+		HP = 0;
 	}
 	//////////////////////////////////
 	// Boss Health Tracking :kappa: //
 	//////////////////////////////////
-	if (form = 1) // BARON SPAWN, and more than half health
+	if (spawn)
 	{
-		BARON_Spawn == true;
-		BARON_Dead = false; //boss 1 is defeated
-		NORAB_Spawn = false; //ensure NORAB doesn't spawn
-		NORAB_Dead = false; //ensure NORAB isnt dead
-	}
-	else if (form = 2) //<=33% HP
-	{
-		BARON_Spawn = false; //de-spawn BARON
-		BARON_Dead = true; //state BARON has died
-		NORAB_Spawn = true; //NORAB SPAWN, less than half health
-		NORAB_Dead = false; //ensure NORAB isn't dead
-	}
+		if (HP > bossNS::MAXHP / 2) // form 1
+		{
+			form = 1;
+			bossTimer = 0; //reset bossTimer
+		}
+		else if (HP <= bossNS::MAXHP / 2) // form 2
+		{
+			form = 2;
+			shieldOn = false;
+			bossTimer = 0; //reset bossTimer
+		}
 
-	if (HP <= 0) //dieded && ensure NORAB is the one that died
-	{
-		NORAB_Dead = true;
-		NORAB_Spawn = false;
-		BARON_Dead = true;
-		BARON_Spawn = false;
-	}
-	/////////////////////////////
-	// WIN CONDITION :kreyGASM://
-	/////////////////////////////
-	if (BARON_Dead == true && NORAB_Dead == true) //if 2 forms are dead
-	{
-		//WIN
-		MessageBox(nullptr, TEXT("YOU WIN!!"), TEXT(""), MB_OK);
+		if (HP <= 0) //dieded
+		{
+			//WIN
+			spawn = false;
+			MessageBox(nullptr, TEXT("YOU WIN!!"), TEXT(""), MB_OK);			
+		}
 	}
 	
 	
@@ -134,9 +114,9 @@ int Boss::getForm()
 	return form;
 }
 
-void Boss::setForm(int newform)
+bool Boss::isSpawn()
 {
-	form = newform;
+	return spawn;
 }
 
 void Boss::takesDamage(int dmgValue)
@@ -144,28 +124,43 @@ void Boss::takesDamage(int dmgValue)
 	this->HP -= dmgValue;
 }
 
-int Boss::getStatus()
-{
-	return status;
-}
-
-void Boss::changeStatus()
-{
-	if (status == 0)
-	{
-		status = 1;
-	}
-	else if (status == 1)
-	{
-		status = 0;
-	}
-}
 
 bool Boss::hasShield()
 {
 	return shieldOn;
 }
-void Boss::setNoShield()
+
+bool Boss::isReloading()
 {
-	shieldOn = false;
+	return reloading;
+}
+bool Boss::isChanneling()
+{
+	return channeling;
+}
+bool Boss::isAttacking()
+{
+	return attacking;
+}
+
+void Boss::changeMotion(bool motion)
+{
+	if (reloading == motion)
+	{
+		channeling = true; //change to channeling frame
+		attacking = false;
+		reloading = false;
+	}
+	else if (channeling == motion)
+	{
+		attacking = true; //change to attacking frame
+		reloading = false;
+		channeling = false;
+	}
+	else if (attacking == motion)
+	{
+		reloading = true; //change to reloading frame
+		channeling = false;
+		attacking = false;
+	}
 }

@@ -17,6 +17,7 @@
 #include "zombie.h"
 #include "boss.h"
 #include "bossShield.h"
+#include "bossCannon.h"
 
 class dontdie : public Game
 {
@@ -31,15 +32,29 @@ private:
 	TextureManager zombieTexture;
 	TextureManager bossTexture;
 	TextureManager shieldTexture;
+	TextureManager cannonTexture;
+	TextureManager bossMAXHPTexture;
+	TextureManager bossCURHPTexture;
 	int fpscounter = 0;
 	int seconds = 0;
+	int	BARON_RELOADING_TIMER = bossNS::BARON_RELOADING_TIMER;
+	int	BARON_CHANNELING_TIMER = bossNS::BARON_CHANNELING_TIMER;
+	int	BARON_ATTACKING_TIMER = bossNS::BARON_ATTACKING_TIMER;
+	int	NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
+	int	NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
+	int	NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
+	int CannonBallNo = 0;
 
 	Image   map;                 // map image
 	Image   player;                 // player image
 	Image zombie;
+	Image bossMAXHP;
+	Image bossCURHP;
 
 	Player player1;
 	Zombie zombie1;
+
+	BossCannon CannonArray[360];
     // game variables
 
 	//tempHP
