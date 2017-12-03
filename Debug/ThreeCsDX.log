@@ -1,4 +1,7 @@
 ﻿  dontdie.cpp
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(257): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(247): warning C4101: 'voronoi': unreferenced local variable
-  ThreeCsDX.vcxproj -> C:\Users\chenyifan\Desktop\gpp\Debug\ThreeCsDX.exe
+d:\visual studio projects\gpp project\dontdie.cpp(243): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(233): warning C4101: 'voronoi': unreferenced local variable
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  astar.cpp
+  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe

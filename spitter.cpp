@@ -1,31 +1,31 @@
-#include "zombie.h"
+#include "spitter.h"
 
 //=============================================================================
 // default constructor
 //=============================================================================
-Zombie::Zombie() : Entity()
+Spitter::Spitter() : Entity()
 {
-	spriteData.width = zombieNS::WIDTH;
-	spriteData.height = zombieNS::HEIGHT;
-	spriteData.x = zombieNS::X;                   // location on screen
-	spriteData.y = zombieNS::Y;
-	spriteData.rect.bottom = zombieNS::HEIGHT;    // rectangle to select parts of an image
-	spriteData.rect.right = zombieNS::WIDTH;
-	velocity.x =  0;                             // velocity X
+	spriteData.width = spitterNS::WIDTH;
+	spriteData.height = spitterNS::HEIGHT;
+	spriteData.x = spitterNS::X;                   // location on screen
+	spriteData.y = spitterNS::Y;
+	spriteData.rect.bottom = spitterNS::HEIGHT;    // rectangle to select parts of an image
+	spriteData.rect.right = spitterNS::WIDTH;
+	velocity.x = 0;                             // velocity X
 	velocity.y = 0;                             // velocity Y
-	frameDelay = zombieNS::ZOMBIE_ANIMATION_DELAY;
-	startFrame = zombieNS::ZOMBIE_START_FRAME;     // first frame of ship animation
-	endFrame = zombieNS::ZOMBIE_END_FRAME;     // last frame of ship animation
+	frameDelay = spitterNS::SPITTER_ANIMATION_DELAY;
+	startFrame = spitterNS::SPITTER_START_FRAME;     // first frame of ship animation
+	endFrame = spitterNS::SPITTER_END_FRAME;     // last frame of ship animation
 	currentFrame = startFrame;
-	radius = zombieNS::WIDTH / 2.0;
-	health = zombieNS::HEALTH;
+	radius = spitterNS::WIDTH / 2.0;
+	health = spitterNS::HEALTH;
 	collisionType = entityNS::CIRCLE;
 	wallVector.x = 0;
 	wallVector.y = 0;
 	attackBuffer = 60.0f;
 }
 
-bool Zombie::initialize(Game *gamePtr, int width, int height, int ncols,
+bool Spitter::initialize(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM)
 {
 	//zomb.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
@@ -36,12 +36,12 @@ bool Zombie::initialize(Game *gamePtr, int width, int height, int ncols,
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
-void Zombie::draw()
+void Spitter::draw()
 {
 	Image::draw();              // draw zombie
 }
 
-void Zombie::update(float frameTime)
+void Spitter::update(float frameTime)
 {
 	Entity::update(frameTime);
 	spriteData.x += frameTime * velocity.x;         // move ship along X 
@@ -56,26 +56,26 @@ void Zombie::update(float frameTime)
 		this->endFrame = 0;
 	}
 }
-void Zombie::ai(float frameTime, Zombie &ent)
+void Spitter::ai(float frameTime, Spitter &ent)
 {
 	//spriteData.x = spriteData.x + frameTime * zombieNS::ZOMBIE_SPEED;
 }
-void Zombie::setPrev(float x, float y)
+void Spitter::setPrev(float x, float y)
 {
 	this->prevX = x;
 	this->prevY = y;
 }
-void Zombie::revertLocation()
+void Spitter::revertLocation()
 {
 	this->spriteData.x = prevX;
 	this->spriteData.y = prevY;
 }
-int Zombie::getDamage()
+int Spitter::getDamage()
 {
 	if (attackBuffer == 60)
 	{
 		attackBuffer = 0;
-		return zombieNS::DAMAGE;
+		return spitterNS::DAMAGE;
 	}
 	else
 	{
@@ -83,7 +83,7 @@ int Zombie::getDamage()
 	}
 
 }
-int Zombie::checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector)
+int Spitter::checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector)
 {
 	float min01, min03, max01, max03, center01, center03;
 
@@ -117,40 +117,39 @@ int Zombie::checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector)
 }
 
 
-int Zombie::getWallVectorX()
+int Spitter::getWallVectorX()
 {
 	return this->wallVector.x;
 }
-int Zombie::getWallVectorY()
+int Spitter::getWallVectorY()
 {
 	return this->wallVector.y;
 }
-void Zombie::setWallVector(VECTOR2 vector)
+void Spitter::setWallVector(VECTOR2 vector)
 {
 	this->wallVector = vector;
 }
 
-float Zombie::getAttackBuffer()
+float Spitter::getAttackBuffer()
 {
 	return this->attackBuffer;
 }
 
-void Zombie::setAttackBuffer(float attack)
+void Spitter::setAttackBuffer(float attack)
 {
 	this->attackBuffer = attack;
 }
 
-void Zombie::setEndFrame(int end)
+void Spitter::setEndFrame(int end)
 {
 	this->endFrame = end;
 }
-
-int Zombie::getID()
+int Spitter::getID()
 {
 	return this->id;
 }
 
-void Zombie::setID(int id)
+void Spitter::setID(int id)
 {
 	this->id = id;
 }

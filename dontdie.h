@@ -17,19 +17,11 @@
 #include "constants.h"
 #include "zombie.h"
 #include "boss.h"
+#include "tank.h"
+#include "spitter.h"
+#include "spitterbullet.h"
+#include <vector>
 
-namespace astarNS
-{
-	const int n = 1280; //x of the map
-	const int m = 720; //y of the map
-	static int map[n][m]; //use map cause x and y graph has 2 axis
-	static int closed_nodes_map[n][m]; // map of checked nodes
-	static int open_nodes_map[n][m]; // map of not tried nodes
-	static int dir_map[n][m]; // map of directions
-	const int dir = 8; // this is the number of possible directions to go to at any position, can be 4
-	static int dx[dir] = { 1, 1, 0, -1, -1, -1, 0, 1 }; // direction x axis
-	static int dy[dir] = { 0, 1, 1, 1, 0, -1, -1, -1 }; // direction y axis
-}
 
 
 class dontdie : public Game
@@ -45,15 +37,27 @@ private:
 	TextureManager playerTexture;     // player texture
 	TextureManager wallTexture; //wall texture
 	TextureManager zombieTexture;
+	TextureManager tankTexture;
+	TextureManager spitterTexture;
+	TextureManager spitterbulletTexture;
 
 	Image   map;                 // map image
 	Image   player;                 // player image
 	Image zombie;
-	Image	wall;				 // wall image	
+	Image	wall;				 // wall image
+	Image tank;
+	Image spitter;
+	Image spitterbullet;
 
 	Player player1;
 	Zombie zombie1;
 	Wall wallArray[10];
+	std::vector<Zombie> zombieArray;
+	std::vector<Tank> tankArray;
+	std::vector<Spitter> spitterArray;
+	std::vector<Spitterbullet> spitterbulletArray;
+	int spitterbulletID;
+	
     // game variables
 
 	//tempHP

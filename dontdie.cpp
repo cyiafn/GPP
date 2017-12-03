@@ -31,7 +31,7 @@ void dontdie::initialize(HWND hwnd)
 	Game::initialize(hwnd);
 	graphics->setBackColor(graphicsNS::WHITE);
 	//ASTAR Algorithm MAP generation
-	
+	this->spitterbulletID = 0;
 
 
 
@@ -215,25 +215,11 @@ void dontdie::resetAll()
 void dontdie::collisions()
 {
 	VECTOR2 tempVector;
-	if (player1.collidesWith(zombie1, tempVector))
-	{
-		player1.revertLocation();
-		zombie1.revertLocation();
-		player1.damageMe(zombie1.getDamage());
-		
-		if (player1.getHp() == 0)
-		{
-			//player1.setX(GAME_WIDTH / 2);
-			
-			player1.setY(GAME_HEIGHT / 2);
-		}
-	}
 	for (int i = 0; i < 10; i++)
 	{
 		if (player1.collidesWith(wallArray[i], tempVector))
 		{
 			player1.revertLocation();
-			zombie1.revertLocation();
 		}
 	}
 }
@@ -242,7 +228,7 @@ void dontdie::ai()
 {
 	//zombie AI
 	VECTOR2 dir, tempVec, wallVec;
-	float up,down,left,right;
+	float up, down, left, right, upChange,downChange,leftChange,rightChange;
 	string failDirection = "";
 	int voronoi;
 	bool failCheck = false;
@@ -311,11 +297,36 @@ void dontdie::ai()
 				{
 					yValue *= -1;
 				}
+				if (player1.getY() >= zombie1.getY())
+				{
+					upChange = 1;
+					downChange = -1;
+				}
+				else
+				{
+					upChange = -1;
+					downChange = 1;
 
-				up = sqrt(xValue * xValue + (yValue-1) * (yValue - 1));
-				down = sqrt(xValue * xValue + (yValue + 1) * (yValue + 1));
+				}
+				up = sqrt(xValue * xValue + (yValue+upChange) * (yValue + upChange));
+				down = sqrt(xValue * xValue + (yValue + downChange) * (yValue + downChange));
 				//left = sqrt((xValue-1) * (xValue-1) + (yValue) * (yValue));
-				if (up < down)
+				if (zombie1.checkVoronoiRegion(wallArray[i], tempVec))
+				{
+					if (up < down)
+					{
+						wallVec.x = 0;
+						wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;
+						zombie1.setVelocity(wallVec);
+					}
+					else
+					{
+						wallVec.x = 0;
+						wallVec.y = 1 * zombieNS::ZOMBIE_SPEED;
+						zombie1.setVelocity(wallVec);
+					}
+				}
+				else if (up < down)
 				{
 					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
 					wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;
@@ -352,11 +363,38 @@ void dontdie::ai()
 				{
 					yValue *= -1;
 				}
+				if (player1.getY() >= zombie1.getY())
+				{
+					upChange = 1;
+					downChange = -1;
+				}
+				else
+				{
+					upChange = -1;
+					downChange = 1;
 
-				up = sqrt(xValue * xValue + (yValue - 1)* (yValue -1));
-				down = sqrt(xValue * xValue + (yValue + 1)* (yValue + 1));
+				}
+
+
+				up = sqrt(xValue * xValue + (yValue + upChange)* (yValue + upChange));
+				down = sqrt(xValue * xValue + (yValue + downChange)* (yValue + downChange));
 				//right = sqrt((xValue + 1) * (xValue + 1) + (yValue) * (yValue));
-				if (up < down)
+				if (zombie1.checkVoronoiRegion(wallArray[i], tempVec))
+				{
+					if (up < down)
+					{
+						wallVec.x = 0;
+						wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;
+						zombie1.setVelocity(wallVec);
+					}
+					else if (down < up)
+					{
+						wallVec.x = 0;
+						wallVec.y = 1 * zombieNS::ZOMBIE_SPEED;
+						zombie1.setVelocity(wallVec);
+					}
+				}
+				else if (up < down)
 				{
 					wallVec.x = 0 * zombieNS::ZOMBIE_SPEED;
 					wallVec.y = -1 * zombieNS::ZOMBIE_SPEED;
@@ -393,9 +431,19 @@ void dontdie::ai()
 				{
 					yValue *= -1;
 				}
-				left = sqrt((xValue - 1) * (xValue - 1) + (yValue) * (yValue));
+				if (player1.getX() >= zombie1.getX())
+				{
+					leftChange = 1;
+					rightChange = -1;
+				}
+				else
+				{
+					leftChange = -1;
+					rightChange = 1;
+				}
+				left = sqrt((xValue + leftChange) * (xValue + leftChange) + (yValue) * (yValue));
 				//down = sqrt(xValue * xValue + (yValue + 1)* (yValue + 1));
-				right = sqrt((xValue + 1) * (xValue + 1) + (yValue) * (yValue));
+				right = sqrt((xValue + rightChange) * (xValue + rightChange) + (yValue) * (yValue));
 				if (left < right)
 				{
 					wallVec.x = -1 * zombieNS::ZOMBIE_SPEED;
@@ -427,9 +475,19 @@ void dontdie::ai()
 				{
 					yValue *= -1;
 				}
-				left = sqrt((xValue - 1) * (xValue - 1) + (yValue) * (yValue));
+				if (player1.getX() >= zombie1.getX())
+				{
+					leftChange = 1;
+					rightChange = -1;
+				}
+				else
+				{
+					leftChange = -1;
+					rightChange = 1;
+				}
+				left = sqrt((xValue + leftChange) * (xValue + leftChange) + (yValue) * (yValue));
 				//up = sqrt(xValue * xValue + (yValue - 1)* (yValue - 1));
-				right = sqrt((xValue + 1) * (xValue + 1) + (yValue) * (yValue));
+				right = sqrt((xValue + rightChange) * (xValue + rightChange) + (yValue) * (yValue));
 				if (left < right)
 				{
 					wallVec.x = -1 * zombieNS::ZOMBIE_SPEED;;
@@ -459,8 +517,25 @@ void dontdie::ai()
 			
 		}
 	}
+	VECTOR2 tempVector;
+	if (player1.collidesWith(zombie1, tempVector))
+	{
+		player1.revertLocation();
+		zombie1.revertLocation();
+		player1.damageMe(zombie1.getDamage());
+		if (player1.getHp() == 0)
+		{
+			player1.setX(GAME_WIDTH / 2);
+			//player1.setY(GAME_HEIGHT / 2);
+		}
+	}
 	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 
+
+	//Tank AI
+
+
+	//Spitter AI
 	
 
 }

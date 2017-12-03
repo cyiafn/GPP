@@ -72,6 +72,15 @@
     <ClCompile Include="astar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spitterbullet.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">
@@ -132,6 +141,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="astar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spitterbullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
