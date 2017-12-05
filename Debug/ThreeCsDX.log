@@ -1,7 +1,15 @@
 ﻿  dontdie.cpp
-d:\visual studio projects\gpp project\dontdie.cpp(243): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(233): warning C4101: 'voronoi': unreferenced local variable
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(254): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(255): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(260): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(261): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(266): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(267): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(272): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(273): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(412): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\chenyifan\desktop\gpp\dontdie.cpp(398): warning C4101: 'voronoi': unreferenced local variable
   Generating Code...
   Skipping... (no relevant changes detected)
   astar.cpp
-  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
+  ThreeCsDX.vcxproj -> C:\Users\chenyifan\Desktop\gpp\Debug\ThreeCsDX.exe

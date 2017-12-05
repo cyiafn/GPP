@@ -19,6 +19,7 @@ namespace spitterNS
 	const float SPITTER_ANIMATION_DELAY = 0.2f; // time between frames
 	const int HEALTH = 20;
 	const float SPITTER_SPEED = 30.0f;
+	const int DAMAGE = 2;
 }
 
 // inherits from Entity class
@@ -33,6 +34,7 @@ private:
 	//float playerY;
 	VECTOR2 wallVector;
 	float attackBuffer;
+	bool initialised;
 
 public:
 	// constructor
@@ -56,6 +58,14 @@ public:
 	void setEndFrame(int end);
 	int getID();
 	void setID(int id);
+	bool isInitialised()
+	{
+		return initialised;
+	}
+	void setInitialised(bool init)
+	{
+		this->initialised = init;
+	}
 };
 #endif
 

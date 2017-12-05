@@ -35,6 +35,7 @@ private:
 	//float playerY;
 	VECTOR2 wallVector;
 	float attackBuffer;
+	bool initialised;
 
 public:
 	// constructor
@@ -58,6 +59,15 @@ public:
 	void setEndFrame(int end);
 	int getID();
 	void setID(int id);
+	bool isInitialised()
+	{
+		return initialised;
+	}
+	void setInitialised(bool init)
+	{
+		this->initialised = init;
+	}
+	
 };
 #endif
 

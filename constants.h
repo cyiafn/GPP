@@ -61,6 +61,7 @@ const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
 const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
 const char TANK_IMAGE[] = "pictures\\tank.png";
 const char SPITTER_IMAGE[] = "pictures\\spitter.png";
+const char SPITTERBULLET_IMAGE[] = "pictures\\spitterbullet.png";
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second

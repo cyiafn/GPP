@@ -28,6 +28,7 @@ private:
 	bool attack;
 	Image spitterbullet;
 	VECTOR2 wallVector;
+	bool initialised;
 
 public:
 	// constructor
@@ -38,13 +39,19 @@ public:
 	// inherited member functions
 	void update(float frameTime);
 	void ai(float frameTime, Spitterbullet &ent);
-	void setPrev(float x, float y);
-	void revertLocation();
 	int getDamage();
 	void setWallVector(VECTOR2 vector);
 	int getWallVectorX();
 	int getWallVectorY();
 	void setEndFrame(int end);
+	bool isInitialised()
+	{
+		return initialised;
+	}
+	void setInitialised(bool init)
+	{
+		this->initialised = init;
+	}
 };
 #endif
 

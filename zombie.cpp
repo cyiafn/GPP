@@ -23,6 +23,7 @@ Zombie::Zombie() : Entity()
 	wallVector.x = 0;
 	wallVector.y = 0;
 	attackBuffer = 60.0f;
+	initialised = false;
 }
 
 bool Zombie::initialize(Game *gamePtr, int width, int height, int ncols,

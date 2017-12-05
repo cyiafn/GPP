@@ -21,7 +21,7 @@
 #include "spitter.h"
 #include "spitterbullet.h"
 #include <vector>
-
+#include <string>
 
 
 class dontdie : public Game
@@ -52,11 +52,26 @@ private:
 	Player player1;
 	Zombie zombie1;
 	Wall wallArray[10];
-	std::vector<Zombie> zombieArray;
-	std::vector<Tank> tankArray;
-	std::vector<Spitter> spitterArray;
-	std::vector<Spitterbullet> spitterbulletArray;
+	Zombie zombieArray[50];
+	Tank tankArray[10];
+	Spitter spitterArray[10];
+	Spitterbullet spitterbulletArray[100];
+
+	float spawnbuffer;
 	int spitterbulletID;
+	int stage;
+	bool stageSpawnComplete;
+	int zombieStageOneSpawn;
+	int zombieTotalInitialised;
+	int tankTotalInitialised;
+	int spitterTotalInitialised;
+	int zombieStageTwoSpawn;
+	int TankStageTwoSpawn;
+	int zombieStageThreeSpawn;
+	int TankStageThreeSpawn;
+	int SpitterStageThreeSpawn;
+	int currentSpawn;
+	float stageBufferTime;
 	
     // game variables
 
@@ -78,6 +93,7 @@ public:
     void render();
     void releaseAll();
     void resetAll();
+	bool checkStageClear();
 };
 
 #endif
