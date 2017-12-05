@@ -19,7 +19,7 @@ namespace tankNS
 	const float TANK_ANIMATION_DELAY = 0.2f; // time between frames
 	const int DAMAGE = 2;
 	const int HEALTH = 20;
-	const float TANK_SPEED = 30.0f;
+	const float TANK_SPEED = 20.0f;
 }
 
 // inherits from Entity class
@@ -60,7 +60,7 @@ public:
 	void setID(int id);
 	bool isInitialised()
 	{
-		return initialised;
+		return this->initialised;
 	}
 	void setInitialised(bool init)
 	{

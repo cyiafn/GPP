@@ -18,7 +18,7 @@ namespace spitterNS
 	const int   SPITTER_END_FRAME = 1;         // ship animation frames 0,1,2,3
 	const float SPITTER_ANIMATION_DELAY = 0.2f; // time between frames
 	const int HEALTH = 20;
-	const float SPITTER_SPEED = 30.0f;
+	const float SPITTER_SPEED = 50.0f;
 	const int DAMAGE = 2;
 }
 
@@ -60,7 +60,7 @@ public:
 	void setID(int id);
 	bool isInitialised()
 	{
-		return initialised;
+		return this->initialised;
 	}
 	void setInitialised(bool init)
 	{

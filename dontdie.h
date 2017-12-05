@@ -55,7 +55,7 @@ private:
 	Zombie zombieArray[50];
 	Tank tankArray[10];
 	Spitter spitterArray[10];
-	Spitterbullet spitterbulletArray[100];
+	Spitterbullet spitterbulletArray[500];
 
 	float spawnbuffer;
 	int spitterbulletID;
@@ -72,6 +72,7 @@ private:
 	int SpitterStageThreeSpawn;
 	int currentSpawn;
 	float stageBufferTime;
+	float clearCooldown;
 	
     // game variables
 
@@ -94,6 +95,7 @@ public:
     void releaseAll();
     void resetAll();
 	bool checkStageClear();
+	void clearAllMobs();
 };
 
 #endif

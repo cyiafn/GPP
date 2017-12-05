@@ -87,6 +87,7 @@ const UCHAR PLAYER_RIGHT_KEY = 0x44; //Right arrow key
 const UCHAR PLAYER_LEFT_KEY = 0x41; //Left Arrow key
 const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
 const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
+const UCHAR KILL_ALL = 0xC0;
 
 
 #endif

@@ -50,7 +50,7 @@ public:
 	void revertLocation();
 	int getDamage();
 	//void setPlayerLoc(float x, float y) { playerX = x; playerY = y; };
-	int checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector);
+	//int checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector);
 	void setWallVector(VECTOR2 vector);
 	int getWallVectorX();
 	int getWallVectorY();
@@ -61,7 +61,7 @@ public:
 	void setID(int id);
 	bool isInitialised()
 	{
-		return initialised;
+		return this->initialised;
 	}
 	void setInitialised(bool init)
 	{

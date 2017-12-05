@@ -18,7 +18,7 @@ namespace spitterbulletNS
 	const int   SPITTERBULLET_END_FRAME = 0;         // ship animation frames 0,1,2,3
 	const float SPITTERBULLET_ANIMATION_DELAY = 0.2f; // time between frames
 	const int DAMAGE = 2;
-	const float SPITTERBULLET_SPEED = 30.0f;
+	const float SPITTERBULLET_SPEED = 100.0f;
 }
 
 // inherits from Entity class

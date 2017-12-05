@@ -22,7 +22,7 @@ Spitter::Spitter() : Entity()
 	collisionType = entityNS::CIRCLE;
 	wallVector.x = 0;
 	wallVector.y = 0;
-	attackBuffer = 60.0f;
+	attackBuffer = 10;
 }
 
 bool Spitter::initialize(Game *gamePtr, int width, int height, int ncols,

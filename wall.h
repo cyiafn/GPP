@@ -28,6 +28,7 @@ class Wall : public Entity            // inherits from Entity class
 public:
 	// constructor
 	Wall();
+	int checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector);
 };
 #endif
 

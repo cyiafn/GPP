@@ -1,15 +1,58 @@
 ﻿  dontdie.cpp
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(254): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(255): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(260): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(261): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(266): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(267): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(272): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(273): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(412): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\chenyifan\desktop\gpp\dontdie.cpp(398): warning C4101: 'voronoi': unreferenced local variable
+d:\visual studio projects\gpp project\dontdie.cpp(282): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(283): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(288): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(289): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(294): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(295): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(300): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(301): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(330): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(331): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(336): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(337): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(342): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(343): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(348): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(349): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(363): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(364): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(369): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(370): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(375): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(376): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(381): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(382): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(413): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(414): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(419): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(420): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(425): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(426): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(431): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(432): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(445): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(446): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(451): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(452): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(457): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(458): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(463): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(464): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(477): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(478): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(483): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(484): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(489): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(490): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(495): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(496): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(665): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(978): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(1303): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(1593): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(651): warning C4101: 'voronoi': unreferenced local variable
   Generating Code...
   Skipping... (no relevant changes detected)
   astar.cpp
-  ThreeCsDX.vcxproj -> C:\Users\chenyifan\Desktop\gpp\Debug\ThreeCsDX.exe
+  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
