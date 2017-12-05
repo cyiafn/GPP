@@ -10,16 +10,16 @@
 #include <string>
 #include "bossShield.h"
 #include "bossCannon.h"
-
+#include "player.h"
+#include <vector>
 
 namespace bossNS
 {
-	const int MAXHP = 2000;
-	const int WIDTH = 128;                   // image width
-	const int HEIGHT = 128;                  // image height
-	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
-	const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
-	//const float SPEED = 100;                // 100 pixels per second
+	const int	MAXHP = 2000;
+	const int	WIDTH = 128;                   // image width
+	const int	HEIGHT = 128;                  // image height
+	const int	X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
+	const int	Y = GAME_HEIGHT / 2 - HEIGHT / 2;
 	const int   TEXTURE_COLS = 2;           // texture has 2 columns
 	////////////BARON :: FORM 1////////////////////////////
 	const int   BARON_START_FRAME = 0;      // boss starts at frame 0
@@ -31,9 +31,6 @@ namespace bossNS
 	const int	BARON_CHANNELING_TIMER = 3;
 	const int	BARON_ATTACKING_TIMER = 6;
 	const float BARON_ANIMATION_DELAY = 0.5f;    // time between frames
-	/*int	BARON_RELOADING_TIMER = 6;
-	int	BARON_CHANNELING_TIMER = 3;
-	int	BARON_ATTACKING_TIMER = 6;*/
 	///////////////////////////////////////////////////////
 	////////////NORAB :: FORM 2////////////////////////////
 	const int   NORAB_START_FRAME = 6;      // boss starts at frame 6
@@ -45,19 +42,8 @@ namespace bossNS
 	const int	NORAB_CHANNELING_TIMER = 2;
 	const int	NORAB_ATTACKING_TIMER = 4;
 	const float NORAB_ANIMATION_DELAY = 0.5f;    // time between frames
-	/*int	NORAB_RELOADING_TIMER = 4;
-	int	NORAB_CHANNELING_TIMER = 2;
-	int	NORAB_ATTACKING_TIMER = 4;*/
+	const float CHARRRGE_SPEED = 150.0f;
 	///////////////////////////////////////////////////////
-	const int form = 1;
-	const int damage = 1;
-	const int COLLISION_RADIUS = WIDTH*2/3;
-	//1
-	
-	//2
-
-	//3
-	const int MOVEMENT_SPEED = 40;
 }
 
 enum BOSS_STATUS {
@@ -74,17 +60,15 @@ protected:
 	int HP = 2000;
 	int form = 1;
 	int damage = 1;
-	//enum class STATUS {RELOAD_STATE, ATTACK_STATE}
 	bool spawn = true;
-	Image boss_form;
+	Image boss_form; //sprite Data
+	//enum class STATUS {RELOAD_STATE, ATTACK_STATE}
 	BOSS_STATUS _boss_Status; //how does this work???
-	int frameTimer = 0;
-	int bossTimer = 0;
 	bool reloading = true;
 	bool channeling = false;
 	bool attacking = false;
-	bool shieldOn = false;
-	BossShield *shield;
+	bool shieldOn = false; // for form 1
+
 public:
 	// constructor
 	Boss();
@@ -106,13 +90,8 @@ public:
 	virtual void draw();
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void update(float frameTime);
-	
-	
-	//1
-	void shootBullet();
-	
-	//3
-	void CHARRRGE();
+	void CHARRRGE(float frameTime);
+
 };
 
 

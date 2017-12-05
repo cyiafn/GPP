@@ -18,7 +18,6 @@ Boss::Boss() : Entity()
 	edge.right = 64;
 	edge.bottom = 64;
 	collisionType = entityNS::BOX;
-	shield = new BossShield();
 }
 
 
@@ -50,16 +49,18 @@ void Boss::update(float frameTime)
 		spawn = true;
 		form = 1;
 		HP = bossNS::MAXHP;
+		spriteData.x = bossNS::X; //reset position
+		spriteData.y = bossNS::Y;
 		shieldOn = true;
-		bossTimer = 0; //reset bossTimer
 	}
 	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
 	{
 		spawn = true;
 		form = 2;
 		shieldOn = false;
+		spriteData.x = bossNS::X; //reset position
+		spriteData.y = bossNS::Y;
 		HP = 1000;
-		bossTimer = 0; //reset bossTimer
 	}
 	else if (input->isKeyDown(BOSS_CLEAR)) //clear boss = win game
 	{
@@ -70,19 +71,17 @@ void Boss::update(float frameTime)
 	//////////////////////////////////
 	if (spawn)
 	{
-		if (HP > bossNS::MAXHP / 2) // form 1
+		if (HP > bossNS::MAXHP / 2) // if HP > 50% == form 1
 		{
 			form = 1;
-			bossTimer = 0; //reset bossTimer
 		}
-		else if (HP <= bossNS::MAXHP / 2) // form 2
+		else if (HP <= bossNS::MAXHP / 2) // if HP <= 50% == form 2
 		{
 			form = 2;
 			shieldOn = false;
-			bossTimer = 0; //reset bossTimer
 		}
 
-		if (HP <= 0) //dieded
+		if (HP <= 0) // if HP <= 0% == DIEDED
 		{
 			//WIN
 			spawn = false;
@@ -90,8 +89,6 @@ void Boss::update(float frameTime)
 		}
 	}
 	
-	
-	this->HP -= 1;
 }
 
 int Boss::getDamage()
@@ -143,6 +140,7 @@ bool Boss::isAttacking()
 	return attacking;
 }
 
+
 void Boss::changeMotion(bool motion)
 {
 	if (reloading == motion)
@@ -162,5 +160,15 @@ void Boss::changeMotion(bool motion)
 		reloading = true; //change to reloading frame
 		channeling = false;
 		attacking = false;
+	}
+}
+
+
+void Boss::CHARRRGE(float frameTime)
+{
+	if (form == 2 && attacking)
+	{	
+		spriteData.x += frameTime * velocity.x;        
+		spriteData.y += frameTime * velocity.y;
 	}
 }

@@ -18,6 +18,8 @@
 #include "boss.h"
 #include "bossShield.h"
 #include "bossCannon.h"
+#include <vector>
+#include <list>
 
 class dontdie : public Game
 {
@@ -37,24 +39,27 @@ private:
 	TextureManager bossCURHPTexture;
 	int fpscounter = 0;
 	int seconds = 0;
+	float CannonAngle = 0.0f;
 	int	BARON_RELOADING_TIMER = bossNS::BARON_RELOADING_TIMER;
 	int	BARON_CHANNELING_TIMER = bossNS::BARON_CHANNELING_TIMER;
 	int	BARON_ATTACKING_TIMER = bossNS::BARON_ATTACKING_TIMER;
 	int	NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
 	int	NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
 	int	NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
-	int CannonBallNo = 0;
 
 	Image   map;                 // map image
-	Image   player;                 // player image
+	Image player;                 // player image
 	Image zombie;
 	Image bossMAXHP;
 	Image bossCURHP;
+	/*BossCannon cannon1;
+	BossCannon cannon2;
+	BossCannon cannon3;
+	BossCannon cannon4;*/
 
 	Player player1;
 	Zombie zombie1;
-
-	BossCannon CannonArray[360];
+	BossCannon CannonArray[36];
     // game variables
 
 	//tempHP
@@ -70,7 +75,7 @@ public:
     void initialize(HWND hwnd);
     void reset();
     void update();
-    void ai() {};
+	void ai() {};
     void collisions();
     void render();
     void releaseAll();

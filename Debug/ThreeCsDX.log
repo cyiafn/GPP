@@ -1,9 +1,3 @@
-﻿  dontdie.cpp
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(244): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(245): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  winmain.cpp
+﻿  bossCannon.cpp
+audio.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

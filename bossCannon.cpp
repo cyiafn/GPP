@@ -9,6 +9,8 @@ BossCannon::BossCannon() : Entity()
 	spriteData.height = Cannon::HEIGHT;
 	spriteData.x = Cannon::X;              // location on screen
 	spriteData.y = Cannon::Y;
+	velocity.x = 0;
+	velocity.y = 0;
 	radius = Cannon::COLLISION_RADIUS;
 	startFrame = Cannon::CANNON_START_FRAME;    // first frame of ship animation
 	endFrame = Cannon::CANNON_END_FRAME;      // last frame of ship animation
@@ -32,29 +34,22 @@ bool BossCannon::initialize(Game *gamePtr, int width, int height, int ncols, Tex
 void BossCannon::update(float frameTime)
 {
 	Entity::update(frameTime);
+	angle += 1;
+	spriteData.x += frameTime * velocity.x;
+	spriteData.y += frameTime * velocity.y;
+	// VECTOR2 newPosition = VECTOR2 position + VECTOR2 direction * frameTime;
 }
 
 int BossCannon::getdamage()
 {
 	return damage;
 }
-
-int BossCannon::getprevX()
+void BossCannon::setVelocityX(float newX)
 {
-	return prevX;
+	velocity.x = newX;
 }
 
-void BossCannon::setprevX()
+void BossCannon::setVelocityY(float newY)
 {
-
-}
-
-int BossCannon::getprevY()
-{
-	return prevY;
-}
-
-void BossCannon::setprevY()
-{
-
+	velocity.y = newY;
 }

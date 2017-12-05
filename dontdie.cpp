@@ -70,19 +70,41 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss MAX HP BAR"));
 	bossMAXHP.setX(140); //centerize the HP bar
 	bossMAXHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
-	// boss form 1 texture
-	// if hp >66%
+	// BOSS
 	if (!bossTexture.initialize(graphics, BOSS_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss form 1 texture"));
-	// boss form 1 image
 	if (!boss.initialize(this, bossNS::WIDTH, bossNS::HEIGHT, bossNS::TEXTURE_COLS, &bossTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your boss"));
+	// CANNON
 	if (!cannonTexture.initialize(graphics, BOSSCANNON_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Cannon texture"));
-	if (!shieldTexture.initialize(graphics, BOSS_SHIELD))
+	/*if (!cannon1.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
 	{
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shield texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
 	}
+	if (!cannon2.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
+	}
+	if (!cannon3.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
+	}
+	if (!cannon4.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
+	}*/
+	for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+	{
+		if (!CannonArray[cannonNo].initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
+		{
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon textures"));
+		}
+	}
+
+	// SHIELD
+	if (!shieldTexture.initialize(graphics, BOSS_SHIELD))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shield texture"));
 	if (!shield.initialize(this, ShieldNS::WIDTH, ShieldNS::HEIGHT, ShieldNS::TEXTURE_COLS, &shieldTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing shield"));
 	shield.setFrames(ShieldNS::SHIELD_START_FRAME, ShieldNS::SHIELD_END_FRAME);
@@ -119,7 +141,6 @@ void dontdie::update()
 	zombie1.update(frameTime);
 	map.update(frameTime);
 	boss.update(frameTime);
-	
 	//////////////////////////////////boss HP bar////////////////////////////////////
 	int bossHP = boss.getHP() / 2; //1000 pixel, 1 pixel = 2 HP
 	if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
@@ -166,15 +187,17 @@ void dontdie::update()
 			}
 		}
 		else if (boss.isAttacking())
-		{			
-			/*if (!CannonArray[CannonBallNo].initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
-				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing your cannon ballz"));
-			CannonArray[CannonBallNo].setFrames(Cannon::CANNON_START_FRAME, Cannon::CANNON_END_FRAME);
-			CannonArray[CannonBallNo].setCurrentFrame(Cannon::CANNON_START_FRAME);
-			CannonArray[CannonBallNo].setX(CannonArray[CannonBallNo].getprevX());
-			CannonArray[CannonBallNo].setY(CannonArray[CannonBallNo].getprevY());*/
-			//CannonBallNo will ++ at draw (code goes from top to bottom)
-
+		{	
+			VECTOR2 direction;
+			direction.x = 1.0f * Cannon::CANNON_SPEED;
+			direction.y = 0.0f * Cannon::CANNON_SPEED;
+			for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+			{
+				direction.x++;
+				CannonArray[cannonNo].setVelocity(direction);
+				CannonArray[cannonNo].update(frameTime);
+				CannonAngle = CannonAngle + 10.0;
+			}
 			boss.setFrames(bossNS::BARON_ATTACK_FRAME, bossNS::BARON_ATTACK_FRAME);	//no animation
 			if (fpscounter % 60 == 0)
 			{
@@ -224,6 +247,19 @@ void dontdie::update()
 		}
 		else if (boss.isAttacking())
 		{
+			VECTOR2 direction;
+			direction.x = player1.getX() - boss.getX();
+			direction.y = player1.getY() - boss.getY();
+			float hypotenuse = sqrt(direction.x * direction.x + direction.y * direction.y);
+			direction.x /= hypotenuse;
+			direction.y /= hypotenuse;
+			direction.x *= bossNS::CHARRRGE_SPEED;
+			direction.y *= bossNS::CHARRRGE_SPEED;
+			boss.setVelocity(direction);
+			boss.CHARRRGE(frameTime);
+			float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
+			boss.setDegrees(angle);
+			
 			boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
 			if (fpscounter % 60 == 0)
 			{
@@ -233,11 +269,12 @@ void dontdie::update()
 			{
 				boss.changeMotion(boss.isAttacking());
 				boss.setCurrentFrame(bossNS::NORAB_START_FRAME);
+				angle = 0.0f;
+				boss.setDegrees(angle);
 				NORAB_RELOADING_TIMER = 4;
 			}
 		}
 	}
-	CannonArray[CannonBallNo].update(frameTime);
 	if (boss.hasShield() == true)
 	{
 		shield.update(frameTime);
@@ -269,13 +306,14 @@ void dontdie::render()
 		boss.draw(); //draw my boss
 		if (boss.hasShield()) //draw my shield
 			shield.draw();
+		if (boss.isAttacking() && boss.getForm() == 1)
+		{
+			for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+			{
+				CannonArray[cannonNo].draw();
+			}
+		}
 	}
-	//CannonArray[CannonBallNo].draw();
-	//CannonBallNo++;
-	//if (CannonBallNo == 359) // reset cannonBallNo
-	//{
-	//	CannonBallNo = 0;
-	//}
 	graphics->spriteEnd();
 
 
@@ -340,4 +378,13 @@ void dontdie::collisions()
 			player1.setY(GAME_HEIGHT / 4);
 		}
 	}
+	/*if (bullet.collidesWith(boss, tempVector)) //waiting for player bullet
+	{
+		boss.takesDamage(bullet.getDamage());
+												pop bullet
+	}
+	if (bullet.collidesWith(shield, tempVector)) //waiting for player bullet
+	{
+												pop bullet
+	}*/
 }

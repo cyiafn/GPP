@@ -16,8 +16,8 @@ namespace playerNS
     const int HEIGHT = 18;                  // image height
     //const int X = GAME_WIDTH/2 - WIDTH/2;   // location on screen
     //const int Y = GAME_HEIGHT/2 - HEIGHT/2;
-	const int X = GAME_WIDTH /4 - WIDTH / 2;   // temporary location on screen
-	const int Y = GAME_HEIGHT/4 - HEIGHT/2;		// delete this when merge
+	const int X = 1000;   // temporary location on screen
+	const int Y = 280;		// delete this when merge
     const float SPEED = 100;                // 100 pixels per second
     const float MASS = 250.0f;              // mass
     const int   TEXTURE_COLS = 1;           // texture has 2 columns
