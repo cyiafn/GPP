@@ -23,6 +23,7 @@ Tank::Tank() : Entity()
 	wallVector.x = 0;
 	wallVector.y = 0;
 	attackBuffer = 60.0f;
+	damageAnimationBuffer = 30.0f;
 }
 
 bool Tank::initialize(Game *gamePtr, int width, int height, int ncols,
@@ -46,14 +47,26 @@ void Tank::update(float frameTime)
 	Entity::update(frameTime);
 	spriteData.x += frameTime * velocity.x;         // move ship along X 
 	spriteData.y += frameTime * velocity.y;         // move ship along Y
-	if (this->attackBuffer != 60.0f)
+	if (this->damageAnimationBuffer != 30.0f)
 	{
-		attackBuffer += 1.0f;
-		this->endFrame = 1;
+		this->damageAnimationBuffer += 1.0f;
+		this->startFrame = 2;
+		this->endFrame = 3;
+		
 	}
 	else
 	{
-		this->endFrame = 0;
+		if (this->attackBuffer != 60.0f)
+		{
+			attackBuffer += 1.0f;
+			this->startFrame = 0;
+			this->endFrame = 1;
+		}
+		else
+		{
+			this->startFrame = 0;
+			this->endFrame = 0;
+		}
 	}
 }
 void Tank::ai(float frameTime, Tank &ent)

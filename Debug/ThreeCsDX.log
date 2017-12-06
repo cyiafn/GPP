@@ -1,4 +1,7 @@
-﻿  dontdie.cpp
+﻿  tank.cpp
+d:\visual studio projects\gpp project\tank.cpp(135): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+d:\visual studio projects\gpp project\tank.cpp(139): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+  dontdie.cpp
 d:\visual studio projects\gpp project\dontdie.cpp(282): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(283): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(288): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -47,11 +50,15 @@ d:\visual studio projects\gpp project\dontdie.cpp(489): warning C4244: 'argument
 d:\visual studio projects\gpp project\dontdie.cpp(490): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(495): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(496): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(669): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(982): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(1307): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(1597): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(655): warning C4101: 'voronoi': unreferenced local variable
+d:\visual studio projects\gpp project\dontdie.cpp(681): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(994): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(1319): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(1609): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(667): warning C4101: 'voronoi': unreferenced local variable
+  Generating Code...
+d:\visual studio projects\gpp project\tank.cpp(130): warning C4715: 'Tank::checkVoronoiRegion': not all control paths return a value
+  Compiling...
+  winmain.cpp
   Generating Code...
   Skipping... (no relevant changes detected)
   astar.cpp

@@ -35,6 +35,7 @@ private:
 	VECTOR2 wallVector;
 	float attackBuffer;
 	bool initialised;
+	float damageAnimationBuffer;
 
 public:
 	// constructor
@@ -65,6 +66,14 @@ public:
 	void setInitialised(bool init)
 	{
 		this->initialised = init;
+	}
+	void setDamageAnimationBuffer(float inte)
+	{
+		this->damageAnimationBuffer = inte;
+	}
+	float getDamageAnimationBuffer()
+	{
+		return this->damageAnimationBuffer;
 	}
 };
 #endif

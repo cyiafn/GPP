@@ -643,6 +643,18 @@ void dontdie::collisions()
 			}
 		}
 	}
+	//when palyerbullet touches the zombie
+	//for loop to track which bullet
+	for (int tank = 0; tank < (sizeof(tankArray) / sizeof(*tankArray)); tank++)
+	{
+		//damage the tank
+		if (tankArray[tank].getDamageAnimationBuffer() == 30.0f)
+		{
+			tankArray[tank].setDamageAnimationBuffer(0.0f);
+		}
+	}
+	
+	
 
 }
 
