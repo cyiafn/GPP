@@ -44,27 +44,13 @@ void Boss::update(float frameTime)
 	///////////////////////////
 	// CHEAT CODE :PogChamp: //
 	///////////////////////////
-	if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
-	{
-		spawn = true;
-		form = 1;
-		HP = bossNS::MAXHP;
-		spriteData.x = bossNS::X; //reset position
-		spriteData.y = bossNS::Y;
-		shieldOn = true;
-	}
-	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
-	{
-		spawn = true;
-		form = 2;
-		shieldOn = false;
-		spriteData.x = bossNS::X; //reset position
-		spriteData.y = bossNS::Y;
-		HP = 1000;
-	}
-	else if (input->isKeyDown(BOSS_CLEAR)) //clear boss = win game
+	if (input->isKeyDown(BOSS_CLEAR)) //clear boss = win game
 	{
 		HP = 0;
+	}
+	else if (input->isKeyDown(MINUS_HP))
+	{
+		this->HP -= 1;
 	}
 	//////////////////////////////////
 	// Boss Health Tracking :kappa: //
@@ -78,6 +64,7 @@ void Boss::update(float frameTime)
 		else if (HP <= bossNS::MAXHP / 2) // if HP <= 50% == form 2
 		{
 			form = 2;
+			
 			shieldOn = false;
 		}
 
@@ -103,7 +90,7 @@ void Boss::setDamage(int dmg)
 
 int Boss::getHP()
 {
-	return HP;
+	return this->HP;
 }
 
 int Boss::getForm()

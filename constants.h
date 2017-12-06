@@ -105,5 +105,6 @@ const UCHAR KILL_ALL = 0xC0;
 const UCHAR BOSS_STAGE1 = VK_BACK; //skip to boss stage 1 cheat
 const UCHAR BOSS_STAGE2 = VK_INSERT; //skip to boss stage 2 cheat
 const UCHAR BOSS_CLEAR = VK_DELETE; //skip to win cheat
+const UCHAR MINUS_HP = VK_DOWN;
 #endif
 

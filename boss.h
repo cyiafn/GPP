@@ -41,7 +41,7 @@ namespace bossNS
 	const int	NORAB_ATTACK_FRAME = 11;
 	const int	NORAB_RELOADING_TIMER = 3;
 	const int	NORAB_CHANNELING_TIMER = 2;
-	const int	NORAB_ATTACKING_TIMER = 5;
+	const int	NORAB_ATTACKING_TIMER = 2;
 	const float NORAB_ANIMATION_DELAY = 0.5f;    // time between frames
 	const float CHARRRGE_SPEED = 120.0f;
 	///////////////////////////////////////////////////////
@@ -76,6 +76,7 @@ public:
 	int getDamage();
 	void setDamage(int dmg);
 	int getHP();
+	void setHP(int hp) { this->HP = hp; }
 	int getForm();
 	bool isSpawn();
 	void setSpawn(bool spawnVal) { this->spawn = spawnVal; }

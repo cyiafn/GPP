@@ -243,9 +243,9 @@ void dontdie::initialize(HWND hwnd)
 	///////////////
 	if (!bossMAXHPTexture.initialize(graphics, BOSS_MAX_HP))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss MAX HP texture"));
-	if (!bossMAXHP.initialize(graphics, 1000, 0, 0, &bossMAXHPTexture))
+	if (!bossMAXHP.initialize(graphics, 500, 0, 0, &bossMAXHPTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss MAX HP BAR"));
-	bossMAXHP.setX(140); //centerize the HP bar
+	bossMAXHP.setX(110); //centerize the HP bar
 	bossMAXHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
 									  // BOSS
 	if (!bossTexture.initialize(graphics, BOSS_IMAGE))
@@ -325,6 +325,7 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
+	fpscounter++; //keep track of fps
 	VECTOR2 dir;
 	int currenthp;
 	int frame;
@@ -343,11 +344,6 @@ void dontdie::update()
 			pistolBulletArray[pistolb].update(frameTime);
 		}
 	}
-
-
-
-	
-
 	if (input->getMouseLButton() == true)
 	{
 		float clickY = input->getMouseY();
@@ -519,6 +515,20 @@ void dontdie::update()
 			clearCooldown = 0;
 		}
 
+	}
+	else if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
+	{
+		stage = 4;
+		boss.setHP(bossNS::MAXHP);
+		boss.setX(bossNS::X); //reset position
+		boss.setY(bossNS::Y);
+	}
+	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
+	{
+		stage = 5;
+		boss.setHP(bossNS::MAXHP/2);
+		boss.setX(bossNS::X); //reset position
+		boss.setY(bossNS::Y);
 	}
 
 	if (checkStageClear() == true)
@@ -778,14 +788,6 @@ void dontdie::update()
 		{
 			boss.setSpawn(true);
 		}
-		//////////////////////////////////boss HP bar////////////////////////////////////
-		int bossHP = boss.getHP() / 2; //1000 pixel, 1 pixel = 2 HP
-		if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
-			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP texture"));
-		if (!bossCURHP.initialize(graphics, bossHP, 32, 1, &bossCURHPTexture))
-			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP BAR"));
-		bossCURHP.setX(140); //centerize the HP bar
-		bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
 										  /////////////////////////////////////////////////////////////////////////////////
 										  //////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
 										  /////////////////////////////////////////////////////////////////////////////////
@@ -942,6 +944,7 @@ void dontdie::update()
 			}
 			else if (boss.isAttacking())
 			{
+				boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
 				VECTOR2 direction;
 				direction.x = player1.getX() - boss.getX();
 				direction.y = player1.getY() - boss.getY();
@@ -953,9 +956,7 @@ void dontdie::update()
 				boss.setVelocity(direction);
 				boss.CHARRRGE(frameTime);
 				float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
-				boss.setDegrees(angle);
-
-				boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
+				boss.setDegrees(angle);				
 				if (fpscounter % 60 == 0)
 				{
 					NORAB_ATTACKING_TIMER--;
@@ -992,6 +993,14 @@ void dontdie::render()
 	static char buffer[BUF_SIZE];
 
 	graphics->spriteBegin();
+	//////////////////////////////////boss HP bar////////////////////////////////////
+	float bossHP = boss.getHP() / 4;  //500 pixel = 2000HP, 1 pixel = 4 HP
+	if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP texture"));
+	if (!bossCURHP.initialize(graphics, bossHP, 32, 1, &bossCURHPTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP BAR"));
+	bossCURHP.setX(110); //centerize the HP bar
+	bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
 
 	for (int row = 0; row < dontdieNS::MAP_HEIGHT; row++)       // for each row of map
 	{
@@ -1077,6 +1086,7 @@ void dontdie::render()
 			}
 		}
 	}
+	
 	graphics->spriteEnd();
 
 
@@ -1175,15 +1185,18 @@ void dontdie::collisions()
 			}
 		}
 	}
-	if (player1.collidesWith(boss, tempVector))
+	if (boss.getForm() == 2)
 	{
-		player1.revertLocation();
-		player1.damageMe(boss.getDamage());
-		if (player1.getHp() == 0)
+		if (player1.collidesWith(boss, tempVector))
 		{
-			player1.setX(GAME_WIDTH / 2);
+			player1.revertLocation();
+			player1.damageMe(boss.getDamage());
+			if (player1.getHp() == 0)
+			{
+				player1.setX(GAME_WIDTH / 2);
 
-			player1.setY(GAME_HEIGHT / 4);
+				player1.setY(GAME_HEIGHT / 4);
+			}
 		}
 	}
 	/*if (bullet.collidesWith(boss, tempVector)) //waiting for player bullet
@@ -1201,13 +1214,16 @@ void dontdie::collisions()
 		{
 			if (CannonArray[cannon].collidesWith(player1, tempVector))
 			{
-				player1.damageMe(1);
+				CannonArray[cannon].setInitialised(false);
+				CannonArray[cannon].setActive(false);
+				player1.damageMe(CannonArray[cannon].getdamage());
 			}
 			for (int i = 0; i < (sizeof(wallArray) / sizeof(*wallArray)); i++)
 			{
 				if (CannonArray[cannon].collidesWith(wallArray[i], tempVector))
 				{
 					CannonArray[cannon].setInitialised(false);
+					CannonArray[cannon].setActive(false);
 				}
 			}
 		}
