@@ -1,5 +1,6 @@
 
 #include "dontdie.h"
+#include "zombie.h"
 #include "input.h"
 #include "wall.h"
 #include <string>
@@ -56,6 +57,9 @@ void dontdie::initialize(HWND hwnd)
 	if (!playerTexture.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
 
+	if (!playerHealthTexture.initialize(graphics, HEALTH_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player Health texture"));
+
 	// Zombie Texture
 	if (!zombieTexture.initialize(graphics, ZOMBIE_IMAGE))
 	{
@@ -74,9 +78,32 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initalizing Spitter bullet texture"));
 	}
 
+	//Bullet Texture
+	if (!PbulletTexture.initialize(graphics, BULLET_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing bullet texture"));
+	}
+
+	/*if (!SMGbulletTexture.initialize(graphics, SMGBULLET_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing SMG Bullet texture"));
+	}
+
+	if (!ShotgunbulletTexture.initialize(graphics, SHOTGUNBULLET_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shotgun Bullet texture"));
+	}
+
+	if (!RiflebulletTexture.initialize(graphics, RIFLEBULLET_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Rifle Bullet texture"));
+	}*/
+
 	// Map 
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
+	map.setFrames(0, 0);
+	map.setCurrentFrame(0);
 	// Wall 
 	if (!wallArray[0].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
@@ -133,6 +160,7 @@ void dontdie::initialize(HWND hwnd)
 	// Player
 	if (!player1.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &playerTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+
 	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
@@ -768,8 +796,26 @@ void dontdie::render()
 {
 	const int BUF_SIZE = 20;
 	static char buffer[BUF_SIZE];
+	VECTOR2 dir;
 
 	graphics->spriteBegin();
+	for (int row = 0; row < MAP_HEIGHT; row++)       // for each row of map
+	{
+		map.setY((float)(row*TEXTURE_SIZE)); // set tile Y
+		for (int col = 0; col < MAP_WIDTH; col++)    // for each column of map
+		{
+			if (tileMap[row][col] >= 0)          // if tile present
+			{
+				map.setCurrentFrame(tileMap[row][col]);    // set tile texture
+				map.setX((float)(col*TEXTURE_SIZE) + mapX);   // set tile X
+															   // if tile on screen
+				if (map.getX() > -TEXTURE_SIZE && map.getX() < GAME_WIDTH)
+				{
+					map.draw();                // draw tile
+				}
+			}
+		}
+	}
 
 	
 	map.draw();         //adds the map to the scene
@@ -807,6 +853,14 @@ void dontdie::render()
 	}
 
 	player1.draw();     //adds the player into the scene
+	player1health.draw();
+	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+	{
+		if (pistolBulletArray[pistolb].isInitialized() == true)
+		{
+			pistolBulletArray[pistolb].draw();
+		}
+	}
 
 
 	if (boss.isSpawn()) //if boss spawns

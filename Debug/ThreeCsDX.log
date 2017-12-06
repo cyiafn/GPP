@@ -1,4 +1,5 @@
 ﻿  dontdie.cpp
+<<<<<<< HEAD
 d:\visual studio projects\gpp project\dontdie.cpp(173): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(174): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(184): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -62,3 +63,25 @@ d:\visual studio projects\gpp project\dontdie.cpp(1635): warning C4244: 'initial
 d:\visual studio projects\gpp project\dontdie.cpp(1925): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(983): warning C4101: 'voronoi': unreferenced local variable
   ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
+=======
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(255): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(282): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(283): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(525): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(543): warning C4390: ';': empty controlled statement found; is this the intent?
+  Generating Code...
+  Compiling...
+  winmain.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  playerHealth.cpp
+  ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe
+>>>>>>> justin

@@ -85,6 +85,11 @@ int Zombie::getDamage()
 
 }
 
+void Zombie::damageZombie(int damage)
+{
+	this->health - damage;
+}
+
 
 
 int Zombie::getWallVectorX()

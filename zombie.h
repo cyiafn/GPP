@@ -48,6 +48,7 @@ public:
 	void ai(float frameTime, Zombie &ent);
 	void setPrev(float x, float y);
 	void revertLocation();
+	void damageZombie(int damage);
 	int getDamage();
 	//void setPlayerLoc(float x, float y) { playerX = x; playerY = y; };
 	//int checkVoronoiRegion(Entity &ent, VECTOR2 &collisionVector);

@@ -17,6 +17,8 @@
 #include "constants.h"
 #include "zombie.h"
 #include "boss.h"
+#include "playerHealth.h"
+#include "bullet.h"
 #include "bossShield.h"
 #include "bossCannon.h"
 #include <vector>
@@ -27,6 +29,29 @@
 #include <vector>
 #include <string>
 
+namespace dontdieNS
+{
+
+	//const char FONT[] = "Arial Bold";  // font
+	const int TEXTURE_SIZE = 64;
+	const int TEXTURE_COLS = 1;
+	const int MAP_HEIGHT = 9;
+	const int MAP_WIDTH = 12;
+	const float SCROLL_RATE = 10;
+	const int __ = -1;                  // empty tile
+
+	const int tileMap[MAP_HEIGHT][MAP_WIDTH] = {
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0
+	};
+}
 
 class dontdie : public Game
 {
@@ -36,8 +61,11 @@ private:
 	Boss boss;
 	BossShield shield;
     // game items	
+	float mapX;
+	float mapY;
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
+	TextureManager playerHealthTexture; 
 	TextureManager wallTexture; //wall texture
 	TextureManager zombieTexture;
 	TextureManager bossTexture;
@@ -61,6 +89,11 @@ private:
 
 	Image   map;                 // map image
 	Image player;                 // player image
+	TextureManager PbulletTexture;
+	TextureManager SMGbulletTexture;
+	TextureManager ShotgunbulletTexture;
+	TextureManager RiflebulletTexture;
+	Image playerhealth;
 	Image zombie;
 	Image	wall;				 // wall image
 	Image tank;
@@ -68,9 +101,15 @@ private:
 	Image spitterbullet;
 	Image bossMAXHP;
 	Image bossCURHP;
+	Image pistolBullet;          // pistol bullet image
+	Image smgBullet;
+	Image shotgunBullet;
+	Image rifleBullet;
 
 	Player player1;
+    PlayerHealth player1health;
 	Zombie zombie1;
+	Bullet pistolBulletArray[10000], smgBulletArray[100000], shotgunBulletArray[10000], rifleBulletArray[10000];
 	BossCannon CannonArray[32];
 	Wall wallArray[10];
 	Zombie zombieArray[50];
@@ -96,6 +135,10 @@ private:
 	float clearCooldown;
 	
     // game variables
+
+	float pistolBuffer,smgBuffer,shotgunBuffer,rifleBuffer;
+	int stage;
+	int pBullets,smgBullets,rifleBullets;
 
 	//tempHP
 	TextDX  *dxFontSmall;       // DirectX fonts
