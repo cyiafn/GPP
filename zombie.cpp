@@ -11,7 +11,7 @@ Zombie::Zombie() : Entity()
 	spriteData.y = zombieNS::Y;
 	spriteData.rect.bottom = zombieNS::HEIGHT;    // rectangle to select parts of an image
 	spriteData.rect.right = zombieNS::WIDTH;
-	velocity.x = 0;                             // velocity X
+	velocity.x =  0;                             // velocity X
 	velocity.y = 0;                             // velocity Y
 	frameDelay = zombieNS::ZOMBIE_ANIMATION_DELAY;
 	startFrame = zombieNS::ZOMBIE_START_FRAME;     // first frame of ship animation
@@ -20,7 +20,10 @@ Zombie::Zombie() : Entity()
 	radius = zombieNS::WIDTH / 2.0;
 	health = zombieNS::HEALTH;
 	collisionType = entityNS::CIRCLE;
-	attack = false;
+	wallVector.x = 0;
+	wallVector.y = 0;
+	attackBuffer = 60.0f;
+	initialised = false;
 }
 
 bool Zombie::initialize(Game *gamePtr, int width, int height, int ncols,
@@ -42,12 +45,21 @@ void Zombie::draw()
 void Zombie::update(float frameTime)
 {
 	Entity::update(frameTime);
-	spriteData.x += frameTime * velocity.x;         
-	spriteData.y += frameTime * velocity.y;
+	spriteData.x += frameTime * velocity.x;         // move ship along X 
+	spriteData.y += frameTime * velocity.y;         // move ship along Y
+	if (this->attackBuffer != 60.0f)
+	{
+		attackBuffer += 1.0f;
+		this->endFrame = 1;
+	}
+	else
+	{
+		this->endFrame = 0;
+	}
 }
 void Zombie::ai(float frameTime, Zombie &ent)
 {
-
+	//spriteData.x = spriteData.x + frameTime * zombieNS::ZOMBIE_SPEED;
 }
 void Zombie::setPrev(float x, float y)
 {
@@ -61,5 +73,59 @@ void Zombie::revertLocation()
 }
 int Zombie::getDamage()
 {
-	return zombieNS::DAMAGE;
+	if (attackBuffer == 60)
+	{
+		attackBuffer = 0;
+		return zombieNS::DAMAGE;
+	}
+	else
+	{
+		return 0;
+	}
+
+}
+
+void Zombie::damageZombie(int damage)
+{
+	this->health -= damage;
+}
+
+
+
+int Zombie::getWallVectorX()
+{
+	return this->wallVector.x;
+}
+int Zombie::getWallVectorY()
+{
+	return this->wallVector.y;
+}
+void Zombie::setWallVector(VECTOR2 vector)
+{
+	this->wallVector = vector;
+}
+
+float Zombie::getAttackBuffer()
+{
+	return this->attackBuffer;
+}
+
+void Zombie::setAttackBuffer(float attack)
+{
+	this->attackBuffer = attack;
+}
+
+void Zombie::setEndFrame(int end)
+{
+	this->endFrame = end;
+}
+
+int Zombie::getID()
+{
+	return this->id;
+}
+
+void Zombie::setID(int id)
+{
+	this->id = id;
 }

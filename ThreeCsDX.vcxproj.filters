@@ -57,13 +57,28 @@
     <ClCompile Include="bossCannon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="boss1.cpp">
+    <ClCompile Include="bossShield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="boss2.cpp">
+    <ClCompile Include="wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="boss3.cpp">
+    <ClCompile Include="astar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spitterbullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="playerHealth.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,13 +128,28 @@
     <ClInclude Include="bossCannon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="boss1.h">
+    <ClInclude Include="bossShield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="boss2.h">
+    <ClInclude Include="wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="boss3.h">
+    <ClInclude Include="astar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spitterbullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="playerHealth.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

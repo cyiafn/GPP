@@ -9,13 +9,14 @@
 
 #include "entity.h"
 #include "constants.h"
+#include "bullet.h"
 
 namespace playerNS
 {
-    const int WIDTH = 26;                   // image width
-    const int HEIGHT = 18;                  // image height
-    const int X = GAME_WIDTH/2 - WIDTH/2;   // location on screen
-    const int Y = GAME_HEIGHT/2 - HEIGHT/2;
+    const int WIDTH = 22;                   // image width
+    const int HEIGHT = 15;                  // image height
+    const int X = GAME_WIDTH/8 - WIDTH/8;   // location on screen
+    const int Y = GAME_HEIGHT/8 - HEIGHT/8;
     const float SPEED = 100;                // 100 pixels per second
     const float MASS = 250.0f;              // mass
     const int   TEXTURE_COLS = 1;           // texture has 2 columns
@@ -31,6 +32,13 @@ private:
 	float prevX;
 	float prevY;
 	int hp;
+	float pistolBuffer;
+	float shotgunBuffer;
+	float smgBuffer;
+	float rifleBuffer;
+	bool died = false;
+	Bullet pistolBulletArray[2], smgBulletArray[10], ShotgunBullet, rifleBulletArray[5];
+
 public:
     // constructor
     Player();
@@ -43,6 +51,20 @@ public:
 	void revertLocation();
 	void damageMe(int damageValue);
 	int getHp();
+	bool isDead() { return this->died; }
+	void hasDied() { this->died = true; }
+	void closeMsg() { this->died = false; }
+	float getPistolBuffer() { return this->pistolBuffer; };
+	void setPistolBuffer(float buffer);
+	float getSmgBuffer() { return this->smgBuffer; };
+	void setSmgBuffer(float buffer);
+	float getShotgunBuffer() { return this->shotgunBuffer; };
+	void setShotgunBuffer(float buffer);
+	float getRifleBuffer() { return this->rifleBuffer; };
+	void setRifleBuffer(float buffer);
+
+	// new functions
+	void setVelocityX(float v) { velocity.x = v; }
 };
 #endif
 

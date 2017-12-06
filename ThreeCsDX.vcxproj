@@ -91,31 +91,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="astar.cpp" />
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="boss.cpp" />
-    <ClCompile Include="boss1.cpp" />
-    <ClCompile Include="boss2.cpp" />
-    <ClCompile Include="boss3.cpp" />
     <ClCompile Include="bossCannon.cpp" />
+    <ClCompile Include="bossShield.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="playerHealth.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="spitter.cpp" />
+    <ClCompile Include="spitterbullet.cpp" />
+    <ClCompile Include="tank.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="dontdie.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="wall.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="astar.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="boss.h" />
-    <ClInclude Include="boss1.h" />
-    <ClInclude Include="boss2.h" />
-    <ClInclude Include="boss3.h" />
     <ClInclude Include="bossCannon.h" />
+    <ClInclude Include="bossShield.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
@@ -123,11 +127,17 @@
     <ClInclude Include="graphics.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="playerHealth.h" />
+    <ClInclude Include="spitter.h" />
+    <ClInclude Include="spitterbullet.h" />
+    <ClInclude Include="tank.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="dontdie.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="zombie.h" />
+    <ClInclude Include="wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

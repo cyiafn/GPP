@@ -29,6 +29,8 @@
 // Safely call onResetDevice
 #define SAFE_ON_RESET_DEVICE(ptr)   { if(ptr) { ptr->onResetDevice(); } }
 #define TRANSCOLOR  SETCOLOR_ARGB(0,255,0,255)  // transparent color (magenta)
+#define ARRAY_SIZE(array) (sizeof((array))/sizeof((array[0])))
+
 
 //-----------------------------------------------
 //                  Constants
@@ -37,25 +39,43 @@
 const char CLASS_NAME[] = "dontdie";
 const char GAME_TITLE[] = "Don't Die";
 const bool FULLSCREEN = false;          // windowed or fullscreen
-const UINT GAME_WIDTH = 1280;			// width of game in pixels
-const UINT GAME_HEIGHT = 720;			// height of game in pixels
+const UINT GAME_WIDTH = 720;			// width of game in pixels
+const UINT GAME_HEIGHT = 560;			// height of game in pixels
 
 // game
 const double PI = 3.14159265;
-const float FRAME_RATE = 200.0f;                // the target frame rate (frames/sec)
+const float FRAME_RATE = 60.0f;                // the target frame rate (frames/sec)
 const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
+const UINT  TILE_MAP_WIDTH = 100;           // width of tile map in tiles
+const UINT  TILE_MAP_HEIGHT = 20;           // height of tile map in tiles
+
 
 //graphics images
-const char BOSS_IMAGE1[] = "pictures\\Boss form 1.png";
-const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
-const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
-const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
+const char BOSS_IMAGE[] = "pictures\\Boss form.png";
+const char BOSSCANNON_IMAGE[] = "pictures\\Boss Cannon Ball.png";
+const char BOSS_SHIELD[] = "pictures\\Boss Shield.png";
+const char BOSS_HP[] = "pictures\\Health pixel.png";
+const char BOSS_MAX_HP[] = "pictures\\MAXHP pixel.png";
+const char BOSS_CUR_HP[] = "pictures\\CURHP pixel.png";
 // graphic images
-//const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
+const char HEALTH_IMAGE[] = "pictures\\heartCount.png"; //picture of Heart
+const char BULLET_IMAGE[] = "pictures\\bullets.png"; //picture of Pistol Bullet
+//const char SMGBULLET_IMAGE[] = "picture\\smgbullet.png"; //picture of SMG bullet
+//const char SHOTGUNBULLET_IMAGE[] = "picture\\shotgunbullet.png"; //picture of Shotgun Bullet
+//const char RIFLEBULLET_IMAGE[] = "picture\\riflebullet.png"; //picture of Rifle Bullet
+
+// zombie images
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
+
+//environment images
+const char MAP_IMAGE[] = "pictures\\grassTile.png";  // Picture of background
+const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
+const char TANK_IMAGE[] = "pictures\\tank.png";
+const char SPITTER_IMAGE[] = "pictures\\spitter.png";
+const char SPITTERBULLET_IMAGE[] = "pictures\\spitterbullet.png";
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second
@@ -81,7 +101,10 @@ const UCHAR PLAYER_RIGHT_KEY = 0x44; //Right arrow key
 const UCHAR PLAYER_LEFT_KEY = 0x41; //Left Arrow key
 const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
 const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
-
-
+const UCHAR KILL_ALL = 0xC0;
+const UCHAR BOSS_STAGE1 = VK_BACK; //skip to boss stage 1 cheat
+const UCHAR BOSS_STAGE2 = VK_INSERT; //skip to boss stage 2 cheat
+const UCHAR BOSS_CLEAR = VK_DELETE; //skip to win cheat
+const UCHAR MINUS_HP = VK_DOWN;
 #endif
 
