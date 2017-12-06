@@ -37,8 +37,8 @@
 const char CLASS_NAME[] = "dontdie";
 const char GAME_TITLE[] = "Don't Die";
 const bool FULLSCREEN = false;          // windowed or fullscreen
-const UINT GAME_WIDTH = 1280;			// width of game in pixels
-const UINT GAME_HEIGHT = 720;			// height of game in pixels
+const UINT GAME_WIDTH = 720;			// width of game in pixels
+const UINT GAME_HEIGHT = 560;			// height of game in pixels
 
 // game
 const double PI = 3.14159265;
@@ -57,14 +57,18 @@ const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
 
 // player images
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
-//const char PISTOLBULLET_IMAGE[] = "pictures\\player.png"; //picture of Pistol Bullet
+const char HEALTH_IMAGE[] = "pictures\\heartCount.png"; //picture of Heart
+const char BULLET_IMAGE[] = "pictures\\bullets.png"; //picture of Pistol Bullet
+//const char SMGBULLET_IMAGE[] = "picture\\smgbullet.png"; //picture of SMG bullet
+//const char SHOTGUNBULLET_IMAGE[] = "picture\\shotgunbullet.png"; //picture of Shotgun Bullet
+//const char RIFLEBULLET_IMAGE[] = "picture\\riflebullet.png"; //picture of Rifle Bullet
 
 // zombie images
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
 
 //environment images
-const char MAP_IMAGE[] = "pictures\\maptile.png";  // Picture of background
-const char WALL_IMAGE[] = "pictures\\woodentile.png"; //picture of a wall
+const char MAP_IMAGE[] = "pictures\\grassTile.png";  // Picture of background
+const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second

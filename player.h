@@ -9,13 +9,12 @@
 
 #include "entity.h"
 #include "constants.h"
-
 #include "bullet.h"
 
 namespace playerNS
 {
-    const int WIDTH = 26;                   // image width
-    const int HEIGHT = 18;                  // image height
+    const int WIDTH = 32;                   // image width
+    const int HEIGHT = 22;                  // image height
     const int X = GAME_WIDTH/8 - WIDTH/8;   // location on screen
     const int Y = GAME_HEIGHT/8 - HEIGHT/8;
     const float SPEED = 100;                // 100 pixels per second
@@ -34,6 +33,8 @@ private:
 	float prevY;
 	int hp;
 
+	Bullet pistolBulletArray[2], smgBulletArray[10], ShotgunBullet, rifleBulletArray[5];
+
 public:
     // constructor
     Player();
@@ -46,6 +47,9 @@ public:
 	void revertLocation();
 	void damageMe(int damageValue);
 	int getHp();
+
+	// new functions
+	void setVelocityX(float v) { velocity.x = v; }
 };
 #endif
 

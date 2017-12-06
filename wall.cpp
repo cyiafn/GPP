@@ -10,12 +10,12 @@
 //=============================================================================
 Wall::Wall() : Entity()
 {
-	//spriteData.x = wallNS::X;              // location on screen
-	//spriteData.y = wallNS::Y;
+	spriteData.x = wallNS::X;              // location on screen
+	spriteData.y = wallNS::Y;
 	edge.left = -32;
-	edge.top = -32;
+	edge.top = -7;
 	edge.right = 32;
-	edge.bottom = 32;
+	edge.bottom = 7;
 	collisionType = entityNS::BOX;
 	mass = wallNS::MASS;
 	startFrame = wallNS::START_FRAME;    // first frame of ship animation

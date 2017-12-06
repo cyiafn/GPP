@@ -17,6 +17,7 @@
 #include "constants.h"
 #include "zombie.h"
 #include "boss.h"
+#include "playerHealth.h"
 
 namespace dontdieNS
 {
@@ -63,17 +64,35 @@ private:
 
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
+	TextureManager playerHealthTexture; 
 	TextureManager wallTexture; //wall texture
 	TextureManager zombieTexture;
+	TextureManager PbulletTexture;
+	TextureManager SMGbulletTexture;
+	TextureManager ShotgunbulletTexture;
+	TextureManager RiflebulletTexture;
 
-	Image   map;                 // map image
-	Image   player;                 // player image
+
+
+	Image map;                 // map image
+	Image player;                 // player image
+	Image playerhealth;
 	Image zombie;
-	Image	wall;				 // wall image	
+	Image wall;				 // wall image	
+	Image pistolBullet;          // pistol bullet image
+	Image smgBullet;
+	Image shotgunBullet;
+	Image rifleBullet;
 
 	Player player1;
+	PlayerHealth player1health;
 	Zombie zombie1;
-	Wall wall1;
+	Wall wallArray[10];
+	Bullet pistolBulletArray[10000], smgBulletArray[100000], ShotgunBullet, rifleBulletArray[10000];
+
+	float pistolBuffer,smgBuffer,shotgunBuffer,rifleBuffer;
+	int stage;
+	int pBullets,smgBullets,rifleBullets;
 
 	//tempHP
 	TextDX  *dxFontSmall;       // DirectX fonts
