@@ -38,6 +38,7 @@ void dontdie::initialize(HWND hwnd)
 	this->pBullets = 10000;
 	this->smgBullets = 100000;
 	this->rifleBullets = 10000;
+	this->stage = 0;
 
 	// Map texture
 	if (!mapTexture.initialize(graphics, MAP_IMAGE))
@@ -101,18 +102,18 @@ void dontdie::initialize(HWND hwnd)
 	if (!wallArray[0].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[0].setX(GAME_WIDTH / 2);
-	wallArray[0].setY(GAME_HEIGHT / 4);
+	wallArray[0].setY(GAME_HEIGHT / 4 - 64);
 
 	if (!wallArray[1].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[1].setX(wallArray[0].getX() + 128);
-	wallArray[1].setY(GAME_HEIGHT / 4);
+	wallArray[1].setY(GAME_HEIGHT / 4 - 64);
 	wallArray[1].setDegrees(90.0f);
 
 	if (!wallArray[2].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[2].setX(wallArray[0].getX() - 128);
-	wallArray[2].setY(GAME_HEIGHT / 4);
+	wallArray[2].setY(GAME_HEIGHT / 4 - 64);
 	wallArray[2].setDegrees(90.0f);
 
 	if (!wallArray[3].initialize(this, 0, 0, 0, &wallTexture))
@@ -129,18 +130,18 @@ void dontdie::initialize(HWND hwnd)
 	if (!wallArray[5].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[5].setX(GAME_WIDTH / 2);
-	wallArray[5].setY(GAME_HEIGHT / 2 + 64);
+	wallArray[5].setY(GAME_HEIGHT / 2 + 128);
 
 	if (!wallArray[6].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[6].setX(wallArray[0].getX() + 128);
-	wallArray[6].setY(GAME_HEIGHT / 2 + 64);
+	wallArray[6].setY(GAME_HEIGHT / 2 + 128);
 	wallArray[6].setDegrees(90.0f);
 
 	if (!wallArray[7].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[7].setX(wallArray[0].getX() - 128);
-	wallArray[7].setY(GAME_HEIGHT / 2 + 64);
+	wallArray[7].setY(GAME_HEIGHT / 2 + 128);
 	wallArray[7].setDegrees(90.0f);
 
 	if (!wallArray[8].initialize(this, 0, 0, 0, &wallTexture))
@@ -163,8 +164,8 @@ void dontdie::initialize(HWND hwnd)
 	//player1.setDegrees((atan2(player1.getY - input->getMouseY() , player1.getX - input->getMouseX()) * 180) / PI);     //angle of player
 
 	// Player Health
-	//if (!player1health.initialize(this, playerHealthNS::WIDTH, playerHealthNS::HEIGHT, playerHealthNS::TEXTURE_COLS, &playerHealthTexture))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	if (!player1health.initialize(this, playerHealthNS::WIDTH, playerHealthNS::HEIGHT, playerHealthNS::TEXTURE_COLS, &playerHealthTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 
 
 	//Bullets
@@ -190,9 +191,17 @@ void dontdie::initialize(HWND hwnd)
 		smgBulletArray[smgb].setInitialized(false);
 	}
 
-	if (!ShotgunBullet.initialize(this, bulletNS::WIDTH, bulletNS::HEIGHT, bulletNS::TEXTURE_COLS, &ShotgunbulletTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shotgun Bullet"));
 
+	for (int shotgunb = 0; shotgunb < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); shotgunb++)
+	{
+		if (!shotgunBulletArray[shotgunb].initialize(this, bulletNS::WIDTH, bulletNS::HEIGHT, bulletNS::TEXTURE_COLS, &PbulletTexture))
+		{
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing shotgun Bullet"));
+		}
+		shotgunBulletArray[shotgunb].setFrames(bulletNS::SHOTGUNBULLET_START_FRAME, bulletNS::SHOTGUNBULLET_END_FRAME);
+		shotgunBulletArray[shotgunb].setCurrentFrame(bulletNS::SHOTGUNBULLET_START_FRAME);
+		shotgunBulletArray[shotgunb].setInitialized(false);
+	}
 
 	for (int rifleb = 0; rifleb < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); rifleb++)
 	{
@@ -236,25 +245,20 @@ void dontdie::reset()
 void dontdie::update()
 {
 	VECTOR2 dir;
+	int currenthp;
+	int frame;
 	player1.setPrev(player1.getX(), player1.getY());
 	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 	player1.update(frameTime);
 	zombie1.update(frameTime);
-	/*if (player1.getHealth() != 20)
-	{
-		int frame = 1;
-		for (int health = 19; health > 0; health--)
-		{
-			if (player1.getHealth() == health)
-			{
-				player1health.setFrames(frame, frame);
-			}
-			frame++;
-		}
-	}
+
+	currenthp = player1.getHealth();
+	frame = 20 - currenthp;
+	player1health.setFrames(frame, frame);
+	player1health.setCurrentFrame(frame);
 	player1health.setX(player1.getX());
-	player1health.setY(player1.getY() + 32);
-	player1health.update(frameTime);*/
+	player1health.setY(player1.getY() + 15);
+	player1health.update(frameTime);
 
 
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
@@ -265,93 +269,124 @@ void dontdie::update()
 		}
 	}
 
+	if (input->isKeyDown(PLAYER_SHOOT_KEY))
+	{
+		if (stage < 4)
+			stage += 1;
+		else
+			stage = 0;
+	}
+
 	if (input->getMouseLButton() == true)
 	{
 		float clickY = input->getMouseY();
 		float clickX = input->getMouseX();
-		//if (stage == 1)
-		//{
-		if (player1.getPistolBuffer() == 30.0f)
-			//if (pistolBuffer != pistolBulletArray[pBullets - 1].getPistolBuffer())
+		if (stage == 0)
 		{
-			player1.setPistolBuffer(0);
-			for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+			if (player1.getPistolBuffer() == 30.0f)
+				//if (pistolBuffer != pistolBulletArray[pBullets - 1].getPistolBuffer())
 			{
-				if (pistolBulletArray[pistolb].isInitialized() == false)
+				player1.setPistolBuffer(0);
+				for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 				{
-					pistolBulletArray[pistolb].setInitialized(true);
-					dir.x = clickX - player1.getX();
-					dir.y = clickY - player1.getY();
-					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-					dir.x /= hyp;
-					dir.y /= hyp;
-					dir.x *= bulletNS::SPEED;
-					dir.y *= bulletNS::SPEED;
-					pistolBulletArray[pistolb].setX(player1.getX());
-					pistolBulletArray[pistolb].setY(player1.getY());
-					pistolBulletArray[pistolb].setVelocity(dir);
-					break;
+					if (pistolBulletArray[pistolb].isInitialized() == false)
+					{
+						pistolBulletArray[pistolb].setInitialized(true);
+						dir.x = clickX - player1.getX();
+						dir.y = clickY - player1.getY();
+						float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+						dir.x /= hyp;
+						dir.y /= hyp;
+						dir.x *= bulletNS::SPEED;
+						dir.y *= bulletNS::SPEED;
+						pistolBulletArray[pistolb].setX(player1.getX());
+						pistolBulletArray[pistolb].setY(player1.getY());
+						pistolBulletArray[pistolb].setVelocity(dir);
+						break;
+					}
 				}
 			}
 		}
 
-		//}
-
-		/*if (stage == 2)
+		else if (stage == 1)
 		{
 			if (player1.getShotgunBuffer() == 60.0f)
-			//if (shotgunBuffer != shotgunBulletArray[pBullets - 1].getPistolBuffer())
-		{
-			player1.setShotgunBuffer(0);
-			for (int smgb = 0; smgb < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); smgb++)
 			{
-				if (smgBulletArray[smgb].isInitialized() == false)
+				player1.setShotgunBuffer(0);
+				for (int shotgunb = 0; shotgunb < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); shotgunb++)
 				{
-					smgBulletArray[smgb].setInitialized(true);
-					dir.x = clickX - player1.getX();
-					dir.y = clickY - player1.getY();
-					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-					dir.x /= hyp;
-					dir.y /= hyp;
-					dir.x *= bulletNS::SPEED;
-					dir.y *= bulletNS::SPEED;
-					smgBulletArray[smgb].setX(player1.getX());
-					smgbBulletArray[smgb].setY(player1.getY());
-					smgbBulletArray[smgb].setVelocity(dir);
-					break;
+					if (shotgunBulletArray[shotgunb].isInitialized() == false)
+					{
+						shotgunBulletArray[shotgunb].setInitialized(true);
+						dir.x = clickX - player1.getX();
+						dir.y = clickY - player1.getY();
+						float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+						dir.x /= hyp;
+						dir.y /= hyp;
+						dir.x *= bulletNS::SPEED;
+						dir.y *= bulletNS::SPEED;
+						shotgunBulletArray[shotgunb].setX(player1.getX());
+						shotgunBulletArray[shotgunb].setY(player1.getY());
+						shotgunBulletArray[shotgunb].setVelocity(dir);
+						break;
+					}
 				}
 			}
 		}
-		}*/
 
-		/*else
+
+		else if (stage == 2)
 		{
-			if (rifleBuffer == rifleBulletArray[pBullets - 1].getRifleBuffer())
+			if (player1.getSmgBuffer() == 6.0f)
 			{
-				if (pBullets != 0)
+				player1.setSmgBuffer(0);
+				for (int smgb = 0; smgb < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); smgb++)
 				{
-					pBullets -= 1;
-					rifleBulletArray[pBullets - 1].setInitialized(true);
-					rifleBuffer = 0;
-					rifleBulletArray[pBullets - 1].setX(player1.getX());
-					rifleBulletArray[pBullets - 1].setY(player1.getY());
-					dir.x = clickX - player1.getX();
-					dir.y = clickY - player1.getY();
-					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-					dir.x /= hyp;
-					dir.y /= hyp;
-					dir.x *= bulletNS::SPEED;
-					dir.y *= bulletNS::SPEED;
-					rifleBulletArray[pBullets - 1].setVelocity(dir);
-					float angle = atan2(clickX - player1.getX(), clickY - player1.getY())* (180 / PI) + 90;
-					rifleBulletArray[pBullets - 1].setDegrees(angle);
+					if (smgBulletArray[smgb].isInitialized() == false)
+					{
+						smgBulletArray[smgb].setInitialized(true);
+						dir.x = clickX - player1.getX();
+						dir.y = clickY - player1.getY();
+						float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+						dir.x /= hyp;
+						dir.y /= hyp;
+						dir.x *= bulletNS::SPEED;
+						dir.y *= bulletNS::SPEED;
+						smgBulletArray[smgb].setX(player1.getX());
+						smgBulletArray[smgb].setY(player1.getY());
+						smgBulletArray[smgb].setVelocity(dir);
+						break;
+					}
 				}
 			}
-			else
+		}
+
+		else if (stage == 3)
+		{
+			if (player1.getRifleBuffer() == 12.0f)
 			{
-				rifleBuffer += 1;
+				player1.setRifleBuffer(0);
+				for (int rifleb = 0; rifleb < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); rifleb++)
+				{
+					if (rifleBulletArray[rifleb].isInitialized() == false)
+					{
+						rifleBulletArray[rifleb].setInitialized(true);
+						dir.x = clickX - player1.getX();
+						dir.y = clickY - player1.getY();
+						float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+						dir.x /= hyp;
+						dir.y /= hyp;
+						dir.x *= bulletNS::SPEED;
+						dir.y *= bulletNS::SPEED;
+						rifleBulletArray[rifleb].setX(player1.getX());
+						rifleBulletArray[rifleb].setY(player1.getY());
+						rifleBulletArray[rifleb].setVelocity(dir);
+						break;
+					}
+
+				}
 			}
-		}*/
+		}
 
 	}
 	//map.update(frameTime);
@@ -393,7 +428,7 @@ void dontdie::render()
 
 	zombie1.draw();
 	player1.draw();     //adds the player into the scene
-	//player1health.draw();
+	player1health.draw();
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 	{
 		if (pistolBulletArray[pistolb].isInitialized() == true)
@@ -460,7 +495,7 @@ void dontdie::collisions()
 			//player1.setX(GAME_WIDTH / 2);
 
 			player1.setY(GAME_HEIGHT / 2);
-			player1.setHealth(20);
+			//player1.setHealth(20);
 		}
 	}
 
@@ -470,8 +505,15 @@ void dontdie::collisions()
 		{
 			if (pistolBulletArray[pistolb].collidesWith(zombie1, tempVector))
 			{
-				pistolBulletArray[pistolb].setInitialized(false);
 				zombie1.damageZombie(pistolBulletArray[pistolb].getpistolDamage());
+				pistolBulletArray[pistolb].setInitialized(false);
+			}
+			for (int i = 0; i < 10; i++)
+			{
+				if (pistolBulletArray[pistolb].collidesWith(wallArray[i], tempVector))
+				{
+					pistolBulletArray[pistolb].setInitialized(false);
+				}
 			}
 		}
 	}
@@ -485,6 +527,13 @@ void dontdie::collisions()
 				smgBulletArray[smgb].setInitialized(false);
 				zombie1.damageZombie(smgBulletArray[smgb].getsmgDamage());
 			}
+			for (int i = 0; i < 10; i++)
+			{
+				if (smgBulletArray[smgb].collidesWith(wallArray[i], tempVector))
+				{
+					smgBulletArray[smgb].setInitialized(false);
+				}
+			}
 		}
 	}
 	for (int rifleb = 0; rifleb < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); rifleb++)
@@ -495,6 +544,13 @@ void dontdie::collisions()
 			{
 				rifleBulletArray[rifleb].setInitialized(false);
 				zombie1.damageZombie(rifleBulletArray[rifleb].getrifleDamage());
+			}
+			for (int i = 0; i < 10; i++)
+			{
+				if (rifleBulletArray[rifleb].collidesWith(wallArray[i], tempVector))
+				{
+					rifleBulletArray[rifleb].setInitialized(false);
+				}
 			}
 		}
 	}

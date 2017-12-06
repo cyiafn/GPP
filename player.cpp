@@ -101,33 +101,6 @@ void Player::update(float frameTime)
 	}
 	spriteData.angle = atan2(spriteData.y - input->getMouseY(), spriteData.x - input->getMouseX()) - 90;
 	
-	if (input->isKeyDown(PLAYER_SHOOT_KEY))
-	{
-		/*if (this->pistolBuffer != 30.0f)
-		{
-			pistolBuffer += 1.0f;
-		}*/
-
-		/*float Xaxis;
-		float Yaxis;
-
-		for (int i = 0; i < 2; i++)
-		{
-			pistolBulletArray[i].draw();
-			pistolBulletArray[i].setX(player1.getX());
-			pistolBulletArray[i].setY(player1.getY());
-			dir.x = input->getMouseX() - player1.getX();
-			dir.y = input->getMouseY() - player1.getY();
-			float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-			dir.x /= hyp;
-			dir.y /= hyp;
-			dir.x *= bulletNS::SPEED;
-			dir.y *= bulletNS::SPEED;
-			pistolBulletArray[i].setVelocity(dir);
-			float angle = atan2(input->getMouseX() - player1.getX(), input->getMouseY() - player1.getY())* (180 / PI) + 90;
-			pistolBulletArray[i].setDegrees(angle);
-		}*/
-	}
 	if (this->pistolBuffer != 30.0f)
 	{
 		pistolBuffer += 1.0f;

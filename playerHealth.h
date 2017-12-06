@@ -21,7 +21,7 @@ namespace playerHealthNS
 	//const float MASS = 250.0f;              // mass
 	const int   TEXTURE_COLS = 4;           // texture has 4 columns
 	const int   PLAYERHEALTH_START_FRAME = 0;      
-	const int   PLAYERHEALTH_END_FRAME = 0;        
+	const int   PLAYERHEALTH_END_FRAME = 0;     
 	//const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
 }
 

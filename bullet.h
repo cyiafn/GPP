@@ -9,6 +9,15 @@ namespace bulletNS
 {
 	const int WIDTH = 32;                   // image width
 	const int HEIGHT = 32;                  // image height
+
+	//const int pistolWidth = 7;
+	//const int pistolHeight = 7;
+	//const int shotgunWidth = 9;
+	//const int shotgunHeight = 12;
+	//const int smgWidth = 3;
+	//const int smgHeight = 5;
+	//const int rifleWidth = 5;
+	//const int rifleHeight = 11;
 	//const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
 	//const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
 	const int X = 0;
@@ -20,17 +29,16 @@ namespace bulletNS
 	const int   PISTOLBULLET_END_FRAME = 0;         
 	const int	PISTOL_DAMAGE = 4;
 	
-
-	const int   SMGBULLET_START_FRAME = 0;     //No animation  
-	const int   SMGBULLET_END_FRAME = 0;
+	const int   SMGBULLET_START_FRAME = 3;     //No animation  
+	const int   SMGBULLET_END_FRAME = 3;
 	const int	SMG_DAMAGE = 1;
 
-	const int   SHOTGUNBULLET_START_FRAME = 0;     //No animation  
-	const int   SHOTGUNBULLET_END_FRAME = 0;
+	const int   SHOTGUNBULLET_START_FRAME = 1;     //No animation  
+	const int   SHOTGUNBULLET_END_FRAME = 1;
 	const int	SHOTGUN_DAMAGE = 4;
 
-	const int   RIFLEBULLET_START_FRAME = 0;     //No animation  
-	const int   RIFLEBULLET_END_FRAME = 0;
+	const int   RIFLEBULLET_START_FRAME = 2;     //No animation  
+	const int   RIFLEBULLET_END_FRAME = 2;
 	const int	RIFLE_DAMAGE = 4;
 }
 

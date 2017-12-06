@@ -13,8 +13,8 @@
 
 namespace playerNS
 {
-    const int WIDTH = 32;                   // image width
-    const int HEIGHT = 22;                  // image height
+    const int WIDTH = 22;                   // image width
+    const int HEIGHT = 15;                  // image height
     const int X = GAME_WIDTH/8 - WIDTH/8;   // location on screen
     const int Y = GAME_HEIGHT/8 - HEIGHT/8;
     const float SPEED = 100;                // 100 pixels per second

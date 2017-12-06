@@ -1,10 +1,21 @@
 ﻿  dontdie.cpp
-d:\visual studio projects\gpp project\bullet.h(65): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-d:\visual studio projects\gpp project\bullet.h(66): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-d:\visual studio projects\gpp project\bullet.h(67): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-d:\visual studio projects\gpp project\bullet.h(68): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(270): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(271): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(483): warning C4390: ';': empty controlled statement found; is this the intent?
-d:\visual studio projects\gpp project\dontdie.cpp(494): warning C4390: ';': empty controlled statement found; is this the intent?
-  ThreeCsDX.vcxproj -> D:\Visual Studio Projects\GPP Project\Debug\ThreeCsDX.exe
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(255): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(282): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(283): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(525): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(543): warning C4390: ';': empty controlled statement found; is this the intent?
+  Generating Code...
+  Compiling...
+  winmain.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  playerHealth.cpp
+  ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe

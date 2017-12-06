@@ -67,7 +67,7 @@ const char BULLET_IMAGE[] = "pictures\\bullets.png"; //picture of Pistol Bullet
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
 
 //environment images
-const char MAP_IMAGE[] = "pictures\\grassTile.png";  // Picture of background
+const char MAP_IMAGE[] = "pictures\\maptiles.png";  // Picture of background
 const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
 
 // player movement
@@ -95,6 +95,7 @@ const UCHAR PLAYER_LEFT_KEY = 0x41; //Left Arrow key
 const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
 const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
 const UCHAR PLAYER_SHOOT_KEY = VK_SPACE;
+
 
 
 #endif

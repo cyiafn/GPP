@@ -26,28 +26,21 @@ namespace dontdieNS
 	//const char FONT[] = "Arial Bold";  // font
 	const int TEXTURE_SIZE = 64;
 	const int TEXTURE_COLS = 1;
-	const int MAP_HEIGHT = 16;
-	const int MAP_WIDTH = 16;
+	const int MAP_HEIGHT = 9;
+	const int MAP_WIDTH = 12;
 	const float SCROLL_RATE = 10;
 	const int __ = -1;                  // empty tile
 
 	const int tileMap[MAP_HEIGHT][MAP_WIDTH] = {
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0
 	};
 }
 
@@ -72,9 +65,7 @@ private:
 	TextureManager SMGbulletTexture;
 	TextureManager ShotgunbulletTexture;
 	TextureManager RiflebulletTexture;
-
-
-
+	
 	Image map;                 // map image
 	Image player;                 // player image
 	Image playerhealth;
@@ -86,10 +77,10 @@ private:
 	Image rifleBullet;
 
 	Player player1;
-   // PlayerHealth player1health;
+    PlayerHealth player1health;
 	Zombie zombie1;
 	Wall wallArray[10];
-	Bullet pistolBulletArray[10000], smgBulletArray[100000], ShotgunBullet, rifleBulletArray[10000];
+	Bullet pistolBulletArray[10000], smgBulletArray[100000], shotgunBulletArray[10000], rifleBulletArray[10000];
 
 	float pistolBuffer,smgBuffer,shotgunBuffer,rifleBuffer;
 	int stage;
