@@ -73,7 +73,7 @@ public:
 	}
 	void setInitialized(bool init)
 	{
-		this->initialized == init;
+		this->initialized = init;
 	}
 };
 

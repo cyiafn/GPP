@@ -163,8 +163,8 @@ void dontdie::initialize(HWND hwnd)
 	//player1.setDegrees((atan2(player1.getY - input->getMouseY() , player1.getX - input->getMouseX()) * 180) / PI);     //angle of player
 
 	// Player Health
-	if (!player1health.initialize(this, playerHealthNS::WIDTH, playerHealthNS::HEIGHT, playerHealthNS::TEXTURE_COLS, &playerHealthTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	//if (!player1health.initialize(this, playerHealthNS::WIDTH, playerHealthNS::HEIGHT, playerHealthNS::TEXTURE_COLS, &playerHealthTexture))
+	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 
 
 	//Bullets
@@ -189,7 +189,7 @@ void dontdie::initialize(HWND hwnd)
 		smgBulletArray[smgb].setCurrentFrame(bulletNS::SMGBULLET_START_FRAME);
 		smgBulletArray[smgb].setInitialized(false);
 	}
-	
+
 	if (!ShotgunBullet.initialize(this, bulletNS::WIDTH, bulletNS::HEIGHT, bulletNS::TEXTURE_COLS, &ShotgunbulletTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shotgun Bullet"));
 
@@ -206,7 +206,7 @@ void dontdie::initialize(HWND hwnd)
 	}
 
 
-// Zombies
+	// Zombies
 	if (!zombie1.initialize(this, zombieNS::WIDTH, zombieNS::HEIGHT, zombieNS::TEXTURE_COLS, &zombieTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing zombie texture"));
@@ -240,7 +240,7 @@ void dontdie::update()
 	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 	player1.update(frameTime);
 	zombie1.update(frameTime);
-	if (player1.getHealth() != 20)
+	/*if (player1.getHealth() != 20)
 	{
 		int frame = 1;
 		for (int health = 19; health > 0; health--)
@@ -254,7 +254,7 @@ void dontdie::update()
 	}
 	player1health.setX(player1.getX());
 	player1health.setY(player1.getY() + 32);
-	player1health.update(frameTime);
+	player1health.update(frameTime);*/
 
 
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
@@ -294,7 +294,7 @@ void dontdie::update()
 				}
 			}
 		}
-			
+
 		//}
 
 		/*if (stage == 2)
@@ -352,7 +352,7 @@ void dontdie::update()
 				rifleBuffer += 1;
 			}
 		}*/
-		
+
 	}
 	//map.update(frameTime);
 }
@@ -393,8 +393,7 @@ void dontdie::render()
 
 	zombie1.draw();
 	player1.draw();     //adds the player into the scene
-	player1health.draw();
-
+	//player1health.draw();
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb--)
 	{
 		if (pistolBulletArray[pistolb].isInitialized() == true)
@@ -402,6 +401,7 @@ void dontdie::render()
 			pistolBulletArray[pistolb].draw();
 		}
 	}
+
 
 	graphics->spriteEnd();
 

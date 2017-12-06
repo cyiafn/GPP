@@ -3,10 +3,9 @@ c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bul
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(66): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(67): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(68): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4553: '==': operator has no effect; did you intend '='?
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(270): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(271): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(471): warning C4390: ';': empty controlled statement found; is this the intent?
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(483): warning C4390: ';': empty controlled statement found; is this the intent?
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(494): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(473): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(485): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(496): warning C4390: ';': empty controlled statement found; is this the intent?
   ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe
