@@ -71,7 +71,7 @@ const char BULLET_IMAGE[] = "pictures\\bullets.png"; //picture of Pistol Bullet
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
 
 //environment images
-const char MAP_IMAGE[] = "pictures\\maptiles.png";  // Picture of background
+const char MAP_IMAGE[] = "pictures\\grassTile.png";  // Picture of background
 const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
 const char TANK_IMAGE[] = "pictures\\tank.png";
 const char SPITTER_IMAGE[] = "pictures\\spitter.png";

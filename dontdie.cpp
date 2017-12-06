@@ -5,6 +5,7 @@
 #include <string>
 #include "astar.h"
 #include "zombie.h"
+using namespace dontdieNS;
 
 //=============================================================================
 // Constructor
@@ -1003,17 +1004,17 @@ void dontdie::render()
 	bossCURHP.setX(110); //centerize the HP bar
 	bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
 
-	for (int row = 0; row < dontdieNS::MAP_HEIGHT; row++)       // for each row of map
+	for (int row = 0; row < MAP_HEIGHT; row++)       // for each row of map
 	{
-		map.setY((float)(row*dontdieNS::TEXTURE_SIZE)); // set tile Y
-		for (int col = 0; col < dontdieNS::MAP_WIDTH; col++)    // for each column of map
+		map.setY((float)(row*TEXTURE_SIZE)); // set tile Y
+		for (int col = 0; col < MAP_WIDTH; col++)    // for each column of map
 		{
-			if (dontdieNS::tileMap[row][col] >= 0)          // if tile present
+			if (tileMap[row][col] >= 0)          // if tile present
 			{
-				map.setCurrentFrame(dontdieNS::tileMap[row][col]);    // set tile texture
-				map.setX((float)(col*dontdieNS::TEXTURE_SIZE) + mapX);   // set tile X
+				map.setCurrentFrame(tileMap[row][col]);    // set tile texture
+				map.setX((float)(col*TEXTURE_SIZE) + mapX);   // set tile X
 															  // if tile on screen
-				if (map.getX() > -dontdieNS::TEXTURE_SIZE && map.getX() < GAME_WIDTH)
+				if (map.getX() > -TEXTURE_SIZE && map.getX() < GAME_WIDTH)
 				{
 					map.draw();                // draw tile
 				}
@@ -1021,7 +1022,6 @@ void dontdie::render()
 		}
 	}
 
-	map.draw();         //adds the map to the scene
 	for (int zomb = 0; zomb < (sizeof(zombieArray) / sizeof(*zombieArray)); zomb++)
 	{
 		if (zombieArray[zomb].isInitialised() == true)
