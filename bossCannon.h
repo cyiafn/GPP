@@ -31,6 +31,7 @@ private:
 	float angle = 0.0f;
 	VECTOR2 direction;
 	VECTOR2 position;
+	bool resetBool = true;
 public:
 	// constructor
 	BossCannon();
@@ -42,5 +43,8 @@ public:
 	void update(float frameTime);
 	void setVelocityX(float newX);
 	void setVelocityY(float newY);
+	bool getReset();
+	void setReset(bool reset);
+	void resetPosition(bool boolean);	
 };
 #endif

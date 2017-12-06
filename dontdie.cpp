@@ -78,22 +78,6 @@ void dontdie::initialize(HWND hwnd)
 	// CANNON
 	if (!cannonTexture.initialize(graphics, BOSSCANNON_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Cannon texture"));
-	/*if (!cannon1.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
-	{
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
-	}
-	if (!cannon2.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
-	{
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
-	}
-	if (!cannon3.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
-	{
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
-	}
-	if (!cannon4.initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
-	{
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon texture"));
-	}*/
 	for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
 	{
 		if (!CannonArray[cannonNo].initialize(this, Cannon::WIDTH, Cannon::HEIGHT, Cannon::TEXTURE_COLS, &cannonTexture))
@@ -189,11 +173,17 @@ void dontdie::update()
 		else if (boss.isAttacking())
 		{	
 			VECTOR2 direction;
-			direction.x = 1.0f * Cannon::CANNON_SPEED;
-			direction.y = 0.0f * Cannon::CANNON_SPEED;
+			/*direction.x = player1.getX() - boss.getX();
+			direction.y = player1.getY() - boss.getY();
+			float hypotenuse = sqrt(direction.x * direction.x + direction.y * direction.y);
+			direction.x /= hypotenuse;
+			direction.y /= hypotenuse;*/
+			direction.x *= Cannon::CANNON_SPEED;
+			direction.y *= Cannon::CANNON_SPEED;
 			for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
 			{
-				direction.x++;
+				direction.x *= cos(CannonAngle);
+				direction.y *= sin(CannonAngle);
 				CannonArray[cannonNo].setVelocity(direction);
 				CannonArray[cannonNo].update(frameTime);
 				CannonAngle = CannonAngle + 10.0;

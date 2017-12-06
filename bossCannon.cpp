@@ -53,3 +53,22 @@ void BossCannon::setVelocityY(float newY)
 {
 	velocity.y = newY;
 }
+
+bool BossCannon::getReset()
+{
+	return resetBool;
+}
+
+void BossCannon::setReset(bool reset)
+{
+	resetBool = reset;
+}
+
+void BossCannon::resetPosition(bool boolean)
+{
+	if (resetBool = boolean)
+	{
+		spriteData.x = Cannon::X;              // location on screen
+		spriteData.y = Cannon::Y;
+	}
+}
