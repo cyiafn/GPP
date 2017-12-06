@@ -46,7 +46,7 @@ private:
 	int	NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
 	int	NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
 	int	NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
-
+	int cannonInt = 0;
 	Image   map;                 // map image
 	Image player;                 // player image
 	Image zombie;

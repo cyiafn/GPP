@@ -26,7 +26,7 @@ dontdie::~dontdie()
 void dontdie::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd);
-	graphics->setBackColor(graphicsNS::WHITE);
+	graphics->setBackColor(graphicsNS::BLACK);
 
 
 	// Map texture
@@ -84,6 +84,8 @@ void dontdie::initialize(HWND hwnd)
 		{
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon textures"));
 		}
+		CannonArray[cannonNo].setX(Cannon::X);
+		CannonArray[cannonNo].setY(Cannon::Y);
 	}
 
 	// SHIELD
@@ -168,25 +170,30 @@ void dontdie::update()
 				boss.changeMotion(boss.isChanneling());
 				boss.setCurrentFrame(bossNS::BARON_ATTACK_FRAME);
 				BARON_ATTACKING_TIMER = 6;
+				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+				{
+					CannonArray[cannonNo].setX(Cannon::X); //set bullet positions
+					CannonArray[cannonNo].setY(Cannon::Y);
+				}
 			}
 		}
 		else if (boss.isAttacking())
 		{	
 			VECTOR2 direction;
-			/*direction.x = player1.getX() - boss.getX();
+			direction.x = player1.getX() - boss.getX();
 			direction.y = player1.getY() - boss.getY();
 			float hypotenuse = sqrt(direction.x * direction.x + direction.y * direction.y);
 			direction.x /= hypotenuse;
-			direction.y /= hypotenuse;*/
+			direction.y /= hypotenuse;
 			direction.x *= Cannon::CANNON_SPEED;
 			direction.y *= Cannon::CANNON_SPEED;
 			for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
 			{
-				direction.x *= cos(CannonAngle);
-				direction.y *= sin(CannonAngle);
+				CannonArray[cannonNo].setX(CannonArray[cannonNo].getX());
+				CannonArray[cannonNo].setY(CannonArray[cannonNo].getY());
 				CannonArray[cannonNo].setVelocity(direction);
 				CannonArray[cannonNo].update(frameTime);
-				CannonAngle = CannonAngle + 10.0;
+				CannonAngle = CannonAngle + 10;
 			}
 			boss.setFrames(bossNS::BARON_ATTACK_FRAME, bossNS::BARON_ATTACK_FRAME);	//no animation
 			if (fpscounter % 60 == 0)

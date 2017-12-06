@@ -43,8 +43,5 @@ public:
 	void update(float frameTime);
 	void setVelocityX(float newX);
 	void setVelocityY(float newY);
-	bool getReset();
-	void setReset(bool reset);
-	void resetPosition(bool boolean);	
 };
 #endif

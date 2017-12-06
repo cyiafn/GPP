@@ -1,8 +1,11 @@
 ﻿  dontdie.cpp
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(96): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(189): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(250): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(271): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(272): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(87): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(88): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(99): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(175): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(176): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(258): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(279): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(280): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

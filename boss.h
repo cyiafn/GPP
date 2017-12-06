@@ -62,8 +62,6 @@ protected:
 	int damage = 1;
 	bool spawn = true;
 	Image boss_form; //sprite Data
-	//enum class STATUS {RELOAD_STATE, ATTACK_STATE}
-	BOSS_STATUS _boss_Status; //how does this work???
 	bool reloading = true;
 	bool channeling = false;
 	bool attacking = false;
