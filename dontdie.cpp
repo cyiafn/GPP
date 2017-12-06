@@ -289,7 +289,7 @@ void dontdie::update()
 	{
 		clearCooldown += 1;
 	}
-	if (input->isKeyDown(KILL_ALL))
+	if (input->isKeyDown(KILL_ALL)) //cheat code press ~
 	{
 		if (clearCooldown == 180)
 		{
@@ -297,6 +297,20 @@ void dontdie::update()
 			clearCooldown = 0;
 		}
 			
+	}
+	else if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1 VK_BACKSPACE
+	{
+		stage = 4;
+		boss.setHP(bossNS::MAXHP);
+		boss.setX(bossNS::X);//reset position
+		boss.setY(bossNS::Y);
+	}
+	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2 VK_INSERT
+	{
+		stage = 5;
+		boss.setHP(bossNS::MAXHP/2);
+		boss.setX(bossNS::X); //reset position
+		boss.setY(bossNS::Y);
 	}
 
 	if (checkStageClear() == true)
@@ -919,7 +933,8 @@ void dontdie::collisions()
 		{
 			if (CannonArray[cannon].collidesWith(player1, tempVector))
 			{
-				player1.damageMe(1);
+				CannonArray[cannon].setInitialised(false);
+				player1.damageMe(CannonArray[cannon].getdamage());
 			}
 			for (int i = 0; i < (sizeof(wallArray) / sizeof(*wallArray)); i++)
 			{

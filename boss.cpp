@@ -44,25 +44,8 @@ void Boss::update(float frameTime)
 	///////////////////////////
 	// CHEAT CODE :PogChamp: //
 	///////////////////////////
-	if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
-	{
-		spawn = true;
-		form = 1;
-		HP = bossNS::MAXHP;
-		spriteData.x = bossNS::X; //reset position
-		spriteData.y = bossNS::Y;
-		shieldOn = true;
-	}
-	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
-	{
-		spawn = true;
-		form = 2;
-		shieldOn = false;
-		spriteData.x = bossNS::X; //reset position
-		spriteData.y = bossNS::Y;
-		HP = 1000;
-	}
-	else if (input->isKeyDown(BOSS_CLEAR)) //clear boss = win game
+	
+	if (input->isKeyDown(BOSS_CLEAR)) //VK_DELETE
 	{
 		HP = 0;
 	}

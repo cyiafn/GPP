@@ -76,6 +76,7 @@ public:
 	int getDamage();
 	void setDamage(int dmg);
 	int getHP();
+	void setHP(int hp) { this->HP = hp; }
 	int getForm();
 	bool isSpawn();
 	void setSpawn(bool spawnVal) { this->spawn = spawnVal; }

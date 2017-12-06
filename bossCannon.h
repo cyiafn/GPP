@@ -26,7 +26,7 @@ class BossCannon : public Entity            // inherits from Entity class
 private:
 	int damage = 1;
 	Image CannonBall;
-	bool initialised = false;
+	bool initialised = true;
 public:
 	// constructor
 	BossCannon();
