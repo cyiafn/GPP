@@ -1,15 +1,4 @@
-﻿  zombie.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\zombie.cpp(90): warning C4552: '-': operator has no effect; expected operator with side-effect
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\zombie.cpp(97): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\zombie.cpp(101): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-  winmain.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  wall.cpp
-  textureManager.cpp
-  dontdie.cpp
+﻿  dontdie.cpp
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
@@ -21,120 +10,68 @@ c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\don
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(334): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(350): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(351): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(524): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(525): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(531): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(532): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(556): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(557): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(562): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(563): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(568): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(569): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(574): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(575): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(604): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(605): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(610): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(611): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(616): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(617): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(622): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(623): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(637): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(638): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(643): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(644): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(649): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(650): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(655): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(656): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(687): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(688): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(693): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(694): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(699): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(700): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(705): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(706): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(719): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(720): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(725): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(726): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(731): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(732): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(737): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(738): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(751): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(752): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(757): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(758): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(763): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(764): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(769): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(770): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(833): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(834): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(960): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(979): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(980): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(999): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1002): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1296): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1609): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1934): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(2224): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1282): warning C4101: 'voronoi': unreferenced local variable
-  textDX.cpp
-  tank.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\tank.cpp(135): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\tank.cpp(139): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-  spitterbullet.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\spitterbullet.cpp(61): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\spitterbullet.cpp(65): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-  spitter.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\spitter.cpp(117): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\spitter.cpp(121): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-  player.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  playerHealth.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  bullet.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  input.cpp
-  image.cpp
-  graphics.cpp
-  game.cpp
-  entity.cpp
-  bossShield.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bossshield.cpp(10): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bossshield.cpp(11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bossshield.cpp(38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bossshield.cpp(39): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bossshield.cpp(40): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  bossCannon.cpp
-  boss.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(73): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(74): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(75): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\spitter.cpp(112): warning C4715: 'Spitter::checkVoronoiRegion': not all control paths return a value
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\tank.cpp(130): warning C4715: 'Tank::checkVoronoiRegion': not all control paths return a value
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\wall.cpp(57): warning C4715: 'Wall::checkVoronoiRegion': not all control paths return a value
-  Compiling...
-  audio.cpp
-  astar.cpp
-  Generating Code...
-  LINK : C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe not found or not built by the last incremental link; performing full link
-astar.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(526): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(527): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(533): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(534): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(558): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(559): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(564): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(565): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(570): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(571): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(576): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(577): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(606): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(607): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(612): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(613): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(618): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(619): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(624): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(625): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(639): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(640): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(645): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(646): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(651): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(652): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(657): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(658): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(689): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(690): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(695): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(696): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(701): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(702): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(707): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(708): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(721): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(722): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(727): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(728): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(733): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(734): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(739): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(740): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(753): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(754): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(759): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(760): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(765): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(766): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(771): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(772): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(835): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(836): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(962): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(981): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(982): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1001): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1004): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1298): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1611): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1936): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(2226): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(1284): warning C4101: 'voronoi': unreferenced local variable
   ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe

@@ -349,31 +349,30 @@ void dontdie::update()
 	{
 		float clickY = input->getMouseY();
 		float clickX = input->getMouseX();
-		if (stage == 0)
+		if (player1.getPistolBuffer() == 30.0f)
+			//if (pistolBuffer != pistolBulletArray[pBullets - 1].getPistolBuffer())
 		{
-			//if (player1.getPistolBuffer() == 30.0f)
-			if (pistolBuffer != pistolBulletArray[pBullets - 1].getPistolBuffer())
-			//{
-				player1.setPistolBuffer(0);
-				for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+			player1.setPistolBuffer(0);
+			for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+			{
+				if (pistolBulletArray[pistolb].isInitialized() == false)
 				{
-					if (pistolBulletArray[pistolb].isInitialized() == false)
-					{
-						pistolBulletArray[pistolb].setInitialized(true);
-						dir.x = clickX - player1.getX();
-						dir.y = clickY - player1.getY();
-						float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-						dir.x /= hyp;
-						dir.y /= hyp;
-						dir.x *= bulletNS::SPEED;
-						dir.y *= bulletNS::SPEED;
-						pistolBulletArray[pistolb].setX(player1.getX());
-						pistolBulletArray[pistolb].setY(player1.getY());
-						pistolBulletArray[pistolb].setVelocity(dir);
-						break;
-					}
+					pistolBulletArray[pistolb].setInitialized(true);
+					dir.x = clickX - player1.getX();
+					dir.y = clickY - player1.getY();
+					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+					dir.x /= hyp;
+					dir.y /= hyp;
+					dir.x *= bulletNS::SPEED;
+					dir.y *= bulletNS::SPEED;
+					pistolBulletArray[pistolb].setX(player1.getX());
+					pistolBulletArray[pistolb].setY(player1.getY());
+					pistolBulletArray[pistolb].setVelocity(dir);
+					break;
 				}
 			}
+		}
+
 		/*}*/
 
 		/*else if (stage == 1)
@@ -462,6 +461,7 @@ void dontdie::update()
 	if (player1.getHp() <= 0)
 	{
 		player1.setX(GAME_WIDTH / 2);
+		player1.setHealth(20.0f);
 		//player1.setY(GAME_HEIGHT / 2);
 	}
 	player1.update(frameTime);
@@ -527,7 +527,7 @@ void dontdie::update()
 	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
 	{
 		stage = 5;
-		boss.setHP(bossNS::MAXHP/2);
+		boss.setHP(bossNS::MAXHP / 2);
 		boss.setX(bossNS::X); //reset position
 		boss.setY(bossNS::Y);
 	}
@@ -789,9 +789,9 @@ void dontdie::update()
 		{
 			boss.setSpawn(true);
 		}
-										  /////////////////////////////////////////////////////////////////////////////////
-										  //////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
-										  /////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		//////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
+		/////////////////////////////////////////////////////////////////////////////////
 		if (boss.getForm() == 1) //boss form 1 :: BARON
 		{
 			if (boss.isReloading())
@@ -958,7 +958,7 @@ void dontdie::update()
 				boss.CHARRRGE(frameTime);
 				boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
 				float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
-				boss.setDegrees(angle);				
+				boss.setDegrees(angle);
 				if (fpscounter % 60 == 0)
 				{
 					NORAB_ATTACKING_TIMER--;
@@ -1087,7 +1087,7 @@ void dontdie::render()
 			}
 		}
 	}
-	
+
 	graphics->spriteEnd();
 
 
@@ -1176,7 +1176,7 @@ void dontdie::collisions()
 					}
 				}
 			}
-				
+
 			for (int i = 0; i < 10; i++)
 			{
 				if (pistolBulletArray[pistolb].collidesWith(wallArray[i], tempVector))
