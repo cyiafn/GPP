@@ -56,6 +56,7 @@ public:
 	int getWallVectorY();
 	void setAttackBuffer(float buffer);
 	float getAttackBuffer();
+	void setStartFrame(int end) { this->startFrame = end; }
 	void setEndFrame(int end); 
 	int getID();
 	void setID(int id);

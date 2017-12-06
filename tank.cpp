@@ -47,26 +47,16 @@ void Tank::update(float frameTime)
 	Entity::update(frameTime);
 	spriteData.x += frameTime * velocity.x;         // move ship along X 
 	spriteData.y += frameTime * velocity.y;         // move ship along Y
-	if (this->damageAnimationBuffer != 30.0f)
+	if (this->attackBuffer != 60.0f)
 	{
-		this->damageAnimationBuffer += 1.0f;
-		this->startFrame = 2;
-		this->endFrame = 3;
-		
+		attackBuffer += 1.0f;
+		this->startFrame = 0;
+		this->endFrame = 1;
 	}
 	else
 	{
-		if (this->attackBuffer != 60.0f)
-		{
-			attackBuffer += 1.0f;
-			this->startFrame = 0;
-			this->endFrame = 1;
-		}
-		else
-		{
-			this->startFrame = 0;
-			this->endFrame = 0;
-		}
+		this->startFrame = 0;
+		this->endFrame = 0;
 	}
 }
 void Tank::ai(float frameTime, Tank &ent)

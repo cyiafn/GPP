@@ -19,7 +19,7 @@ namespace zombieNS
 	const int   ZOMBIE_END_FRAME = 1;         // ship animation frames 0,1,2,3
 	const float ZOMBIE_ANIMATION_DELAY = 0.2f; // time between frames
 	const int DAMAGE = 1;
-	const int HEALTH = 4;
+	const int HEALTH = 1;
 	const float ZOMBIE_SPEED = 50.0f;
 }
 

@@ -108,7 +108,7 @@ private:
 
 	Player player1;
     //PlayerHealth player1health;
-	Bullet pistolBulletArray[10000], smgBulletArray[100000], shotgunBulletArray[10000], rifleBulletArray[10000];
+	Bullet pistolBulletArray[100], smgBulletArray[1], shotgunBulletArray[1], rifleBulletArray[1];
 	BossCannon CannonArray[32];
 	Wall wallArray[10];
 	Zombie zombieArray[50];

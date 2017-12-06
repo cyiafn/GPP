@@ -35,10 +35,10 @@ void dontdie::initialize(HWND hwnd)
 	this->spawnbuffer = 30;
 	this->stage = 0;
 	this->zombieStageOneSpawn = 50;
-	this->zombieStageTwoSpawn = 40;
-	this->TankStageTwoSpawn = 10;
-	this->zombieStageThreeSpawn = 0;
-	this->TankStageThreeSpawn = 0;
+	this->zombieStageTwoSpawn = 45;
+	this->TankStageTwoSpawn = 5;
+	this->zombieStageThreeSpawn = 35;
+	this->TankStageThreeSpawn = 5;
 	this->SpitterStageThreeSpawn = 10;
 	this->currentSpawn = 0;
 	this->stageSpawnComplete = false;
@@ -461,7 +461,7 @@ void dontdie::update()
 	if (player1.getHp() <= 0)
 	{
 		player1.setX(GAME_WIDTH / 2);
-		player1.setHealth(20.0f);
+		//player1.setHealth(20.0f);
 		//player1.setY(GAME_HEIGHT / 2);
 	}
 	player1.update(frameTime);
@@ -630,7 +630,9 @@ void dontdie::update()
 				{
 
 					tankArray[TankStageTwoSpawn - 1].setInitialised(true);
+					tankArray[TankStageTwoSpawn - 1].setStartFrame(0);
 					tankArray[TankStageTwoSpawn - 1].setEndFrame(0);
+					tankArray[TankStageTwoSpawn - 1].setHealth(5);
 					spawnbuffer = 0;
 					if (currentSpawn == 0)
 					{
@@ -712,6 +714,7 @@ void dontdie::update()
 				{
 
 					tankArray[TankStageThreeSpawn - 1].setInitialised(true);
+					tankArray[TankStageThreeSpawn - 1].setStartFrame(0);
 					tankArray[TankStageThreeSpawn - 1].setEndFrame(0);
 					spawnbuffer = 0;
 					if (currentSpawn == 0)
@@ -1158,12 +1161,21 @@ void dontdie::collisions()
 		}
 
 	}
+	for (int zombie = 0; zombie < (sizeof(zombieArray) / sizeof(*zombieArray)); zombie++)
+	{
+		if (zombieArray[zombie].isInitialised() == true)
+		{
+			if (zombieArray[zombie].collidesWith(player1, tempVector))
+			{
+				player1.damageMe(1);
+			}
+		}
+	}
+
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 	{
 		if (pistolBulletArray[pistolb].isInitialized() == true)
 		{
-			for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
-			{
 				for (int zombie = 0; zombie < (sizeof(zombieArray) / sizeof(*zombieArray)); zombie++)
 				{
 					if (zombieArray[zombie].isInitialised() == true)
@@ -1172,16 +1184,23 @@ void dontdie::collisions()
 						{
 							zombieArray[zombie].damageZombie(pistolBulletArray[pistolb].getpistolDamage());
 							pistolBulletArray[pistolb].setInitialized(false);
+							if (zombieArray[zombie].getHealth() <= 0)
+							{
+								zombieArray[zombie].setInitialised(false);
+							}
 						}
 					}
 				}
-			}
 
 			for (int i = 0; i < 10; i++)
 			{
-				if (pistolBulletArray[pistolb].collidesWith(wallArray[i], tempVector))
+				if (pistolBulletArray[pistolb].collidesWith(wallArray[i], tempVector) || pistolBulletArray[pistolb].getX() < 0 || pistolBulletArray[pistolb].getY() < 0 || pistolBulletArray[pistolb].getX() > GAME_WIDTH || pistolBulletArray[pistolb].getY() > GAME_HEIGHT)
 				{
-					pistolBulletArray[pistolb].setInitialized(false);
+					if (pistolBulletArray[pistolb].isInitialized() == true)
+					{
+						pistolBulletArray[pistolb].setInitialized(false);
+					}
+					
 				}
 			}
 		}
@@ -1190,7 +1209,6 @@ void dontdie::collisions()
 	{
 		if (player1.collidesWith(boss, tempVector))
 		{
-			player1.revertLocation();
 			player1.damageMe(boss.getDamage());
 			if (player1.getHp() == 0)
 			{
@@ -1254,20 +1272,64 @@ void dontdie::collisions()
 			}
 		}
 	}
+
+
+
 	//when palyerbullet touches the zombie
 	//for loop to track which bullet
-	for (int tank = 0; tank < (sizeof(tankArray) / sizeof(*tankArray)); tank++)
+	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 	{
-		if (tankArray[tank].isInitialised() == true)
+		if (pistolBulletArray[pistolb].isInitialized() == true)
 		{
-			//damage the tank
-			if (tankArray[tank].getDamageAnimationBuffer() == 30.0f)
+			if (boss.isSpawn() == true)
 			{
-				tankArray[tank].setDamageAnimationBuffer(0.0f);
+				if (pistolBulletArray[pistolb].collidesWith(boss, tempVector))
+				{
+					boss.takesDamage(10);
+					pistolBulletArray[pistolb].setInitialized(false);
+				}
+			}
+
+			for (int tank = 0; tank < (sizeof(tankArray) / sizeof(*tankArray)); tank++)
+			{
+				if (tankArray[tank].isInitialised() == true)
+				{
+					if (pistolBulletArray[pistolb].collidesWith(tankArray[tank] ,tempVector))
+					{
+						if (tankArray[tank].getHealth() <= 0)
+						{
+							tankArray[tank].setInitialised(false);
+						}
+						else
+						{
+							tankArray[tank].setHealth(tankArray[tank].getHealth() - 2);
+						}
+						pistolBulletArray[pistolb].setInitialized(false);
+					}
+				}
+
+			}
+			for (int spitter = 0; spitter < (sizeof(spitterArray) / sizeof(*spitterArray)); spitter++)
+			{
+				if (spitterArray[spitter].isInitialised() == true)
+				{
+					if (pistolBulletArray[pistolb].collidesWith(spitterArray[spitter], tempVector))
+					{
+						if (spitterArray[spitter].getHealth() <= 0)
+						{
+							spitterArray[spitter].setInitialised(false);
+						}
+						else
+						{
+							spitterArray[spitter].setHealth(spitterArray[spitter].getHealth() - 2);
+						}
+						pistolBulletArray[pistolb].setInitialized(false);
+					}
+				}
 			}
 		}
-
 	}
+	
 
 
 
@@ -2290,6 +2352,18 @@ bool dontdie::checkStageClear()
 	}
 	if (zombieCount == 0 && tankCount == 0 && spitterCount == 0 && boss.isSpawn() == false)
 	{
+		for (int zomb = 0; zomb < (sizeof(zombieArray) / sizeof(*zombieArray)); zomb++)
+		{
+			zombieArray[zomb].setHealth(1);
+		}
+		for (int tank = 0; tank < (sizeof(tankArray) / sizeof(*tankArray)); tank++)
+		{
+			tankArray[tank].setHealth(5);
+		}
+		for (int spitter = 0; spitter < (sizeof(spitterArray) / sizeof(*spitterArray)); spitter++)
+		{
+			spitterArray[spitter].setHealth(2);
+		}
 		return true;
 	}
 	else
