@@ -107,8 +107,7 @@ private:
 	Image rifleBullet;
 
 	Player player1;
-    PlayerHealth player1health;
-	Zombie zombie1;
+    //PlayerHealth player1health;
 	Bullet pistolBulletArray[10000], smgBulletArray[100000], shotgunBulletArray[10000], rifleBulletArray[10000];
 	BossCannon CannonArray[32];
 	Wall wallArray[10];
@@ -137,7 +136,6 @@ private:
     // game variables
 
 	float pistolBuffer,smgBuffer,shotgunBuffer,rifleBuffer;
-	int stage;
 	int pBullets,smgBullets,rifleBullets;
 
 	//tempHP
