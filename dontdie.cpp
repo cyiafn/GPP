@@ -647,11 +647,15 @@ void dontdie::collisions()
 	//for loop to track which bullet
 	for (int tank = 0; tank < (sizeof(tankArray) / sizeof(*tankArray)); tank++)
 	{
-		//damage the tank
-		if (tankArray[tank].getDamageAnimationBuffer() == 30.0f)
+		if (tankArray[tank].isInitialised() == true)
 		{
-			tankArray[tank].setDamageAnimationBuffer(0.0f);
+			//damage the tank
+			if (tankArray[tank].getDamageAnimationBuffer() == 30.0f)
+			{
+				tankArray[tank].setDamageAnimationBuffer(0.0f);
+			}
 		}
+		
 	}
 	
 	
