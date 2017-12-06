@@ -461,6 +461,12 @@ void dontdie::update()
 	if (player1.getHp() <= 0)
 	{
 		player1.setX(GAME_WIDTH / 2);
+		if (!player1.isDead()) //if false
+		{
+			player1.hasDied(); //makes died true
+			MessageBox(nullptr, TEXT("YOU DIED!!"), TEXT(""), MB_OK);
+		}
+		
 		//player1.setHealth(20.0f);
 		//player1.setY(GAME_HEIGHT / 2);
 	}
@@ -1218,15 +1224,6 @@ void dontdie::collisions()
 			}
 		}
 	}
-	/*if (bullet.collidesWith(boss, tempVector)) //waiting for player bullet
-	{
-	boss.takesDamage(bullet.getDamage());
-	pop bullet
-	}
-	if (bullet.collidesWith(shield, tempVector)) //waiting for player bullet
-	{
-	pop bullet
-	}*/
 	for (int cannon = 0; cannon < (sizeof(CannonArray) / sizeof(*CannonArray)); cannon++)
 	{
 		if (CannonArray[cannon].isInitialised() == true)
@@ -1286,6 +1283,10 @@ void dontdie::collisions()
 				if (pistolBulletArray[pistolb].collidesWith(boss, tempVector))
 				{
 					boss.takesDamage(10);
+					pistolBulletArray[pistolb].setInitialized(false);
+				}
+				if (pistolBulletArray[pistolb].collidesWith(shield, tempVector))
+				{
 					pistolBulletArray[pistolb].setInitialized(false);
 				}
 			}

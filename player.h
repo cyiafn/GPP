@@ -36,7 +36,7 @@ private:
 	float shotgunBuffer;
 	float smgBuffer;
 	float rifleBuffer;
-
+	bool died = false;
 	Bullet pistolBulletArray[2], smgBulletArray[10], ShotgunBullet, rifleBulletArray[5];
 
 public:
@@ -51,6 +51,9 @@ public:
 	void revertLocation();
 	void damageMe(int damageValue);
 	int getHp();
+	bool isDead() { return this->died; }
+	void hasDied() { this->died = true; }
+	void closeMsg() { this->died = false; }
 	float getPistolBuffer() { return this->pistolBuffer; };
 	void setPistolBuffer(float buffer);
 	float getSmgBuffer() { return this->smgBuffer; };
