@@ -1,20 +1,4 @@
-﻿  playerHealth.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(65): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(66): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(67): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(68): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4553: '==': operator has no effect; did you intend '='?
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.h(88): error C3646: 'player1health': unknown override specifier
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.h(88): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  bullet.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(65): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(66): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(67): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(68): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4553: '==': operator has no effect; did you intend '='?
-  Generating Code...
-  Compiling...
-  dontdie.cpp
+﻿  dontdie.cpp
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(65): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(66): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(67): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
@@ -22,8 +6,7 @@ c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bul
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\bullet.h(76): warning C4553: '==': operator has no effect; did you intend '='?
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(270): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(271): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(297): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  winmain.cpp
-  player.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(471): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(483): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\assignment 1\gpp\dontdie.cpp(494): warning C4390: ';': empty controlled statement found; is this the intent?
+  ThreeCsDX.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Assignment 1\gpp\Debug\ThreeCsDX.exe

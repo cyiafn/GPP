@@ -42,6 +42,7 @@ public:
 	void ai(float frameTime, Zombie &ent);
 	void setPrev(float x, float y);
 	void revertLocation();
+	void damageZombie(int damage);
 	int getDamage();
 };
 #endif

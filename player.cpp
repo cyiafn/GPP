@@ -27,6 +27,11 @@ Player::Player() : Entity()
 	mass = playerNS::MASS;
 	collisionType = entityNS::CIRCLE;
 	hp = 20;
+
+	pistolBuffer = 30.0f;
+	shotgunBuffer = 60.0f;
+	smgBuffer = 6.0f;
+	rifleBuffer = 12.0f;
 }
 
 //=============================================================================
@@ -96,9 +101,14 @@ void Player::update(float frameTime)
 	}
 	spriteData.angle = atan2(spriteData.y - input->getMouseY(), spriteData.x - input->getMouseX()) - 90;
 	
-	/*if (input->isKeyDown(PLAYER_SHOOT_KEY))
+	if (input->isKeyDown(PLAYER_SHOOT_KEY))
 	{
-		float Xaxis;
+		if (this->pistolBuffer != 30.0f)
+		{
+			pistolBuffer += 1.0f;
+		}
+
+		/*float Xaxis;
 		float Yaxis;
 
 		for (int i = 0; i < 2; i++)
@@ -116,8 +126,8 @@ void Player::update(float frameTime)
 			pistolBulletArray[i].setVelocity(dir);
 			float angle = atan2(input->getMouseX() - player1.getX(), input->getMouseY() - player1.getY())* (180 / PI) + 90;
 			pistolBulletArray[i].setDegrees(angle);
-		}
-	}*/
+		}*/
+	}
 
 
 	// Bounce off walls
@@ -162,11 +172,29 @@ void Player::damageMe(int damageValue)
 {
 	this->hp = this->hp - damageValue;
 }
+
 int Player::getHp()
 {
 	return this->hp;
 }
 
+void Player::setPistolBuffer(float buffer)
+{
+	this->pistolBuffer = buffer;
+}
+
+void Player::setShotgunBuffer(float buffer)
+{
+	this->shotgunBuffer = buffer;
+}
+void Player::setSmgBuffer(float buffer)
+{
+	this->smgBuffer = buffer;
+}
+void Player::setRifleBuffer(float buffer)
+{
+	this->rifleBuffer = buffer;
+}
 
 
 

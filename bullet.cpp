@@ -11,6 +11,10 @@ Bullet::Bullet() : Entity()
 	spriteData.y = bulletNS::Y;
 	spriteData.rect.bottom = bulletNS::HEIGHT;    // rectangle to select parts of an image
 	spriteData.rect.right = bulletNS::WIDTH;
+	edge.left = -16;
+	edge.top = -16;
+	edge.right = 16;
+	edge.bottom = 16;
 	velocity.x = 0;                             // velocity X
 	velocity.y = 0;                             // velocity Y
 	startFrame = bulletNS::PISTOLBULLET_START_FRAME;     // first frame of bullet animation

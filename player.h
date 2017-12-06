@@ -32,6 +32,10 @@ private:
 	float prevX;
 	float prevY;
 	int hp;
+	float pistolBuffer;
+	float shotgunBuffer;
+	float smgBuffer;
+	float rifleBuffer;
 
 	Bullet pistolBulletArray[2], smgBulletArray[10], ShotgunBullet, rifleBulletArray[5];
 
@@ -47,6 +51,14 @@ public:
 	void revertLocation();
 	void damageMe(int damageValue);
 	int getHp();
+	float getPistolBuffer() { return this->pistolBuffer; };
+	void setPistolBuffer(float buffer);
+	float getSmgBuffer() { return this->smgBuffer; };
+	void setSmgBuffer(float buffer);
+	float getShotgunBuffer() { return this->shotgunBuffer; };
+	void setShotgunBuffer(float buffer);
+	float getRifleBuffer() { return this->rifleBuffer; };
+	void setRifleBuffer(float buffer);
 
 	// new functions
 	void setVelocityX(float v) { velocity.x = v; }

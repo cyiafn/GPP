@@ -240,12 +240,11 @@ void dontdie::update()
 	zombie1.setPrev(zombie1.getX(), zombie1.getY());
 	player1.update(frameTime);
 	zombie1.update(frameTime);
-	player1health.update(frameTime);
 	if (player1.getHealth() != 20)
 	{
+		int frame = 1;
 		for (int health = 19; health > 0; health--)
 		{
-			int frame = 1;
 			if (player1.getHealth() == health)
 			{
 				player1health.setFrames(frame, frame);
@@ -255,6 +254,7 @@ void dontdie::update()
 	}
 	player1health.setX(player1.getX());
 	player1health.setY(player1.getY() + 32);
+	player1health.update(frameTime);
 
 
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
@@ -269,33 +269,89 @@ void dontdie::update()
 	{
 		float clickY = input->getMouseY();
 		float clickX = input->getMouseX();
-
-		if (pistolBuffer == pistolBulletArray[pBullets - 1].getPistolBuffer())
+		//if (stage == 1)
+		//{
+		if (player1.getPistolBuffer() == 30.0f)
+			//if (pistolBuffer != pistolBulletArray[pBullets - 1].getPistolBuffer())
 		{
-			if (pBullets != 0)
+			player1.setPistolBuffer(0);
+			for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 			{
-				pBullets -= 1;
-				pistolBulletArray[pBullets - 1].setInitialized(true);
-				pistolBuffer = 0;
-				pistolBulletArray[pBullets - 1].setX(player1.getX());
-				pistolBulletArray[pBullets - 1].setY(player1.getY());
+				if (pistolBulletArray[pistolb].isInitialized() == false)
+				{
+					pistolBulletArray[pistolb].setInitialized(true);
+					dir.x = clickX - player1.getX();
+					dir.y = clickY - player1.getY();
+					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+					dir.x /= hyp;
+					dir.y /= hyp;
+					dir.x *= bulletNS::SPEED;
+					dir.y *= bulletNS::SPEED;
+					pistolBulletArray[pBullets].setX(player1.getX());
+					pistolBulletArray[pBullets].setY(player1.getY());
+					pistolBulletArray[pBullets].setVelocity(dir);
+					break;
+				}
 			}
 		}
-		else
-		{
-			pistolBuffer += 1;
-		}
+			
+		//}
 
-		dir.x = clickX - player1.getX();
-		dir.y = clickY - player1.getY();
-		float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-		dir.x /= hyp;
-		dir.y /= hyp;
-		dir.x *= bulletNS::SPEED;
-		dir.y *= bulletNS::SPEED;
-		pistolBulletArray[pBullets - 1].setVelocity(dir);
-		float angle = atan2(clickX - player1.getX(), clickY - player1.getY())* (180 / PI) + 90;
-		pistolBulletArray[pBullets - 1].setDegrees(angle);
+		/*if (stage == 2)
+		{
+			if (player1.getShotgunBuffer() == 60.0f)
+			//if (shotgunBuffer != shotgunBulletArray[pBullets - 1].getPistolBuffer())
+		{
+			player1.setShotgunBuffer(0);
+			for (int smgb = 0; smgb < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); smgb++)
+			{
+				if (smgBulletArray[smgb].isInitialized() == false)
+				{
+					smgBulletArray[smgb].setInitialized(true);
+					dir.x = clickX - player1.getX();
+					dir.y = clickY - player1.getY();
+					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+					dir.x /= hyp;
+					dir.y /= hyp;
+					dir.x *= bulletNS::SPEED;
+					dir.y *= bulletNS::SPEED;
+					smgBulletArray[smgb].setX(player1.getX());
+					smgbBulletArray[smgb].setY(player1.getY());
+					smgbBulletArray[smgb].setVelocity(dir);
+					break;
+				}
+			}
+		}
+		}*/
+
+		/*else
+		{
+			if (rifleBuffer == rifleBulletArray[pBullets - 1].getRifleBuffer())
+			{
+				if (pBullets != 0)
+				{
+					pBullets -= 1;
+					rifleBulletArray[pBullets - 1].setInitialized(true);
+					rifleBuffer = 0;
+					rifleBulletArray[pBullets - 1].setX(player1.getX());
+					rifleBulletArray[pBullets - 1].setY(player1.getY());
+					dir.x = clickX - player1.getX();
+					dir.y = clickY - player1.getY();
+					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+					dir.x /= hyp;
+					dir.y /= hyp;
+					dir.x *= bulletNS::SPEED;
+					dir.y *= bulletNS::SPEED;
+					rifleBulletArray[pBullets - 1].setVelocity(dir);
+					float angle = atan2(clickX - player1.getX(), clickY - player1.getY())* (180 / PI) + 90;
+					rifleBulletArray[pBullets - 1].setDegrees(angle);
+				}
+			}
+			else
+			{
+				rifleBuffer += 1;
+			}
+		}*/
 		
 	}
 	//map.update(frameTime);
@@ -339,7 +395,7 @@ void dontdie::render()
 	player1.draw();     //adds the player into the scene
 	player1health.draw();
 
-	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb--)
 	{
 		if (pistolBulletArray[pistolb].isInitialized() == true)
 		{
@@ -404,6 +460,42 @@ void dontdie::collisions()
 			//player1.setX(GAME_WIDTH / 2);
 
 			player1.setY(GAME_HEIGHT / 2);
+			player1.setHealth(20);
+		}
+	}
+
+	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+	{
+		if (pistolBulletArray[pistolb].isInitialized() == true)
+		{
+			if (zombie1.collidesWith(pistolBulletArray[pistolb], tempVector));
+			{
+				pistolBulletArray[pistolb].setInitialized(false);
+				zombie1.damageZombie(pistolBulletArray[pistolb].getpistolDamage());
+			}
+		}
+	}
+
+	for (int smgb = 0; smgb < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); smgb++)
+	{
+		if (smgBulletArray[smgb].isInitialized() == true)
+		{
+			if (zombie1.collidesWith(smgBulletArray[smgb], tempVector));
+			{
+				smgBulletArray[smgb].setInitialized(false);
+				zombie1.damageZombie(smgBulletArray[smgb].getsmgDamage());
+			}
+		}
+	}
+	for (int rifleb = 0; rifleb < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); rifleb++)
+	{
+		if (rifleBulletArray[rifleb].isInitialized() == true)
+		{
+			if (zombie1.collidesWith(rifleBulletArray[rifleb], tempVector));
+			{
+				rifleBulletArray[rifleb].setInitialized(false);
+				zombie1.damageZombie(rifleBulletArray[rifleb].getrifleDamage());
+			}
 		}
 	}
 

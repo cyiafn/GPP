@@ -63,3 +63,8 @@ int Zombie::getDamage()
 {
 	return zombieNS::DAMAGE;
 }
+
+void Zombie::damageZombie(int damage)
+{
+	this->health - damage;
+}

@@ -85,7 +85,7 @@ private:
 	Image rifleBullet;
 
 	Player player1;
-	PlayerHealth player1health;
+    PlayerHealth player1health;
 	Zombie zombie1;
 	Wall wallArray[10];
 	Bullet pistolBulletArray[10000], smgBulletArray[100000], ShotgunBullet, rifleBulletArray[10000];
