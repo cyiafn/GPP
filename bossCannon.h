@@ -26,6 +26,7 @@ class BossCannon : public Entity            // inherits from Entity class
 private:
 	int damage = 1;
 	Image CannonBall;
+	bool initialised = false;
 public:
 	// constructor
 	BossCannon();
@@ -37,5 +38,13 @@ public:
 	void update(float frameTime);
 	void setVelocityX(float newX);
 	void setVelocityY(float newY);
+	bool isInitialised()
+	{
+		return this->initialised;
+	}
+	void setInitialised(bool init)
+	{
+		this->initialised = init;
+	}
 };
 #endif

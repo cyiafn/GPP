@@ -169,6 +169,7 @@ void dontdie::initialize(HWND hwnd)
 		{
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cannon textures"));
 		}
+		CannonArray[cannonNo].setInitialised(false);
 		CannonArray[cannonNo].setX(Cannon::X);
 		CannonArray[cannonNo].setY(Cannon::Y);
 	}
@@ -210,7 +211,7 @@ void dontdie::initialize(HWND hwnd)
 		spitterbulletArray[spitterb].setInitialised(false);
 	}
 
-	//zombie1.setPlayerLoc(player1.getX(), player1.getY());
+	boss.setSpawn(false);
 
 
 
@@ -551,200 +552,213 @@ void dontdie::update()
 	}
 	else if (stage == 4)
 	{
+		if (!boss.isSpawn())
+		{
+			boss.setSpawn(true);
+		}
+		//////////////////////////////////boss HP bar////////////////////////////////////
+		int bossHP = boss.getHP() / 2; //1000 pixel, 1 pixel = 2 HP
+		if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP texture"));
+		if (!bossCURHP.initialize(graphics, bossHP, 32, 1, &bossCURHPTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP BAR"));
+		bossCURHP.setX(140); //centerize the HP bar
+		bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
+										  /////////////////////////////////////////////////////////////////////////////////
+										  //////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
+										  /////////////////////////////////////////////////////////////////////////////////
+		if (boss.getForm() == 1) //boss form 1 :: BARON
+		{
+			if (boss.isReloading())
+			{
+				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+				{
+					CannonArray[cannonNo].setInitialised(false);
+				}
+				boss.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
+				boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+				boss.setLoop(true);
+				if (fpscounter % 60 == 0) //for every second
+				{
+					BARON_RELOADING_TIMER--;
+				}
+				if (BARON_RELOADING_TIMER == 0) //if reload time is up
+				{
+					boss.changeMotion(boss.isReloading());
+					boss.setCurrentFrame(bossNS::BARON_CHANNEL_START_FRAME);
+					BARON_CHANNELING_TIMER = bossNS::BARON_CHANNELING_TIMER;
+				}
+			}
+			else if (boss.isChanneling())
+			{
+				boss.setFrames(bossNS::BARON_CHANNEL_START_FRAME, bossNS::BARON_CHANNEL_END_FRAME);
+				boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+				boss.setLoop(true);
+				if (fpscounter % 60 == 0)
+				{
+					BARON_CHANNELING_TIMER--;
+				}
+				if (BARON_CHANNELING_TIMER == 0) //if channel time is up
+				{
+					boss.changeMotion(boss.isChanneling());
+					boss.setCurrentFrame(bossNS::BARON_ATTACK_FRAME);
+					BARON_ATTACKING_TIMER = bossNS::BARON_ATTACKING_TIMER;
+					for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+					{
+						CannonArray[cannonNo].setX(Cannon::X); //set bullet positions
+						CannonArray[cannonNo].setY(Cannon::Y);
+					}
+				}
+			}
+			else if (boss.isAttacking())
+			{
+				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+				{
+					CannonArray[cannonNo].setInitialised(true);
+				}
+				for (int i = 0; i <= 4; i++)
+				{
+					CannonArray[i].setVelocityX(400.0f);
+				}
+				for (int i = 4; i <= 12; i++)
+				{
+					CannonArray[i].setVelocityY(400.0f);
+				}
+				for (int i = 12; i <= 20; i++)
+				{
+					CannonArray[i].setVelocityX(-400.0f);
+				}
+				for (int i = 20; i <= 28; i++)
+				{
+					CannonArray[i].setVelocityY(-400.0f);
+				}
+				for (int i = 28; i < 32; i++)
+				{
+					CannonArray[i].setVelocityX(400.0f);
+				}
+				float Sy = 0.0f;
+				for (int i = 0; i < 4; i++)
+				{
+					CannonArray[i].setVelocityY(Sy);
+					Sy += 100.0f;
+				}
+				float Sx = 400.0f;
+				for (int i = 4; i < 12; i++)
+				{
+					CannonArray[i].setVelocityX(Sx);
+					Sx -= 100.0f;
+				}
+				float Wy = 400.0f;
+				for (int i = 13; i < 20; i++)
+				{
+					CannonArray[i].setVelocityY(Wy);
+					Wy -= 100.0f;
+				}
+				float Nx = -400.0f;
+				for (int i = 21; i < 28; i++)
+				{
+					CannonArray[i].setVelocityX(Nx);
+					Nx += 100.0f;
+				}
+				float Ey = -400.0f;
+				for (int i = 29; i < 32; i++)
+				{
+					CannonArray[i].setVelocityY(Ey);
+					Ey += 100.0f;
+				}
+				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+				{
+					CannonArray[cannonNo].update(frameTime);
+				}
+				boss.setFrames(bossNS::BARON_ATTACK_FRAME, bossNS::BARON_ATTACK_FRAME);	//no animation
+				if (fpscounter % 60 == 0)
+				{
+					BARON_ATTACKING_TIMER--;
+				}
+				if (BARON_ATTACKING_TIMER == 0) //if attack time is up
+				{
+					boss.changeMotion(boss.isAttacking());
+					boss.setCurrentFrame(bossNS::BARON_START_FRAME);
+					BARON_RELOADING_TIMER = bossNS::BARON_RELOADING_TIMER;
+					
+				}
+			}
+		}
+		else if (boss.getForm() == 2) //boss form 2 :: NORAB
+		{
+			if (boss.isReloading())
+			{
+				boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
+				boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
+				boss.setLoop(true);
+				if (fpscounter % 60 == 0)
+				{
+					NORAB_RELOADING_TIMER--;
+				}
+				if (NORAB_RELOADING_TIMER == 0) //if reload time is up
+				{
+					boss.changeMotion(boss.isReloading());
+					boss.setCurrentFrame(bossNS::NORAB_CHANNEL_START_FRAME);
+					NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
+				}
+			}
+			else if (boss.isChanneling())
+			{
+				boss.setFrames(bossNS::NORAB_CHANNEL_START_FRAME, bossNS::NORAB_CHANNEL_END_FRAME);
+				boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
+				boss.setLoop(true);
+				if (fpscounter % 60 == 0)
+				{
+					NORAB_CHANNELING_TIMER--;
+				}
+				if (NORAB_CHANNELING_TIMER == 0) //if channel time is up
+				{
+					boss.changeMotion(boss.isChanneling());
+					boss.setCurrentFrame(bossNS::NORAB_ATTACK_FRAME);
+					NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
+				}
+			}
+			else if (boss.isAttacking())
+			{
+				VECTOR2 direction;
+				direction.x = player1.getX() - boss.getX();
+				direction.y = player1.getY() - boss.getY();
+				float hypotenuse = sqrt(direction.x * direction.x + direction.y * direction.y);
+				direction.x /= hypotenuse;
+				direction.y /= hypotenuse;
+				direction.x *= bossNS::CHARRRGE_SPEED;
+				direction.y *= bossNS::CHARRRGE_SPEED;
+				boss.setVelocity(direction);
+				boss.CHARRRGE(frameTime);
+				float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
+				boss.setDegrees(angle);
 
+				boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
+				if (fpscounter % 60 == 0)
+				{
+					NORAB_ATTACKING_TIMER--;
+				}
+				if (NORAB_ATTACKING_TIMER == 0) //if attack time is up
+				{
+					boss.changeMotion(boss.isAttacking());
+					boss.setCurrentFrame(bossNS::NORAB_START_FRAME);
+					angle = 0.0f;
+					boss.setDegrees(angle);
+					NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
+				}
+			}
+		}
+		if (boss.hasShield() == true)
+		{
+			shield.update(frameTime);
+			shield.setX(shield.getprevX());
+			shield.setY(shield.getprevY());
+		}
 	}
 	
 	map.update(frameTime);
 	boss.update(frameTime);
-	//////////////////////////////////boss HP bar////////////////////////////////////
-	int bossHP = boss.getHP() / 2; //1000 pixel, 1 pixel = 2 HP
-	if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP texture"));
-	if (!bossCURHP.initialize(graphics, bossHP, 32, 1, &bossCURHPTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP BAR"));
-	bossCURHP.setX(140); //centerize the HP bar
-	bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
-	/////////////////////////////////////////////////////////////////////////////////
-	//////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
-	/////////////////////////////////////////////////////////////////////////////////
-	if (boss.getForm() == 1) //boss form 1 :: BARON
-	{
-		if (boss.isReloading())
-		{
-			boss.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
-			boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
-			boss.setLoop(true);
-			if (fpscounter % 60 == 0) //for every second
-			{
-				BARON_RELOADING_TIMER--;
-			}
-			if (BARON_RELOADING_TIMER == 0) //if reload time is up
-			{
-				boss.changeMotion(boss.isReloading());
-				boss.setCurrentFrame(bossNS::BARON_CHANNEL_START_FRAME);
-				BARON_CHANNELING_TIMER = bossNS::BARON_CHANNELING_TIMER;
-			}
-		}
-		else if (boss.isChanneling())
-		{
-			boss.setFrames(bossNS::BARON_CHANNEL_START_FRAME, bossNS::BARON_CHANNEL_END_FRAME);
-			boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
-			boss.setLoop(true);
-			if (fpscounter % 60 == 0)
-			{
-				BARON_CHANNELING_TIMER--;
-			}
-			if (BARON_CHANNELING_TIMER == 0) //if channel time is up
-			{
-				boss.changeMotion(boss.isChanneling());
-				boss.setCurrentFrame(bossNS::BARON_ATTACK_FRAME);
-				BARON_ATTACKING_TIMER = bossNS::BARON_ATTACKING_TIMER;
-				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
-				{
-					CannonArray[cannonNo].setX(Cannon::X); //set bullet positions
-					CannonArray[cannonNo].setY(Cannon::Y);
-				}
-			}
-		}
-		else if (boss.isAttacking())
-		{	
-			for (int i = 0; i <= 4; i++)
-			{
-				CannonArray[i].setVelocityX(400.0f);
-			}
-			for (int i = 4; i <= 12; i++)
-			{
-				CannonArray[i].setVelocityY(400.0f);
-			}
-			for (int i = 12; i <= 20; i++)
-			{
-				CannonArray[i].setVelocityX(-400.0f);
-			}
-			for (int i = 20; i <= 28; i++)
-			{
-				CannonArray[i].setVelocityY(-400.0f);
-			}
-			for (int i = 28; i < 32; i++)
-			{
-				CannonArray[i].setVelocityX(400.0f);
-			}
-			float Sy = 0.0f;
-			for (int i = 0; i < 4; i++)
-			{
-				CannonArray[i].setVelocityY(Sy);
-				Sy += 100.0f;
-			}
-			float Sx = 400.0f;
-			for (int i = 4; i < 12; i++)
-			{
-				CannonArray[i].setVelocityX(Sx);
-				Sx -= 100.0f;
-			}
-			float Wy = 400.0f;
-			for (int i = 13; i < 20; i++)
-			{
-				CannonArray[i].setVelocityY(Wy);
-				Wy -= 100.0f;
-			}
-			float Nx = -400.0f;
-			for (int i = 21; i < 28; i++)
-			{
-				CannonArray[i].setVelocityX(Nx);
-				Nx += 100.0f;
-			}
-			float Ey = -400.0f;
-			for (int i = 29; i < 32; i++)
-			{
-				CannonArray[i].setVelocityY(Ey);
-				Ey += 100.0f;
-			}
-			for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
-			{				
-				CannonArray[cannonNo].update(frameTime);
-			}
-			boss.setFrames(bossNS::BARON_ATTACK_FRAME, bossNS::BARON_ATTACK_FRAME);	//no animation
-			if (fpscounter % 60 == 0)
-			{
-				BARON_ATTACKING_TIMER--;
-			}
-			if (BARON_ATTACKING_TIMER == 0) //if attack time is up
-			{
-				boss.changeMotion(boss.isAttacking());
-				boss.setCurrentFrame(bossNS::BARON_START_FRAME);
-				BARON_RELOADING_TIMER = bossNS::BARON_RELOADING_TIMER;
-			}
-		}
-	}
-	else if (boss.getForm() == 2) //boss form 2 :: NORAB
-	{
-		if (boss.isReloading())
-		{
-			boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
-			boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
-			boss.setLoop(true);
-			if (fpscounter % 60 == 0)
-			{
-				NORAB_RELOADING_TIMER--;
-			}			
-			if (NORAB_RELOADING_TIMER == 0) //if reload time is up
-			{
-				boss.changeMotion(boss.isReloading());
-				boss.setCurrentFrame(bossNS::NORAB_CHANNEL_START_FRAME);
-				NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
-			}
-		}
-		else if (boss.isChanneling())
-		{
-			boss.setFrames(bossNS::NORAB_CHANNEL_START_FRAME, bossNS::NORAB_CHANNEL_END_FRAME);
-			boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
-			boss.setLoop(true);
-			if (fpscounter % 60 == 0)
-			{
-				NORAB_CHANNELING_TIMER--;
-			}
-			if (NORAB_CHANNELING_TIMER == 0) //if channel time is up
-			{
-				boss.changeMotion(boss.isChanneling());
-				boss.setCurrentFrame(bossNS::NORAB_ATTACK_FRAME);
-				NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
-			}
-		}
-		else if (boss.isAttacking())
-		{
-			VECTOR2 direction;
-			direction.x = player1.getX() - boss.getX();
-			direction.y = player1.getY() - boss.getY();
-			float hypotenuse = sqrt(direction.x * direction.x + direction.y * direction.y);
-			direction.x /= hypotenuse;
-			direction.y /= hypotenuse;
-			direction.x *= bossNS::CHARRRGE_SPEED;
-			direction.y *= bossNS::CHARRRGE_SPEED;
-			boss.setVelocity(direction);
-			boss.CHARRRGE(frameTime);
-			float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
-			boss.setDegrees(angle);
-			
-			boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
-			if (fpscounter % 60 == 0)
-			{
-				NORAB_ATTACKING_TIMER--;
-			}			
-			if (NORAB_ATTACKING_TIMER == 0) //if attack time is up
-			{
-				boss.changeMotion(boss.isAttacking());
-				boss.setCurrentFrame(bossNS::NORAB_START_FRAME);
-				angle = 0.0f;
-				boss.setDegrees(angle);
-				NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
-			}
-		}
-	}
-	if (boss.hasShield() == true)
-	{
-		shield.update(frameTime);
-		shield.setX(shield.getprevX());
-		shield.setY(shield.getprevY());
-	}
+	
 }
 
 //=============================================================================
@@ -809,7 +823,11 @@ void dontdie::render()
 		{
 			for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
 			{
-				CannonArray[cannonNo].draw();
+				if (CannonArray[cannonNo].isInitialised() == true)
+				{
+					CannonArray[cannonNo].draw();
+				}
+					
 			}
 		}
 	}
@@ -871,9 +889,9 @@ void dontdie::collisions()
 				spitterbulletArray[bullet].setInitialised(false);
 				player1.damageMe(2);
 			}
-			
+
 		}
-		
+
 	}
 	if (player1.collidesWith(boss, tempVector))
 	{
@@ -895,21 +913,27 @@ void dontdie::collisions()
 	{
 												pop bullet
 	}*/
-	/*for (int cannon = 0; cannon < (sizeof(CannonArray) / sizeof(*CannonArray)); cannon++)
+	for (int cannon = 0; cannon < (sizeof(CannonArray) / sizeof(*CannonArray)); cannon++)
 	{
-		if (CannonArray[cannon].isInitialised() == true) // help me do your isInitialised thing pls xD
+		if (CannonArray[cannon].isInitialised() == true)
 		{
-			if (CannonArray[cannon].collidesWith(player1, tempVector)) 
+			if (CannonArray[cannon].collidesWith(player1, tempVector))
 			{
-				CannonArray[cannon].setInitialised(false);
-				player1.damageMe(2);
+				player1.damageMe(1);
 			}
-														//help me do collisions with the wall thingy
+			for (int i = 0; i < (sizeof(wallArray) / sizeof(*wallArray)); i++)
+			{
+				if (CannonArray[cannon].collidesWith(wallArray[i], tempVector))
+				{
+					CannonArray[cannon].setInitialised(false);
+				}
+			}
 		}
-	}*/
+			
+	}
 
 	//i will treat you lunch nxt time ;P
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < (sizeof(wallArray)/sizeof(*wallArray)); i++)
 	{
 		if (player1.collidesWith(wallArray[i], tempVector))
 		{
@@ -1965,7 +1989,7 @@ bool dontdie::checkStageClear()
 			zombieCount += 1;
 		}
 	}
-	if (zombieCount == 0 && tankCount == 0 && spitterCount == 0)
+	if (zombieCount == 0 && tankCount == 0 && spitterCount == 0 && boss.isSpawn() == false)
 	{
 		return true;
 	}

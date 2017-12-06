@@ -104,7 +104,7 @@ void Player::update(float frameTime)
 				spriteData.angle = 225.0f;
 			}
 			else
-			spriteData.angle = 180.0f;
+				spriteData.angle = 180.0f;
 		}
 		startFrame = playerNS::PLAYER_START_FRAME;
 		endFrame = playerNS::PLAYER_END_FRAME;

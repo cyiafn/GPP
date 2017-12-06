@@ -28,9 +28,9 @@ namespace bossNS
 	const int	BARON_CHANNEL_START_FRAME = 3;	//frame 3,4 is used for attack
 	const int	BARON_CHANNEL_END_FRAME = 4;	//frame 3,4 is used for attack
 	const int	BARON_ATTACK_FRAME = 5;
-	const int	BARON_RELOADING_TIMER = 4;
-	const int	BARON_CHANNELING_TIMER = 4;
-	const int	BARON_ATTACKING_TIMER = 2;
+	const int	BARON_RELOADING_TIMER = 1;
+	const int	BARON_CHANNELING_TIMER = 1;
+	const int	BARON_ATTACKING_TIMER = 3;
 	const float BARON_ANIMATION_DELAY = 0.5f;    // time between frames
 	///////////////////////////////////////////////////////
 	////////////NORAB :: FORM 2////////////////////////////
@@ -61,7 +61,7 @@ protected:
 	int HP = 2000;
 	int form = 1;
 	int damage = 1;
-	bool spawn = true;
+	bool spawn = false;
 	Image boss_form; //sprite Data
 	bool reloading = true;
 	bool channeling = false;
@@ -78,6 +78,7 @@ public:
 	int getHP();
 	int getForm();
 	bool isSpawn();
+	void setSpawn(bool spawnVal) { this->spawn = spawnVal; }
 	void takesDamage(int dmgValue);
 	bool hasShield();
 	bool isReloading();
