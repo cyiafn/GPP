@@ -944,7 +944,7 @@ void dontdie::update()
 			}
 			else if (boss.isAttacking())
 			{
-				boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
+				boss.setCurrentFrame(bossNS::NORAB_ATTACK_FRAME);	//no animation			
 				VECTOR2 direction;
 				direction.x = player1.getX() - boss.getX();
 				direction.y = player1.getY() - boss.getY();
@@ -955,6 +955,7 @@ void dontdie::update()
 				direction.y *= bossNS::CHARRRGE_SPEED;
 				boss.setVelocity(direction);
 				boss.CHARRRGE(frameTime);
+				boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
 				float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
 				boss.setDegrees(angle);				
 				if (fpscounter % 60 == 0)

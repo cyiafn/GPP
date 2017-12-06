@@ -64,14 +64,14 @@ c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(768): warn
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(769): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(832): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(833): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(958): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(977): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(959): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(978): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(997): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1000): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1295): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1608): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1933): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(2223): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1281): warning C4101: 'voronoi': unreferenced local variable
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(979): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(998): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1001): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1296): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1609): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1934): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(2224): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(1282): warning C4101: 'voronoi': unreferenced local variable
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe
