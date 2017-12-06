@@ -18,6 +18,7 @@
 #include "zombie.h"
 #include "boss.h"
 #include "playerHealth.h"
+#include "bullet.h"
 
 namespace dontdieNS
 {

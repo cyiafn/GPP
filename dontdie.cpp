@@ -287,9 +287,9 @@ void dontdie::update()
 					dir.y /= hyp;
 					dir.x *= bulletNS::SPEED;
 					dir.y *= bulletNS::SPEED;
-					pistolBulletArray[pBullets].setX(player1.getX());
-					pistolBulletArray[pBullets].setY(player1.getY());
-					pistolBulletArray[pBullets].setVelocity(dir);
+					pistolBulletArray[pistolb].setX(player1.getX());
+					pistolBulletArray[pistolb].setY(player1.getY());
+					pistolBulletArray[pistolb].setVelocity(dir);
 					break;
 				}
 			}
@@ -394,7 +394,7 @@ void dontdie::render()
 	zombie1.draw();
 	player1.draw();     //adds the player into the scene
 	//player1health.draw();
-	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb--)
+	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 	{
 		if (pistolBulletArray[pistolb].isInitialized() == true)
 		{
@@ -468,7 +468,7 @@ void dontdie::collisions()
 	{
 		if (pistolBulletArray[pistolb].isInitialized() == true)
 		{
-			if (zombie1.collidesWith(pistolBulletArray[pistolb], tempVector));
+			if (pistolBulletArray[pistolb].collidesWith(zombie1, tempVector))
 			{
 				pistolBulletArray[pistolb].setInitialized(false);
 				zombie1.damageZombie(pistolBulletArray[pistolb].getpistolDamage());

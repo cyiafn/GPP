@@ -103,10 +103,10 @@ void Player::update(float frameTime)
 	
 	if (input->isKeyDown(PLAYER_SHOOT_KEY))
 	{
-		if (this->pistolBuffer != 30.0f)
+		/*if (this->pistolBuffer != 30.0f)
 		{
 			pistolBuffer += 1.0f;
-		}
+		}*/
 
 		/*float Xaxis;
 		float Yaxis;
@@ -127,6 +127,10 @@ void Player::update(float frameTime)
 			float angle = atan2(input->getMouseX() - player1.getX(), input->getMouseY() - player1.getY())* (180 / PI) + 90;
 			pistolBulletArray[i].setDegrees(angle);
 		}*/
+	}
+	if (this->pistolBuffer != 30.0f)
+	{
+		pistolBuffer += 1.0f;
 	}
 
 
