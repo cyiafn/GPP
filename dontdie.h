@@ -52,14 +52,10 @@ private:
 	Image zombie;
 	Image bossMAXHP;
 	Image bossCURHP;
-	/*BossCannon cannon1;
-	BossCannon cannon2;
-	BossCannon cannon3;
-	BossCannon cannon4;*/
 
 	Player player1;
 	Zombie zombie1;
-	BossCannon CannonArray[36];
+	BossCannon CannonArray[32];
     // game variables
 
 	//tempHP

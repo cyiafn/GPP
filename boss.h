@@ -21,15 +21,16 @@ namespace bossNS
 	const int	X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
 	const int	Y = GAME_HEIGHT / 2 - HEIGHT / 2;
 	const int   TEXTURE_COLS = 2;           // texture has 2 columns
+	///////////////////////////////////////////////////////
 	////////////BARON :: FORM 1////////////////////////////
 	const int   BARON_START_FRAME = 0;      // boss starts at frame 0
 	const int   BARON_END_FRAME = 2;        // boss animation frames 0,1,2 
 	const int	BARON_CHANNEL_START_FRAME = 3;	//frame 3,4 is used for attack
 	const int	BARON_CHANNEL_END_FRAME = 4;	//frame 3,4 is used for attack
 	const int	BARON_ATTACK_FRAME = 5;
-	const int	BARON_RELOADING_TIMER = 6;
-	const int	BARON_CHANNELING_TIMER = 3;
-	const int	BARON_ATTACKING_TIMER = 6;
+	const int	BARON_RELOADING_TIMER = 4;
+	const int	BARON_CHANNELING_TIMER = 4;
+	const int	BARON_ATTACKING_TIMER = 2;
 	const float BARON_ANIMATION_DELAY = 0.5f;    // time between frames
 	///////////////////////////////////////////////////////
 	////////////NORAB :: FORM 2////////////////////////////
@@ -38,11 +39,11 @@ namespace bossNS
 	const int	NORAB_CHANNEL_START_FRAME = 9;	//frame 9,10 is used for attack
 	const int	NORAB_CHANNEL_END_FRAME = 10;	//frame 9,10 is used for attack
 	const int	NORAB_ATTACK_FRAME = 11;
-	const int	NORAB_RELOADING_TIMER = 4;
+	const int	NORAB_RELOADING_TIMER = 3;
 	const int	NORAB_CHANNELING_TIMER = 2;
-	const int	NORAB_ATTACKING_TIMER = 4;
+	const int	NORAB_ATTACKING_TIMER = 5;
 	const float NORAB_ANIMATION_DELAY = 0.5f;    // time between frames
-	const float CHARRRGE_SPEED = 150.0f;
+	const float CHARRRGE_SPEED = 120.0f;
 	///////////////////////////////////////////////////////
 }
 

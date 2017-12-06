@@ -1,11 +1,25 @@
-﻿  dontdie.cpp
+﻿  boss.cpp
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bosscannon.h(30): warning C4244: 'initializing': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bosscannon.h(31): warning C4244: 'initializing': conversion from 'const int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  winmain.cpp
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bosscannon.h(30): warning C4244: 'initializing': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bosscannon.h(31): warning C4244: 'initializing': conversion from 'const int' to 'float', possible loss of data
+  dontdie.cpp
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bosscannon.h(30): warning C4244: 'initializing': conversion from 'const int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\bosscannon.h(31): warning C4244: 'initializing': conversion from 'const int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(87): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(88): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(99): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(175): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
 c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(176): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(258): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(279): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(280): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(295): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(316): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\practical\assignment\gpp\gpp\dontdie.cpp(317): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  bossShield.cpp
+  bossCannon.cpp
   ThreeCsDX.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Practical\Assignment\GPP\GPP\Debug\ThreeCsDX.exe

@@ -34,10 +34,8 @@ bool BossCannon::initialize(Game *gamePtr, int width, int height, int ncols, Tex
 void BossCannon::update(float frameTime)
 {
 	Entity::update(frameTime);
-	angle += 1;
 	spriteData.x += frameTime * velocity.x;
 	spriteData.y += frameTime * velocity.y;
-	// VECTOR2 newPosition = VECTOR2 position + VECTOR2 direction * frameTime;
 }
 
 int BossCannon::getdamage()
