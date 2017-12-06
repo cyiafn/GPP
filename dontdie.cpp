@@ -559,18 +559,18 @@ void dontdie::update()
 					else if (currentSpawn == 1)
 					{
 						zombieArray[zombieStageOneSpawn - 1].setX(0 + zombieArray[zombieStageOneSpawn - 1].getWidth());
-						zombieArray[zombieStageOneSpawn - 1].setY(720 - zombieArray[zombieStageOneSpawn - 1].getHeight());
+						zombieArray[zombieStageOneSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageOneSpawn - 1].getHeight());
 						currentSpawn = 2;
 					}
 					else if (currentSpawn == 2)
 					{
-						zombieArray[zombieStageOneSpawn - 1].setX(1280 - zombieArray[zombieStageOneSpawn - 1].getWidth());
-						zombieArray[zombieStageOneSpawn - 1].setY(720 - zombieArray[zombieStageOneSpawn - 1].getHeight());
+						zombieArray[zombieStageOneSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageOneSpawn - 1].getWidth());
+						zombieArray[zombieStageOneSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageOneSpawn - 1].getHeight());
 						currentSpawn = 3;
 					}
 					else if (currentSpawn == 3)
 					{
-						zombieArray[zombieStageOneSpawn - 1].setX(1280 - zombieArray[zombieStageOneSpawn - 1].getWidth());
+						zombieArray[zombieStageOneSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageOneSpawn - 1].getWidth());
 						zombieArray[zombieStageOneSpawn - 1].setY(0 + zombieArray[zombieStageOneSpawn - 1].getHeight());
 						currentSpawn = 0;
 					}
@@ -607,18 +607,18 @@ void dontdie::update()
 					else if (currentSpawn == 1)
 					{
 						zombieArray[zombieStageTwoSpawn - 1].setX(0 + zombieArray[zombieStageTwoSpawn - 1].getWidth());
-						zombieArray[zombieStageTwoSpawn - 1].setY(720 - zombieArray[zombieStageTwoSpawn - 1].getHeight());
+						zombieArray[zombieStageTwoSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageTwoSpawn - 1].getHeight());
 						currentSpawn = 2;
 					}
 					else if (currentSpawn == 2)
 					{
-						zombieArray[zombieStageTwoSpawn - 1].setX(1280 - zombieArray[zombieStageTwoSpawn - 1].getWidth());
-						zombieArray[zombieStageTwoSpawn - 1].setY(720 - zombieArray[zombieStageTwoSpawn - 1].getHeight());
+						zombieArray[zombieStageTwoSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageTwoSpawn - 1].getWidth());
+						zombieArray[zombieStageTwoSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageTwoSpawn - 1].getHeight());
 						currentSpawn = 3;
 					}
 					else if (currentSpawn == 3)
 					{
-						zombieArray[zombieStageTwoSpawn - 1].setX(1280 - zombieArray[zombieStageTwoSpawn - 1].getWidth());
+						zombieArray[zombieStageTwoSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageTwoSpawn - 1].getWidth());
 						zombieArray[zombieStageTwoSpawn - 1].setY(0 + zombieArray[zombieStageTwoSpawn - 1].getHeight());
 						currentSpawn = 0;
 					}
@@ -640,18 +640,18 @@ void dontdie::update()
 					else if (currentSpawn == 1)
 					{
 						tankArray[TankStageTwoSpawn - 1].setX(0 + tankArray[TankStageTwoSpawn - 1].getWidth());
-						tankArray[TankStageTwoSpawn - 1].setY(720 - tankArray[TankStageTwoSpawn - 1].getHeight());
+						tankArray[TankStageTwoSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageTwoSpawn - 1].getHeight());
 						currentSpawn = 2;
 					}
 					else if (currentSpawn == 2)
 					{
-						tankArray[TankStageTwoSpawn - 1].setX(1280 - tankArray[TankStageTwoSpawn - 1].getWidth());
-						tankArray[TankStageTwoSpawn - 1].setY(720 - tankArray[TankStageTwoSpawn - 1].getHeight());
+						tankArray[TankStageTwoSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageTwoSpawn - 1].getWidth());
+						tankArray[TankStageTwoSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageTwoSpawn - 1].getHeight());
 						currentSpawn = 3;
 					}
 					else if (currentSpawn == 3)
 					{
-						tankArray[TankStageTwoSpawn - 1].setX(1280 - tankArray[TankStageTwoSpawn - 1].getWidth());
+						tankArray[TankStageTwoSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageTwoSpawn - 1].getWidth());
 						tankArray[TankStageTwoSpawn - 1].setY(0 + tankArray[TankStageTwoSpawn - 1].getHeight());
 						currentSpawn = 0;
 					}
@@ -690,18 +690,18 @@ void dontdie::update()
 					else if (currentSpawn == 1)
 					{
 						zombieArray[zombieStageThreeSpawn - 1].setX(0 + zombieArray[zombieStageThreeSpawn - 1].getWidth());
-						zombieArray[zombieStageThreeSpawn - 1].setY(720 - zombieArray[zombieStageThreeSpawn - 1].getHeight());
+						zombieArray[zombieStageThreeSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageThreeSpawn - 1].getHeight());
 						currentSpawn = 2;
 					}
 					else if (currentSpawn == 2)
 					{
-						zombieArray[zombieStageThreeSpawn - 1].setX(1280 - zombieArray[zombieStageThreeSpawn - 1].getWidth());
-						zombieArray[zombieStageThreeSpawn - 1].setY(720 - zombieArray[zombieStageThreeSpawn - 1].getHeight());
+						zombieArray[zombieStageThreeSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageThreeSpawn - 1].getWidth());
+						zombieArray[zombieStageThreeSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageThreeSpawn - 1].getHeight());
 						currentSpawn = 3;
 					}
 					else if (currentSpawn == 3)
 					{
-						zombieArray[zombieStageThreeSpawn - 1].setX(1280 - zombieArray[zombieStageThreeSpawn - 1].getWidth());
+						zombieArray[zombieStageThreeSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageThreeSpawn - 1].getWidth());
 						zombieArray[zombieStageThreeSpawn - 1].setY(0 + zombieArray[zombieStageThreeSpawn - 1].getHeight());
 						currentSpawn = 0;
 					}
@@ -722,18 +722,18 @@ void dontdie::update()
 					else if (currentSpawn == 1)
 					{
 						tankArray[TankStageThreeSpawn - 1].setX(0 + tankArray[TankStageThreeSpawn - 1].getWidth());
-						tankArray[TankStageThreeSpawn - 1].setY(720 - tankArray[TankStageThreeSpawn - 1].getHeight());
+						tankArray[TankStageThreeSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageThreeSpawn - 1].getHeight());
 						currentSpawn = 2;
 					}
 					else if (currentSpawn == 2)
 					{
-						tankArray[TankStageThreeSpawn - 1].setX(1280 - tankArray[TankStageThreeSpawn - 1].getWidth());
-						tankArray[TankStageThreeSpawn - 1].setY(720 - tankArray[TankStageThreeSpawn - 1].getHeight());
+						tankArray[TankStageThreeSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageThreeSpawn - 1].getWidth());
+						tankArray[TankStageThreeSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageThreeSpawn - 1].getHeight());
 						currentSpawn = 3;
 					}
 					else if (currentSpawn == 3)
 					{
-						tankArray[TankStageThreeSpawn - 1].setX(1280 - tankArray[TankStageThreeSpawn - 1].getWidth());
+						tankArray[TankStageThreeSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageThreeSpawn - 1].getWidth());
 						tankArray[TankStageThreeSpawn - 1].setY(0 + tankArray[TankStageThreeSpawn - 1].getHeight());
 						currentSpawn = 0;
 					}
@@ -754,18 +754,18 @@ void dontdie::update()
 					else if (currentSpawn == 1)
 					{
 						spitterArray[SpitterStageThreeSpawn - 1].setX(0 + spitterArray[SpitterStageThreeSpawn - 1].getWidth());
-						spitterArray[SpitterStageThreeSpawn - 1].setY(720 - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
+						spitterArray[SpitterStageThreeSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
 						currentSpawn = 2;
 					}
 					else if (currentSpawn == 2)
 					{
-						spitterArray[SpitterStageThreeSpawn - 1].setX(1280 - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
-						spitterArray[SpitterStageThreeSpawn - 1].setY(720 - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
+						spitterArray[SpitterStageThreeSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
+						spitterArray[SpitterStageThreeSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
 						currentSpawn = 3;
 					}
 					else if (currentSpawn == 3)
 					{
-						spitterArray[SpitterStageThreeSpawn - 1].setX(1280 - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
+						spitterArray[SpitterStageThreeSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
 						spitterArray[SpitterStageThreeSpawn - 1].setY(0 + spitterArray[SpitterStageThreeSpawn - 1].getHeight());
 						currentSpawn = 0;
 					}
