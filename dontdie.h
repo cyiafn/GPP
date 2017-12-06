@@ -17,6 +17,10 @@
 #include "constants.h"
 #include "zombie.h"
 #include "boss.h"
+#include "bossShield.h"
+#include "bossCannon.h"
+#include <vector>
+#include <list>
 #include "tank.h"
 #include "spitter.h"
 #include "spitterbullet.h"
@@ -28,29 +32,46 @@ class dontdie : public Game
 {
 private:
     // game items
-	TextureManager bossTexture;
-	Boss boss1;
-	Boss boss2;
-	Boss boss3;
+	
+	Boss boss;
+	BossShield shield;
     // game items	
 	TextureManager mapTexture;   // map texture
 	TextureManager playerTexture;     // player texture
 	TextureManager wallTexture; //wall texture
 	TextureManager zombieTexture;
+	TextureManager bossTexture;
+	TextureManager shieldTexture;
+	TextureManager cannonTexture;
+	TextureManager bossMAXHPTexture;
+	TextureManager bossCURHPTexture;
+	int fpscounter = 0;
+	int seconds = 0;
+	float CannonAngle = 0.0f;
+	int	BARON_RELOADING_TIMER = bossNS::BARON_RELOADING_TIMER;
+	int	BARON_CHANNELING_TIMER = bossNS::BARON_CHANNELING_TIMER;
+	int	BARON_ATTACKING_TIMER = bossNS::BARON_ATTACKING_TIMER;
+	int	NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
+	int	NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
+	int	NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
+	int cannonInt = 0;
 	TextureManager tankTexture;
 	TextureManager spitterTexture;
 	TextureManager spitterbulletTexture;
 
 	Image   map;                 // map image
-	Image   player;                 // player image
+	Image player;                 // player image
 	Image zombie;
 	Image	wall;				 // wall image
 	Image tank;
 	Image spitter;
 	Image spitterbullet;
+	Image bossMAXHP;
+	Image bossCURHP;
 
 	Player player1;
 	Zombie zombie1;
+	BossCannon CannonArray[32];
 	Wall wallArray[10];
 	Zombie zombieArray[50];
 	Tank tankArray[10];

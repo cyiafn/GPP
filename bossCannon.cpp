@@ -1,33 +1,55 @@
-//#include "bossCannon.h"
-//
-//BossCannon::bossCannon() : Entity()
-//{
-//	spriteData.width = Cannon::WIDTH;           // size of boss
-//	spriteData.height = Cannon::HEIGHT;
-//	spriteData.x = Cannon::X;                   // location on screen
-//	spriteData.y = Cannon::Y;
-//	startFrame = Cannon::BOSSCANNON_START_FRAME;     // first frame of boss animation
-//	endFrame = Cannon::BOSSCANNON_END_FRAME;     // last frame of boss animation
-//	currentFrame = startFrame;
-//	radius = Cannon::WIDTH / 2.0;
-//	collisionType = entityNS::CIRCLE;
-//}
+#include "bossCannon.h"
 
-//bool BossCannon::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
-//{
-//	bossCannon.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
-//	bossCannon.setFrames(bossCannon::BOSSCANNON_START_FRAME, bossCannon::BOSSCANNON_END_FRAME);
-//	bossCannon.setCurrentFrame(bossCannon::BOSSCANNON_START_FRAME);
-//	bossCannon.setLoop(true);                  // do not loop animation
-//	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
-//}
-//
-//void BossCannon::draw()
-//{
-//	Image::draw();              // draw boss
-//}
-//
-//void BossCannon::update(float frameTime)
-//{
-//	Entity::update(frameTime);
-//}
+//=============================================================================
+// default constructor
+//=============================================================================
+BossCannon::BossCannon() : Entity()
+{
+	spriteData.width = Cannon::WIDTH;
+	spriteData.height = Cannon::HEIGHT;
+	spriteData.x = Cannon::X;              // location on screen
+	spriteData.y = Cannon::Y;
+	velocity.x = 0;
+	velocity.y = 0;
+	radius = Cannon::COLLISION_RADIUS;
+	startFrame = Cannon::CANNON_START_FRAME;    // first frame of ship animation
+	endFrame = Cannon::CANNON_END_FRAME;      // last frame of ship animation
+	setCurrentFrame(startFrame);
+	collisionType = entityNS::CIRCLE;
+}
+
+void BossCannon::draw()
+{
+	Image::draw();
+}
+bool BossCannon::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
+{
+	CannonBall.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
+	CannonBall.setFrames(Cannon::CANNON_START_FRAME, Cannon::CANNON_END_FRAME);
+	CannonBall.setCurrentFrame(Cannon::CANNON_START_FRAME);
+	CannonBall.setLoop(true);                  // do not loop animation
+	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
+}
+
+void BossCannon::update(float frameTime)
+{
+	Entity::update(frameTime);
+	spriteData.x += frameTime * velocity.x;
+	spriteData.y += frameTime * velocity.y;
+}
+
+int BossCannon::getdamage()
+{
+	return damage;
+}
+void BossCannon::setVelocityX(float newX)
+{
+	velocity.x = newX;
+}
+
+void BossCannon::setVelocityY(float newY)
+{
+	velocity.y = newY;
+}
+
+

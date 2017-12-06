@@ -57,13 +57,7 @@
     <ClCompile Include="bossCannon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="boss1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="boss2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="boss3.cpp">
+    <ClCompile Include="bossShield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="wall.cpp">
@@ -128,13 +122,7 @@
     <ClInclude Include="bossCannon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="boss1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="boss2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="boss3.h">
+    <ClInclude Include="bossShield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="wall.h">
