@@ -47,11 +47,11 @@ d:\visual studio projects\gpp project\dontdie.cpp(489): warning C4244: 'argument
 d:\visual studio projects\gpp project\dontdie.cpp(490): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(495): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\visual studio projects\gpp project\dontdie.cpp(496): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(665): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(978): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(1303): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(1593): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\visual studio projects\gpp project\dontdie.cpp(651): warning C4101: 'voronoi': unreferenced local variable
+d:\visual studio projects\gpp project\dontdie.cpp(669): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(982): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(1307): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(1597): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\visual studio projects\gpp project\dontdie.cpp(655): warning C4101: 'voronoi': unreferenced local variable
   Generating Code...
   Skipping... (no relevant changes detected)
   astar.cpp

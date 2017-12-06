@@ -46,14 +46,9 @@ void Spitter::update(float frameTime)
 	Entity::update(frameTime);
 	spriteData.x += frameTime * velocity.x;         // move ship along X 
 	spriteData.y += frameTime * velocity.y;         // move ship along Y
-	if (this->attackBuffer != 60.0f)
+	if (this->attackBuffer != 20.0f)
 	{
 		attackBuffer += 1.0f;
-		this->endFrame = 1;
-	}
-	else
-	{
-		this->endFrame = 0;
 	}
 }
 void Spitter::ai(float frameTime, Spitter &ent)

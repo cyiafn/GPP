@@ -199,7 +199,7 @@ void dontdie::update()
 {
 	player1.setPrev(player1.getX(), player1.getY());
 	
-	if (player1.getHp() == 0)
+	if (player1.getHp() <= 0)
 	{
 		player1.setX(GAME_WIDTH / 2);
 		//player1.setY(GAME_HEIGHT / 2);
@@ -509,7 +509,7 @@ void dontdie::update()
 			spawnbuffer += 1;
 		}
 	}
-	else if (stage == 3)
+	else if (stage == 4)
 	{
 
 	}
@@ -612,7 +612,7 @@ void dontdie::collisions()
 	{
 		if (spitterbulletArray[bullet].isInitialised() == true)
 		{
-			if (player1.collidesWith(spitterbulletArray[bullet], tempVector))
+			if (spitterbulletArray[bullet].collidesWith(player1, tempVector))
 			{
 				spitterbulletArray[bullet].setInitialised(false);
 				player1.damageMe(2);
@@ -632,6 +632,10 @@ void dontdie::collisions()
 			if (spitterbulletArray[bullet].isInitialised() == true)
 			{
 				if (spitterbulletArray[bullet].collidesWith(wallArray[i], tempVector))
+				{
+					spitterbulletArray[bullet].setInitialised(false);
+				}
+				if (spitterbulletArray[bullet].getX() < 0 || spitterbulletArray[bullet].getX() > GAME_WIDTH || spitterbulletArray[bullet].getY() < 0 || spitterbulletArray[bullet].getY() > GAME_HEIGHT)
 				{
 					spitterbulletArray[bullet].setInitialised(false);
 				}
@@ -1595,7 +1599,7 @@ void dontdie::ai()
 				dir.x = 0;
 				dir.y = 0;
 				spitterArray[spitter].setVelocity(dir);
-				if (spitterArray[spitter].getAttackBuffer() == 10)
+				if (spitterArray[spitter].getAttackBuffer() == 20.0f)
 				{
 					spitterArray[spitter].setAttackBuffer(0);
 					for (int bullet = 0; bullet < (sizeof(spitterbulletArray) / sizeof(*spitterbulletArray)); bullet++)
@@ -1616,10 +1620,6 @@ void dontdie::ai()
 							break;
 						}
 					}
-				}
-				else
-				{
-					spitterArray[spitter].setAttackBuffer(spitterArray[spitter].getAttackBuffer() + 1);
 				}
 			}
 			
