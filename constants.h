@@ -29,6 +29,8 @@
 // Safely call onResetDevice
 #define SAFE_ON_RESET_DEVICE(ptr)   { if(ptr) { ptr->onResetDevice(); } }
 #define TRANSCOLOR  SETCOLOR_ARGB(0,255,0,255)  // transparent color (magenta)
+#define ARRAY_SIZE(array) (sizeof((array))/sizeof((array[0])))
+
 
 //-----------------------------------------------
 //                  Constants
@@ -42,15 +44,24 @@ const UINT GAME_HEIGHT = 720;			// height of game in pixels
 
 // game
 const double PI = 3.14159265;
-const float FRAME_RATE = 200.0f;                // the target frame rate (frames/sec)
+const float FRAME_RATE = 60.0f;                // the target frame rate (frames/sec)
 const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 
+//graphics images
+const char BOSS_IMAGE1[] = "pictures\\Boss form 1.png";
+const char BOSS_IMAGE2[] = "pictures\\Boss form 2.png";
+const char BOSS_IMAGE3[] = "pictures\\Boss form 3.png";
+const char BOSSCANNON_IMAGE[] = "pictures\\Boss form 1 Cannon Ball.png";
 // graphic images
-//const char MAP_IMAGE[] = "pictures\\MapforGame.png";  // Picture of background
+const char MAP_IMAGE[] = "pictures\\newMap.png";  // Picture of background
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
+const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
+const char TANK_IMAGE[] = "pictures\\tank.png";
+const char SPITTER_IMAGE[] = "pictures\\spitter.png";
+const char SPITTERBULLET_IMAGE[] = "pictures\\spitterbullet.png";
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second
@@ -76,6 +87,7 @@ const UCHAR PLAYER_RIGHT_KEY = 0x44; //Right arrow key
 const UCHAR PLAYER_LEFT_KEY = 0x41; //Left Arrow key
 const UCHAR PLAYER_UP_KEY = 0x57; //Up Arrow key
 const UCHAR PLAYER_DOWN_KEY = 0x53; //Down Arrow key
+const UCHAR KILL_ALL = 0xC0;
 
 
 #endif

@@ -51,6 +51,36 @@
     <ClCompile Include="zombie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="boss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bossCannon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boss1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boss2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boss3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="astar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spitterbullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">
@@ -90,6 +120,36 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="zombie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bossCannon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boss1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boss2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boss3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="astar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spitterbullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
