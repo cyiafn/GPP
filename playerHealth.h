@@ -13,8 +13,8 @@
 
 namespace playerHealthNS
 {
-	const int WIDTH = 128;                   // image width
-	const int HEIGHT = 128;                  // image height
+	const int WIDTH = 38;                   // image width
+	const int HEIGHT = 32;                  // image height
 	//const int X = ;// location on screen
 	//const int Y = ;
 	const float SPEED = 100;                // 100 pixels per second

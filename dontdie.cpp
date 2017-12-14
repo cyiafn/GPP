@@ -184,8 +184,8 @@ void dontdie::initialize(HWND hwnd)
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
 
 	// Player Health
-	//if (!player1health.initialize(this, playerHealthNS::WIDTH, playerHealthNS::HEIGHT, playerHealthNS::TEXTURE_COLS, &playerHealthTexture))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	if (!playerhealth.initialize(graphics, playerHealthNS::WIDTH, playerHealthNS::HEIGHT, playerHealthNS::TEXTURE_COLS, &playerHealthTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 
 
 	for (int zomb = 0; zomb < (sizeof(zombieArray) / sizeof(*zombieArray)); zomb++)
@@ -338,11 +338,11 @@ void dontdie::update()
 	currenthp = player1.getHealth();
 	frame = 20 - currenthp;
 
-	//player1health.setFrames(frame, frame);
-	//player1health.setCurrentFrame(frame);
-	//player1health.setX(GAME_WIDTH/12 * 0);
-	//player1health.setY(GAME_HEIGHT/2 * 0);
-	//player1health.update(frameTime);
+	playerhealth.setFrames(frame, frame);
+	playerhealth.setCurrentFrame(frame);
+	playerhealth.setX(0);
+	playerhealth.setY(0);
+	playerhealth.update(frameTime);
 
 
 	for (int bullet  = 0; bullet  < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); bullet ++)
@@ -1090,7 +1090,7 @@ void dontdie::render()
 
 	player1.draw();     //adds the player into the scene
 
-	//player1health.draw();
+	playerhealth.draw();
 
 	for (int bullet  = 0; bullet  < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); bullet ++)
 	{
@@ -1154,8 +1154,8 @@ void dontdie::render()
 	dxFont.setFontColor(graphicsNS::BLACK);
 	if (fpsOn)
 	{
-		_snprintf_s(buffer, BUF_SIZE, "HEALTH: %d ", (int)player1.getHp());
-		dxFont.print(buffer, 0, 0);
+		_snprintf_s(buffer, BUF_SIZE, "%d ", (int)player1.getHp());
+		dxFont.print(buffer, 39, 0);
 	}
 
 	//////////////////////////////////boss HP bar////////////////////////////////////

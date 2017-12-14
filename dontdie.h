@@ -107,7 +107,7 @@ private:
 	Image rifleBullet;
 
 	Player player1;
-    //PlayerHealth player1health;
+   // PlayerHealth player1health;
 	Bullet pistolBulletArray[100], smgBulletArray[100], shotgunBulletArray[1], rifleBulletArray[100];
 	BossCannon CannonArray[32];
 	Wall wallArray[10];
