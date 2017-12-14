@@ -12,7 +12,11 @@ using namespace dontdieNS;
 //=============================================================================
 dontdie::dontdie()
 {
-
+	mapX = 0;
+	mapY = 0;
+	dxFontSmall = new TextDX();     // DirectX fonts
+	dxFontMedium = new TextDX();
+	dxFontLarge = new TextDX();
 }
 
 //=============================================================================
@@ -21,6 +25,9 @@ dontdie::dontdie()
 dontdie::~dontdie()
 {
 	releaseAll();               // call deviceLost() for every graphics item
+	SAFE_DELETE(dxFontSmall);
+	SAFE_DELETE(dxFontMedium);
+	SAFE_DELETE(dxFontLarge);
 }
 
 //=============================================================================
@@ -52,11 +59,27 @@ void dontdie::initialize(HWND hwnd)
 	this->smgBullets = 100000;
 	this->rifleBullets = 10000;
 
+	// 15 pixel high Arial
+	if (dxFontSmall->initialize(graphics, 15, true, false, "Arial") == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing DirectX font"));
+
+	// 62 pixel high Arial
+	if (dxFontMedium->initialize(graphics, 62, true, false, "Arial") == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing DirectX font"));
+
+	// 124 pixel high Arial
+	if (dxFontLarge->initialize(graphics, 124, true, false, "Arial") == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing DirectX font"));
+
+	if (dxFont.initialize(graphics, gameNS::POINT_SIZE, false, false, gameNS::FONT) == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+
+
 	// Map texture
 	if (!mapTexture.initialize(graphics, MAP_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Map texture"));
+	
 	//Wall texture
-
 	if (!wallTexture.initialize(graphics, WALL_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Wall texture"));
 	// Player texture
@@ -74,18 +97,6 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing bullet texture"));
 	}
 
-	/*if (!SMGbulletTexture.initialize(graphics, SMGBULLET_IMAGE))
-	{
-	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing SMG Bullet texture"));
-	}
-	if (!ShotgunbulletTexture.initialize(graphics, SHOTGUNBULLET_IMAGE))
-	{
-	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Shotgun Bullet texture"));
-	}
-	if (!RiflebulletTexture.initialize(graphics, RIFLEBULLET_IMAGE))
-	{
-	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Rifle Bullet texture"));
-	}*/
 	if (!tankTexture.initialize(graphics, TANK_IMAGE))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initalizing Tank texture"));
@@ -99,26 +110,14 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initalizing Spitter bullet texture"));
 	}
 
-	// Map 
+	
 	// Map 
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
 	map.setFrames(0, 0);
 	map.setCurrentFrame(0);
-	// Wall 
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	int x = 2;
-	//	int y = 2;
-	//	if (!wallArray[i].initialize(this, 0, 0, 0, &wallTexture))
-	//		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
-	//	wallArray[i].setX(GAME_WIDTH / 10 * x);
-	//	wallArray[i].setY(GAME_HEIGHT / y);
-	//	x += 2;
-	//	y += 2;
-	//}
 
-	// Wall 
+ 
 	// Wall 
 	if (!wallArray[0].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
@@ -183,9 +182,11 @@ void dontdie::initialize(HWND hwnd)
 	player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	player1.setCurrentFrame(playerNS::PLAYER_START_FRAME);
 	player1.setFrameDelay(playerNS::PLAYER_ANIMATION_DELAY);
-	//player1.setDegrees((atan2(player1.getY - input->getMouseY() , player1.getX - input->getMouseX()) * 180) / PI);     //angle of player
+
+	// Player Health
 	//if (!player1health.initialize(this, playerHealthNS::WIDTH, playerHealthNS::HEIGHT, playerHealthNS::TEXTURE_COLS, &playerHealthTexture))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+
 
 	for (int zomb = 0; zomb < (sizeof(zombieArray) / sizeof(*zombieArray)); zomb++)
 	{
@@ -195,6 +196,7 @@ void dontdie::initialize(HWND hwnd)
 		}
 		zombieArray[zomb].setInitialised(false);
 	}
+
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 	{
 		if (!pistolBulletArray[pistolb].initialize(this, bulletNS::WIDTH, bulletNS::HEIGHT, bulletNS::TEXTURE_COLS, &PbulletTexture))
@@ -309,6 +311,7 @@ void dontdie::initialize(HWND hwnd)
 
 
 	reset();            // reset all game variables
+	fpsOn = true;
 	return;
 }
 
@@ -331,51 +334,80 @@ void dontdie::update()
 	int currenthp;
 	int frame;
 	player1.setPrev(player1.getX(), player1.getY());
+
 	currenthp = player1.getHealth();
 	frame = 20 - currenthp;
+
 	//player1health.setFrames(frame, frame);
-	/*player1health.setCurrentFrame(frame);
-	player1health.setX(player1.getX());
-	player1health.setY(player1.getY() + 15);
-	player1health.update(frameTime);*/
-	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+	//player1health.setCurrentFrame(frame);
+	//player1health.setX(GAME_WIDTH/12 * 0);
+	//player1health.setY(GAME_HEIGHT/2 * 0);
+	//player1health.update(frameTime);
+
+
+	for (int bullet  = 0; bullet  < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); bullet ++)
 	{
-		if (pistolBulletArray[pistolb].isInitialized() == true)
+		if (pistolBulletArray[bullet].isInitialized() == true)
 		{
-			pistolBulletArray[pistolb].update(frameTime);
+			pistolBulletArray[bullet].update(frameTime);
 		}
 	}
+	for (int bullet  = 0; bullet  < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); bullet ++)
+	{
+		if (smgBulletArray[bullet].isInitialized() == true)
+		{
+			smgBulletArray[bullet].update(frameTime);
+		}
+	}
+
+	for (int bullet  = 0; bullet  < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); bullet ++)
+	{
+		if (shotgunBulletArray[bullet].isInitialized() == true)
+		{
+			shotgunBulletArray[bullet].update(frameTime);
+		}
+	}
+
+	for (int bullet  = 0; bullet  < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); bullet ++)
+	{
+		if (rifleBulletArray[bullet].isInitialized() == true)
+		{
+			rifleBulletArray[bullet].update(frameTime);
+		}
+	}
+
 	if (input->getMouseLButton() == true)
 	{
 		float clickY = input->getMouseY();
 		float clickX = input->getMouseX();
-		if (player1.getPistolBuffer() == 30.0f)
-			//if (pistolBuffer != pistolBulletArray[pBullets - 1].getPistolBuffer())
-		{
-			player1.setPistolBuffer(0);
-			for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+		//if (stage == 1)
+		//{
+			if (player1.getPistolBuffer() == 30.0f)
 			{
-				if (pistolBulletArray[pistolb].isInitialized() == false)
+				player1.setPistolBuffer(0);
+				for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 				{
-					pistolBulletArray[pistolb].setInitialized(true);
-					dir.x = clickX - player1.getX();
-					dir.y = clickY - player1.getY();
-					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-					dir.x /= hyp;
-					dir.y /= hyp;
-					dir.x *= bulletNS::SPEED;
-					dir.y *= bulletNS::SPEED;
-					pistolBulletArray[pistolb].setX(player1.getX());
-					pistolBulletArray[pistolb].setY(player1.getY());
-					pistolBulletArray[pistolb].setVelocity(dir);
-					break;
+					if (pistolBulletArray[pistolb].isInitialized() == false)
+					{
+						pistolBulletArray[pistolb].setInitialized(true);
+						dir.x = clickX - player1.getX();
+						dir.y = clickY - player1.getY();
+						float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+						dir.x /= hyp;
+						dir.y /= hyp;
+						dir.x *= bulletNS::SPEED;
+						dir.y *= bulletNS::SPEED;
+						pistolBulletArray[pistolb].setX(player1.getX());
+						pistolBulletArray[pistolb].setY(player1.getY());
+						pistolBulletArray[pistolb].setVelocity(dir);
+						break;
+					}
 				}
 			}
-		}
+		//}
 
-		/*}*/
 
-		/*else if (stage == 1)
+	/*	else if (stage == 1)
 		{
 			if (player1.getShotgunBuffer() == 60.0f)
 			{
@@ -399,10 +431,10 @@ void dontdie::update()
 					}
 				}
 			}
-		}
+		}*/
 
 
-		else if (stage == 2)
+		/*else if (stage == 2)
 		{
 			if (player1.getSmgBuffer() == 6.0f)
 			{
@@ -428,7 +460,7 @@ void dontdie::update()
 			}
 		}
 
-		else if (stage == 3)
+		else
 		{
 			if (player1.getRifleBuffer() == 12.0f)
 			{
@@ -1004,14 +1036,6 @@ void dontdie::render()
 	static char buffer[BUF_SIZE];
 
 	graphics->spriteBegin();
-	//////////////////////////////////boss HP bar////////////////////////////////////
-	float bossHP = boss.getHP() / 4;  //500 pixel = 2000HP, 1 pixel = 4 HP
-	if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP texture"));
-	if (!bossCURHP.initialize(graphics, bossHP, 32, 1, &bossCURHPTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP BAR"));
-	bossCURHP.setX(110); //centerize the HP bar
-	bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
 
 	for (int row = 0; row < MAP_HEIGHT; row++)       // for each row of map
 	{
@@ -1066,14 +1090,41 @@ void dontdie::render()
 
 	player1.draw();     //adds the player into the scene
 
-	/*player1health.draw();*/
-	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+	//player1health.draw();
+
+	for (int bullet  = 0; bullet  < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); bullet ++)
 	{
-		if (pistolBulletArray[pistolb].isInitialized() == true)
+		if (pistolBulletArray[bullet].isInitialized() == true)
 		{
-			pistolBulletArray[pistolb].draw();
+			pistolBulletArray[bullet].draw();
 		}
 	}
+
+	for (int bullet  = 0; bullet  < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); bullet ++)
+	{
+		if (rifleBulletArray[bullet].isInitialized() == true)
+		{
+			rifleBulletArray[bullet].draw();
+		}
+	}
+
+
+	for (int bullet  = 0; bullet  < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); bullet ++)
+	{
+		if (smgBulletArray[bullet].isInitialized() == true)
+		{
+			smgBulletArray[bullet].draw();
+		}
+	}
+
+	for (int bullet  = 0; bullet  < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); bullet ++)
+	{
+		if (shotgunBulletArray[bullet].isInitialized() == true)
+		{
+			shotgunBulletArray[bullet].draw();
+		}
+	}
+
 	if (boss.isSpawn()) //if boss spawns
 	{
 		bossMAXHP.draw(); //draw MAXHP bar
@@ -1096,6 +1147,25 @@ void dontdie::render()
 			}
 		}
 	}
+
+	dxFontSmall->setFontColor(graphicsNS::BLACK);
+	dxFontMedium->setFontColor(graphicsNS::BLACK);
+	dxFontLarge->setFontColor(graphicsNS::BLACK);
+	dxFont.setFontColor(graphicsNS::BLACK);
+	if (fpsOn)
+	{
+		_snprintf_s(buffer, BUF_SIZE, "HEALTH: %d ", (int)player1.getHp());
+		dxFont.print(buffer, 0, 0);
+	}
+
+	//////////////////////////////////boss HP bar////////////////////////////////////
+	float bossHP = boss.getHP() / 4;  //500 pixel = 2000HP, 1 pixel = 4 HP
+	if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP texture"));
+	if (!bossCURHP.initialize(graphics, bossHP, 32, 1, &bossCURHPTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP BAR"));
+	bossCURHP.setX(110); //centerize the HP bar
+	bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
 
 	graphics->spriteEnd();
 
@@ -1211,6 +1281,110 @@ void dontdie::collisions()
 			}
 		}
 	}
+
+	for (int pistolb = 0; pistolb < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); pistolb++)
+	{
+		if (smgBulletArray[pistolb].isInitialized() == true)
+		{
+			for (int zombie = 0; zombie < (sizeof(zombieArray) / sizeof(*zombieArray)); zombie++)
+			{
+				if (zombieArray[zombie].isInitialised() == true)
+				{
+					if (smgBulletArray[pistolb].collidesWith(zombieArray[zombie], tempVector))
+					{
+						zombieArray[zombie].damageZombie(smgBulletArray[pistolb].getpistolDamage());
+						smgBulletArray[pistolb].setInitialized(false);
+						if (zombieArray[zombie].getHealth() <= 0)
+						{
+							zombieArray[zombie].setInitialised(false);
+						}
+					}
+				}
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				if (smgBulletArray[pistolb].collidesWith(wallArray[i], tempVector) || smgBulletArray[pistolb].getX() < 0 || smgBulletArray[pistolb].getY() < 0 || smgBulletArray[pistolb].getX() > GAME_WIDTH || smgBulletArray[pistolb].getY() > GAME_HEIGHT)
+				{
+					if (smgBulletArray[pistolb].isInitialized() == true)
+					{
+						smgBulletArray[pistolb].setInitialized(false);
+					}
+
+				}
+			}
+		}
+	}
+
+	for (int pistolb = 0; pistolb < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); pistolb++)
+	{
+		if (shotgunBulletArray[pistolb].isInitialized() == true)
+		{
+			for (int zombie = 0; zombie < (sizeof(zombieArray) / sizeof(*zombieArray)); zombie++)
+			{
+				if (zombieArray[zombie].isInitialised() == true)
+				{
+					if (shotgunBulletArray[pistolb].collidesWith(zombieArray[zombie], tempVector))
+					{
+						zombieArray[zombie].damageZombie(shotgunBulletArray[pistolb].getpistolDamage());
+						shotgunBulletArray[pistolb].setInitialized(false);
+						if (zombieArray[zombie].getHealth() <= 0)
+						{
+							zombieArray[zombie].setInitialised(false);
+						}
+					}
+				}
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				if (shotgunBulletArray[pistolb].collidesWith(wallArray[i], tempVector) || shotgunBulletArray[pistolb].getX() < 0 || shotgunBulletArray[pistolb].getY() < 0 || shotgunBulletArray[pistolb].getX() > GAME_WIDTH || shotgunBulletArray[pistolb].getY() > GAME_HEIGHT)
+				{
+					if (shotgunBulletArray[pistolb].isInitialized() == true)
+					{
+						shotgunBulletArray[pistolb].setInitialized(false);
+					}
+
+				}
+			}
+		}
+	}
+
+	for (int pistolb = 0; pistolb < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); pistolb++)
+	{
+		if (rifleBulletArray[pistolb].isInitialized() == true)
+		{
+			for (int zombie = 0; zombie < (sizeof(zombieArray) / sizeof(*zombieArray)); zombie++)
+			{
+				if (zombieArray[zombie].isInitialised() == true)
+				{
+					if (rifleBulletArray[pistolb].collidesWith(zombieArray[zombie], tempVector))
+					{
+						zombieArray[zombie].damageZombie(rifleBulletArray[pistolb].getpistolDamage());
+						rifleBulletArray[pistolb].setInitialized(false);
+						if (zombieArray[zombie].getHealth() <= 0)
+						{
+							zombieArray[zombie].setInitialised(false);
+						}
+					}
+				}
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				if (rifleBulletArray[pistolb].collidesWith(wallArray[i], tempVector) || rifleBulletArray[pistolb].getX() < 0 || rifleBulletArray[pistolb].getY() < 0 || rifleBulletArray[pistolb].getX() > GAME_WIDTH || rifleBulletArray[pistolb].getY() > GAME_HEIGHT)
+				{
+					if (rifleBulletArray[pistolb].isInitialized() == true)
+					{
+						rifleBulletArray[pistolb].setInitialized(false);
+					}
+
+				}
+			}
+		}
+	}
+
+
 	if (boss.getForm() == 2)
 	{
 		if (player1.collidesWith(boss, tempVector))

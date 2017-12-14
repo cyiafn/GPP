@@ -108,7 +108,7 @@ private:
 
 	Player player1;
     //PlayerHealth player1health;
-	Bullet pistolBulletArray[100], smgBulletArray[1], shotgunBulletArray[1], rifleBulletArray[1];
+	Bullet pistolBulletArray[100], smgBulletArray[100], shotgunBulletArray[1], rifleBulletArray[100];
 	BossCannon CannonArray[32];
 	Wall wallArray[10];
 	Zombie zombieArray[50];
@@ -138,8 +138,9 @@ private:
 	float pistolBuffer,smgBuffer,shotgunBuffer,rifleBuffer;
 	int pBullets,smgBullets,rifleBullets;
 
-	//tempHP
 	TextDX  *dxFontSmall;       // DirectX fonts
+	TextDX  *dxFontMedium;
+	TextDX  *dxFontLarge;
 public:
 	//Constructor
 	dontdie();
