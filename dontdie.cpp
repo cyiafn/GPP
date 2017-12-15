@@ -374,7 +374,7 @@ void dontdie::update()
 		float clickY = input->getMouseY();
 		float clickX = input->getMouseX();
 		//if (stage == 1)
-		//{
+		//{ 
 		if (player1.getPistolBuffer() == 30.0f)
 		{
 			player1.setPistolBuffer(0);
@@ -1310,7 +1310,6 @@ void dontdie::collisions()
 
 	}
 
-	//i will treat you lunch nxt time ;P
 	for (int i = 0; i < (sizeof(wallArray) / sizeof(*wallArray)); i++)
 	{
 		if (player1.collidesWith(wallArray[i], tempVector))

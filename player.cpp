@@ -98,6 +98,7 @@ void Player::update(float frameTime)
 		endFrame = playerNS::PLAYER_START_FRAME;
 		//player1.setFrames(playerNS::PLAYER_START_FRAME, playerNS::PLAYER_START_FRAME);
 	}
+
 	spriteData.angle = atan2(spriteData.y - input->getMouseY(), spriteData.x - input->getMouseX()) - 90;
 	
 	if (this->pistolBuffer != 30.0f)
