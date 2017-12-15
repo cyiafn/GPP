@@ -13,13 +13,13 @@
 
 namespace playerHealthNS
 {
-	const int WIDTH = 32;                   // image width
+	const int WIDTH = 38;                   // image width
 	const int HEIGHT = 32;                  // image height
 	//const int X = ;// location on screen
 	//const int Y = ;
 	const float SPEED = 100;                // 100 pixels per second
 	//const float MASS = 250.0f;              // mass
-	const int   TEXTURE_COLS = 4;           // texture has 4 columns
+	const int   TEXTURE_COLS = 1;           // texture has 1 columns
 	const int   PLAYERHEALTH_START_FRAME = 0;      
 	const int   PLAYERHEALTH_END_FRAME = 0;     
 	//const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames

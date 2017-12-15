@@ -61,7 +61,7 @@ const char BOSS_MAX_HP[] = "pictures\\MAXHP pixel.png";
 const char BOSS_CUR_HP[] = "pictures\\CURHP pixel.png";
 // graphic images
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
-const char HEALTH_IMAGE[] = "pictures\\heartCount.png"; //picture of Heart
+const char HEALTH_IMAGE[] = "pictures\\heart.png"; //picture of Heart
 const char BULLET_IMAGE[] = "pictures\\bullets.png"; //picture of Pistol Bullet
 //const char SMGBULLET_IMAGE[] = "picture\\smgbullet.png"; //picture of SMG bullet
 //const char SHOTGUNBULLET_IMAGE[] = "picture\\shotgunbullet.png"; //picture of Shotgun Bullet
