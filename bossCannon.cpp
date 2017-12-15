@@ -20,7 +20,11 @@ BossCannon::BossCannon() : Entity()
 
 void BossCannon::draw()
 {
-	Image::draw();
+	if (getActive())
+	{
+		Image::draw();
+	}
+	
 }
 bool BossCannon::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
 {
