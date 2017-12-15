@@ -864,14 +864,20 @@ void dontdie::update()
 					{
 						CannonArray[cannonNo].setX(Cannon::X); //set bullet positions
 						CannonArray[cannonNo].setY(Cannon::Y);
+						shoot = true;
 					}
 				}
 			}
 			else if (boss.isAttacking())
 			{
-				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+				if (shoot)
 				{
-					CannonArray[cannonNo].setInitialised(true);
+					for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+					{
+						CannonArray[cannonNo].setInitialised(true);
+						CannonArray[cannonNo].setActive(true);
+						shoot = false;
+					}
 				}
 				for (int i = 0; i <= 4; i++)
 				{

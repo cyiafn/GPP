@@ -137,6 +137,7 @@ private:
 
 	float pistolBuffer,smgBuffer,shotgunBuffer,rifleBuffer;
 	int pBullets,smgBullets,rifleBullets;
+	bool shoot = false;
 
 	TextDX  *dxFontSmall;       // DirectX fonts
 	TextDX  *dxFontMedium;
