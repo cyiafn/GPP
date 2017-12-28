@@ -28,6 +28,7 @@
 #include "spitterbullet.h"
 #include <vector>
 #include <string>
+#include "start.h"
 
 namespace dontdieNS
 {
@@ -142,6 +143,11 @@ private:
 	TextDX  *dxFontSmall;       // DirectX fonts
 	TextDX  *dxFontMedium;
 	TextDX  *dxFontLarge;
+
+	int state;
+	Start startScreen;
+	TextureManager StartTexture;
+	Image start;
 public:
 	//Constructor
 	dontdie();

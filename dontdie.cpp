@@ -58,6 +58,7 @@ void dontdie::initialize(HWND hwnd)
 	this->pBullets = 10000;
 	this->smgBullets = 100000;
 	this->rifleBullets = 10000;
+	this->state = 0;
 	
 	// 15 pixel high Arial
 	if (dxFontSmall->initialize(graphics, 15, true, false, "Arial") == false)
@@ -96,7 +97,10 @@ void dontdie::initialize(HWND hwnd)
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing bullet texture"));
 	}
-
+	if (!StartTexture.initialize(graphics, START_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing start texture"));
+	}
 	if (!tankTexture.initialize(graphics, TANK_IMAGE))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initalizing Tank texture"));
@@ -112,6 +116,9 @@ void dontdie::initialize(HWND hwnd)
 
 	// Map 
 	// Map 
+	if (!startScreen.initialize(this, startNS::WIDTH, startNS::HEIGHT, startNS::TEXTURE_COLS, &StartTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing start"));
+
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
 	map.setFrames(0, 0);
@@ -325,703 +332,642 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
-	fpscounter++; //keep track of fps
-	VECTOR2 dir;
-	int currenthp;
-	int frame;
-	player1.setPrev(player1.getX(), player1.getY());
-	currenthp = player1.getHealth();
-	frame = 20 - currenthp;
-	playerhealth.setFrames(frame, frame);
-	playerhealth.setCurrentFrame(frame);
-	playerhealth.setX(0);
-	playerhealth.setY(0);
-	playerhealth.update(frameTime);
-
-	for (int bullet = 0; bullet < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); bullet++)
+	if (state == 0)
 	{
-		if (pistolBulletArray[bullet].isInitialized() == true)
+		startScreen.update(frameTime);
+		if (input->getMouseLButton() == true)
 		{
-			pistolBulletArray[bullet].update(frameTime);
+			state = 2;
+			startScreen.setInitialised(false);
 		}
-	}
-	for (int bullet = 0; bullet < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); bullet++)
-	{
-		if (smgBulletArray[bullet].isInitialized() == true)
-		{
-			smgBulletArray[bullet].update(frameTime);
-		}
-	}
 
-	for (int bullet = 0; bullet < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); bullet++)
-	{
-		if (shotgunBulletArray[bullet].isInitialized() == true)
-		{
-			shotgunBulletArray[bullet].update(frameTime);
-		}
 	}
-
-	for (int bullet = 0; bullet < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); bullet++)
+	else if (state == 1)
 	{
-		if (rifleBulletArray[bullet].isInitialized() == true)
-		{
-			rifleBulletArray[bullet].update(frameTime);
-		}
+
 	}
-
-	if (input->getMouseLButton() == true)
+	else if (state == 2)
 	{
-		float clickY = input->getMouseY();
-		float clickX = input->getMouseX();
-		//if (stage == 1)
-		//{ 
-		if (player1.getPistolBuffer() == 30.0f)
+		fpscounter++; //keep track of fps
+		VECTOR2 dir;
+		int currenthp;
+		int frame;
+		player1.setPrev(player1.getX(), player1.getY());
+		currenthp = player1.getHealth();
+		frame = 20 - currenthp;
+		playerhealth.setFrames(frame, frame);
+		playerhealth.setCurrentFrame(frame);
+		playerhealth.setX(0);
+		playerhealth.setY(0);
+		playerhealth.update(frameTime);
+
+		for (int bullet = 0; bullet < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); bullet++)
 		{
-			player1.setPistolBuffer(0);
-			for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+			if (pistolBulletArray[bullet].isInitialized() == true)
 			{
-				if (pistolBulletArray[pistolb].isInitialized() == false)
-				{
-					pistolBulletArray[pistolb].setInitialized(true);
-					dir.x = clickX - player1.getX();
-					dir.y = clickY - player1.getY();
-					float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-					dir.x /= hyp;
-					dir.y /= hyp;
-					dir.x *= bulletNS::SPEED;
-					dir.y *= bulletNS::SPEED;
-					pistolBulletArray[pistolb].setX(player1.getX());
-					pistolBulletArray[pistolb].setY(player1.getY());
-					pistolBulletArray[pistolb].setVelocity(dir);
-					break;
-				}
+				pistolBulletArray[bullet].update(frameTime);
 			}
 		}
-		//}
+		for (int bullet = 0; bullet < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); bullet++)
+		{
+			if (smgBulletArray[bullet].isInitialized() == true)
+			{
+				smgBulletArray[bullet].update(frameTime);
+			}
+		}
+
+		for (int bullet = 0; bullet < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); bullet++)
+		{
+			if (shotgunBulletArray[bullet].isInitialized() == true)
+			{
+				shotgunBulletArray[bullet].update(frameTime);
+			}
+		}
+
+		for (int bullet = 0; bullet < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); bullet++)
+		{
+			if (rifleBulletArray[bullet].isInitialized() == true)
+			{
+				rifleBulletArray[bullet].update(frameTime);
+			}
+		}
+
+		if (input->getMouseLButton() == true)
+		{
+			float clickY = input->getMouseY();
+			float clickX = input->getMouseX();
+			//if (stage == 1)
+			//{ 
+			if (player1.getPistolBuffer() == 30.0f)
+			{
+				player1.setPistolBuffer(0);
+				for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
+				{
+					if (pistolBulletArray[pistolb].isInitialized() == false)
+					{
+						pistolBulletArray[pistolb].setInitialized(true);
+						dir.x = clickX - player1.getX();
+						dir.y = clickY - player1.getY();
+						float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
+						dir.x /= hyp;
+						dir.y /= hyp;
+						dir.x *= bulletNS::SPEED;
+						dir.y *= bulletNS::SPEED;
+						pistolBulletArray[pistolb].setX(player1.getX());
+						pistolBulletArray[pistolb].setY(player1.getY());
+						pistolBulletArray[pistolb].setVelocity(dir);
+						break;
+					}
+				}
+			}
 
 
-		/*	else if (stage == 1)
-		{
-		if (player1.getShotgunBuffer() == 60.0f)
-		{
-		player1.setShotgunBuffer(0);
-		for (int shotgunb = 0; shotgunb < (sizeof(shotgunBulletArray) / sizeof(*shotgunBulletArray)); shotgunb++)
-		{
-		if (shotgunBulletArray[shotgunb].isInitialized() == false)
-		{
-		shotgunBulletArray[shotgunb].setInitialized(true);
-		dir.x = clickX - player1.getX();
-		dir.y = clickY - player1.getY();
-		float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-		dir.x /= hyp;
-		dir.y /= hyp;
-		dir.x *= bulletNS::SPEED;
-		dir.y *= bulletNS::SPEED;
-		shotgunBulletArray[shotgunb].setX(player1.getX());
-		shotgunBulletArray[shotgunb].setY(player1.getY());
-		shotgunBulletArray[shotgunb].setVelocity(dir);
-		break;
-		}
-		}
-		}
-		}*/
-
-
-		/*else if (stage == 2)
-		{
-		if (player1.getSmgBuffer() == 6.0f)
-		{
-		player1.setSmgBuffer(0);
-		for (int smgb = 0; smgb < (sizeof(smgBulletArray) / sizeof(*smgBulletArray)); smgb++)
-		{
-		if (smgBulletArray[smgb].isInitialized() == false)
-		{
-		smgBulletArray[smgb].setInitialized(true);
-		dir.x = clickX - player1.getX();
-		dir.y = clickY - player1.getY();
-		float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-		dir.x /= hyp;
-		dir.y /= hyp;
-		dir.x *= bulletNS::SPEED;
-		dir.y *= bulletNS::SPEED;
-		smgBulletArray[smgb].setX(player1.getX());
-		smgBulletArray[smgb].setY(player1.getY());
-		smgBulletArray[smgb].setVelocity(dir);
-		break;
-		}
-		}
-		}
-		}
-		else
-		{
-		if (player1.getRifleBuffer() == 12.0f)
-		{
-		player1.setRifleBuffer(0);
-		for (int rifleb = 0; rifleb < (sizeof(rifleBulletArray) / sizeof(*rifleBulletArray)); rifleb++)
-		{
-		if (rifleBulletArray[rifleb].isInitialized() == false)
-		{
-		rifleBulletArray[rifleb].setInitialized(true);
-		dir.x = clickX - player1.getX();
-		dir.y = clickY - player1.getY();
-		float hyp = sqrt(dir.x*dir.x + dir.y*dir.y);
-		dir.x /= hyp;
-		dir.y /= hyp;
-		dir.x *= bulletNS::SPEED;
-		dir.y *= bulletNS::SPEED;
-		rifleBulletArray[rifleb].setX(player1.getX());
-		rifleBulletArray[rifleb].setY(player1.getY());
-		rifleBulletArray[rifleb].setVelocity(dir);
-		break;
-		}
-		}
-		}
-		}*/
-
-	}
-
-
-	if (player1.getHp() <= 0)
-	{
-		player1.setX(GAME_WIDTH / 2);
-		if (!player1.isDead()) //if false
-		{
-			player1.hasDied(); //makes died true
-			MessageBox(nullptr, TEXT("YOU DIED!!"), TEXT(""), MB_OK);
-		}
 		
-		//player1.setHealth(20.0f);
-		//player1.setY(GAME_HEIGHT / 2);
-	}
-	player1.update(frameTime);
-	//zombie1.setPlayerLoc(player1.getX(), player1.getY());
-	for (int zomb = 0; zomb < (sizeof(zombieArray) / sizeof(*zombieArray)); zomb++)
-	{
-		if (zombieArray[zomb].isInitialised() == true)
-		{
-			zombieArray[zomb].setPrev(zombieArray[zomb].getX(), zombieArray[zomb].getY());
-			zombieArray[zomb].update(frameTime);
-		}
-	}
-	for (int tank = 0; tank < (sizeof(tankArray) / sizeof(*tankArray)); tank++)
-	{
-		if (tankArray[tank].isInitialised() == true)
-		{
-			tankArray[tank].setPrev(tankArray[tank].getX(), tankArray[tank].getY());
-			tankArray[tank].update(frameTime);
-		}
-	}
-	for (int spitter = 0; spitter < (sizeof(spitterArray) / sizeof(*spitterArray)); spitter++)
-	{
-		if (spitterArray[spitter].isInitialised() == true)
-		{
-			spitterArray[spitter].setPrev(spitterArray[spitter].getX(), spitterArray[spitter].getY());
-			spitterArray[spitter].update(frameTime);
-		}
-	}
-	for (int spitterb = 0; spitterb < (sizeof(spitterbulletArray) / sizeof(*spitterbulletArray)); spitterb++)
-	{
-		if (spitterbulletArray[spitterb].isInitialised() == true)
-		{
-			spitterbulletArray[spitterb].update(frameTime);
-		}
-	}
 
-
-
-	for (int i = 0; i < 10; i++)
-	{
-		wallArray[i].update(frameTime);
-	}
-	if (clearCooldown != 180)
-	{
-		clearCooldown += 1;
-	}
-	if (input->isKeyDown(KILL_ALL))
-	{
-		if (clearCooldown == 180)
-		{
-			clearAllMobs();
-			clearCooldown = 0;
 		}
 
-	}
-	else if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
-	{
-		stage = 4;
-		boss.setHP(bossNS::MAXHP);
-		boss.setX(bossNS::X); //reset position
-		boss.setY(bossNS::Y);
-	}
-	else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
-	{
-		stage = 5;
-		boss.setHP(bossNS::MAXHP / 2);
-		boss.setX(bossNS::X); //reset position
-		boss.setY(bossNS::Y);
-	}
 
-	if (checkStageClear() == true)
-	{
-		stage += 1;
-		stageSpawnComplete = false;
-		spawnbuffer = 30;
-		currentSpawn = 0;
-	}
-	if (stage == 1)
-	{
-		if (spawnbuffer == 30)
+		if (player1.getHp() <= 0)
 		{
-			if (stageSpawnComplete == false)
+			player1.setX(GAME_WIDTH / 2);
+			if (!player1.isDead()) //if false
 			{
-				if (zombieStageOneSpawn != 0)
-				{
-
-					zombieArray[zombieStageOneSpawn - 1].setInitialised(true);
-					zombieArray[zombieStageOneSpawn - 1].setEndFrame(0);
-					spawnbuffer = 0;
-					if (currentSpawn == 0)
-					{
-						zombieArray[zombieStageOneSpawn - 1].setX(0 + zombieArray[zombieStageOneSpawn - 1].getWidth());
-						zombieArray[zombieStageOneSpawn - 1].setY(0 + zombieArray[zombieStageOneSpawn - 1].getHeight());
-						currentSpawn = 1;
-					}
-					else if (currentSpawn == 1)
-					{
-						zombieArray[zombieStageOneSpawn - 1].setX(0 + zombieArray[zombieStageOneSpawn - 1].getWidth());
-						zombieArray[zombieStageOneSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageOneSpawn - 1].getHeight());
-						currentSpawn = 2;
-					}
-					else if (currentSpawn == 2)
-					{
-						zombieArray[zombieStageOneSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageOneSpawn - 1].getWidth());
-						zombieArray[zombieStageOneSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageOneSpawn - 1].getHeight());
-						currentSpawn = 3;
-					}
-					else if (currentSpawn == 3)
-					{
-						zombieArray[zombieStageOneSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageOneSpawn - 1].getWidth());
-						zombieArray[zombieStageOneSpawn - 1].setY(0 + zombieArray[zombieStageOneSpawn - 1].getHeight());
-						currentSpawn = 0;
-					}
-					zombieStageOneSpawn -= 1;
-				}
-				else
-				{
-					stageSpawnComplete = true;
-				}
+				player1.hasDied(); //makes died true
+				MessageBox(nullptr, TEXT("YOU DIED!!"), TEXT(""), MB_OK);
+			}
+		
+			//player1.setHealth(20.0f);
+			//player1.setY(GAME_HEIGHT / 2);
+		}
+		player1.update(frameTime);
+		//zombie1.setPlayerLoc(player1.getX(), player1.getY());
+		for (int zomb = 0; zomb < (sizeof(zombieArray) / sizeof(*zombieArray)); zomb++)
+		{
+			if (zombieArray[zomb].isInitialised() == true)
+			{
+				zombieArray[zomb].setPrev(zombieArray[zomb].getX(), zombieArray[zomb].getY());
+				zombieArray[zomb].update(frameTime);
 			}
 		}
-		else
+		for (int tank = 0; tank < (sizeof(tankArray) / sizeof(*tankArray)); tank++)
 		{
-			spawnbuffer += 1;
-		}
-	}
-	if (stage == 2)
-	{
-		if (spawnbuffer == 30)
-		{
-			if (stageSpawnComplete == false)
+			if (tankArray[tank].isInitialised() == true)
 			{
-				if (zombieStageTwoSpawn != 0)
-				{
-					zombieArray[zombieStageTwoSpawn - 1].setInitialised(true);
-					zombieArray[zombieStageTwoSpawn - 1].setEndFrame(0);
-					spawnbuffer = 0;
-					if (currentSpawn == 0)
-					{
-						zombieArray[zombieStageTwoSpawn - 1].setX(0 + zombieArray[zombieStageTwoSpawn - 1].getWidth());
-						zombieArray[zombieStageTwoSpawn - 1].setY(0 + zombieArray[zombieStageTwoSpawn - 1].getHeight());
-						currentSpawn = 1;
-					}
-					else if (currentSpawn == 1)
-					{
-						zombieArray[zombieStageTwoSpawn - 1].setX(0 + zombieArray[zombieStageTwoSpawn - 1].getWidth());
-						zombieArray[zombieStageTwoSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageTwoSpawn - 1].getHeight());
-						currentSpawn = 2;
-					}
-					else if (currentSpawn == 2)
-					{
-						zombieArray[zombieStageTwoSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageTwoSpawn - 1].getWidth());
-						zombieArray[zombieStageTwoSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageTwoSpawn - 1].getHeight());
-						currentSpawn = 3;
-					}
-					else if (currentSpawn == 3)
-					{
-						zombieArray[zombieStageTwoSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageTwoSpawn - 1].getWidth());
-						zombieArray[zombieStageTwoSpawn - 1].setY(0 + zombieArray[zombieStageTwoSpawn - 1].getHeight());
-						currentSpawn = 0;
-					}
-					zombieStageTwoSpawn -= 1;
-
-				}
-				else if (TankStageTwoSpawn != 0)
-				{
-
-					tankArray[TankStageTwoSpawn - 1].setInitialised(true);
-					tankArray[TankStageTwoSpawn - 1].setStartFrame(0);
-					tankArray[TankStageTwoSpawn - 1].setEndFrame(0);
-					tankArray[TankStageTwoSpawn - 1].setHealth(5);
-					spawnbuffer = 0;
-					if (currentSpawn == 0)
-					{
-						tankArray[TankStageTwoSpawn - 1].setX(0 + tankArray[TankStageTwoSpawn - 1].getWidth());
-						tankArray[TankStageTwoSpawn - 1].setY(0 + tankArray[TankStageTwoSpawn - 1].getHeight());
-						currentSpawn = 1;
-					}
-					else if (currentSpawn == 1)
-					{
-						tankArray[TankStageTwoSpawn - 1].setX(0 + tankArray[TankStageTwoSpawn - 1].getWidth());
-						tankArray[TankStageTwoSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageTwoSpawn - 1].getHeight());
-						currentSpawn = 2;
-					}
-					else if (currentSpawn == 2)
-					{
-						tankArray[TankStageTwoSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageTwoSpawn - 1].getWidth());
-						tankArray[TankStageTwoSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageTwoSpawn - 1].getHeight());
-						currentSpawn = 3;
-					}
-					else if (currentSpawn == 3)
-					{
-						tankArray[TankStageTwoSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageTwoSpawn - 1].getWidth());
-						tankArray[TankStageTwoSpawn - 1].setY(0 + tankArray[TankStageTwoSpawn - 1].getHeight());
-						currentSpawn = 0;
-					}
-					TankStageTwoSpawn -= 1;
-				}
-				else
-				{
-					stageSpawnComplete = true;
-				}
-
+				tankArray[tank].setPrev(tankArray[tank].getX(), tankArray[tank].getY());
+				tankArray[tank].update(frameTime);
 			}
 		}
-		else
+		for (int spitter = 0; spitter < (sizeof(spitterArray) / sizeof(*spitterArray)); spitter++)
 		{
-			spawnbuffer += 1;
-		}
-	}
-	else if (stage == 3)
-	{
-		if (spawnbuffer == 30)
-		{
-			if (stageSpawnComplete == false)
+			if (spitterArray[spitter].isInitialised() == true)
 			{
-				if (zombieStageThreeSpawn != 0)
-				{
-
-					zombieArray[zombieStageThreeSpawn - 1].setInitialised(true);
-					zombieArray[zombieStageThreeSpawn - 1].setEndFrame(0);
-					spawnbuffer = 0;
-					if (currentSpawn == 0)
-					{
-						zombieArray[zombieStageThreeSpawn - 1].setX(0 + zombieArray[zombieStageThreeSpawn - 1].getWidth());
-						zombieArray[zombieStageThreeSpawn - 1].setY(0 + zombieArray[zombieStageThreeSpawn - 1].getHeight());
-						currentSpawn = 1;
-					}
-					else if (currentSpawn == 1)
-					{
-						zombieArray[zombieStageThreeSpawn - 1].setX(0 + zombieArray[zombieStageThreeSpawn - 1].getWidth());
-						zombieArray[zombieStageThreeSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageThreeSpawn - 1].getHeight());
-						currentSpawn = 2;
-					}
-					else if (currentSpawn == 2)
-					{
-						zombieArray[zombieStageThreeSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageThreeSpawn - 1].getWidth());
-						zombieArray[zombieStageThreeSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageThreeSpawn - 1].getHeight());
-						currentSpawn = 3;
-					}
-					else if (currentSpawn == 3)
-					{
-						zombieArray[zombieStageThreeSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageThreeSpawn - 1].getWidth());
-						zombieArray[zombieStageThreeSpawn - 1].setY(0 + zombieArray[zombieStageThreeSpawn - 1].getHeight());
-						currentSpawn = 0;
-					}
-					zombieStageThreeSpawn -= 1;
-				}
-				else if (TankStageThreeSpawn != 0)
-				{
-
-					tankArray[TankStageThreeSpawn - 1].setInitialised(true);
-					tankArray[TankStageThreeSpawn - 1].setStartFrame(0);
-					tankArray[TankStageThreeSpawn - 1].setEndFrame(0);
-					spawnbuffer = 0;
-					if (currentSpawn == 0)
-					{
-						tankArray[TankStageThreeSpawn - 1].setX(0 + tankArray[TankStageThreeSpawn - 1].getWidth());
-						tankArray[TankStageThreeSpawn - 1].setY(0 + tankArray[TankStageThreeSpawn - 1].getHeight());
-						currentSpawn = 1;
-					}
-					else if (currentSpawn == 1)
-					{
-						tankArray[TankStageThreeSpawn - 1].setX(0 + tankArray[TankStageThreeSpawn - 1].getWidth());
-						tankArray[TankStageThreeSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageThreeSpawn - 1].getHeight());
-						currentSpawn = 2;
-					}
-					else if (currentSpawn == 2)
-					{
-						tankArray[TankStageThreeSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageThreeSpawn - 1].getWidth());
-						tankArray[TankStageThreeSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageThreeSpawn - 1].getHeight());
-						currentSpawn = 3;
-					}
-					else if (currentSpawn == 3)
-					{
-						tankArray[TankStageThreeSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageThreeSpawn - 1].getWidth());
-						tankArray[TankStageThreeSpawn - 1].setY(0 + tankArray[TankStageThreeSpawn - 1].getHeight());
-						currentSpawn = 0;
-					}
-					TankStageThreeSpawn -= 1;
-				}
-				else if (SpitterStageThreeSpawn != 0)
-				{
-
-					spitterArray[SpitterStageThreeSpawn - 1].setInitialised(true);
-					spitterArray[SpitterStageThreeSpawn - 1].setEndFrame(0);
-					spawnbuffer = 0;
-					if (currentSpawn == 0)
-					{
-						spitterArray[SpitterStageThreeSpawn - 1].setX(0 + spitterArray[SpitterStageThreeSpawn - 1].getWidth());
-						spitterArray[SpitterStageThreeSpawn - 1].setY(0 + spitterArray[SpitterStageThreeSpawn - 1].getHeight());
-						currentSpawn = 1;
-					}
-					else if (currentSpawn == 1)
-					{
-						spitterArray[SpitterStageThreeSpawn - 1].setX(0 + spitterArray[SpitterStageThreeSpawn - 1].getWidth());
-						spitterArray[SpitterStageThreeSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
-						currentSpawn = 2;
-					}
-					else if (currentSpawn == 2)
-					{
-						spitterArray[SpitterStageThreeSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
-						spitterArray[SpitterStageThreeSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
-						currentSpawn = 3;
-					}
-					else if (currentSpawn == 3)
-					{
-						spitterArray[SpitterStageThreeSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
-						spitterArray[SpitterStageThreeSpawn - 1].setY(0 + spitterArray[SpitterStageThreeSpawn - 1].getHeight());
-						currentSpawn = 0;
-					}
-					SpitterStageThreeSpawn -= 1;
-				}
-				else
-				{
-					stageSpawnComplete = true;
-				}
+				spitterArray[spitter].setPrev(spitterArray[spitter].getX(), spitterArray[spitter].getY());
+				spitterArray[spitter].update(frameTime);
 			}
 		}
-		else
+		for (int spitterb = 0; spitterb < (sizeof(spitterbulletArray) / sizeof(*spitterbulletArray)); spitterb++)
 		{
-			spawnbuffer += 1;
-		}
-	}
-	else if (stage == 4)
-	{
-		if (!boss.isSpawn())
-		{
-			boss.setSpawn(true);
-		}
-		/////////////////////////////////////////////////////////////////////////////////
-		//////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
-		/////////////////////////////////////////////////////////////////////////////////
-		if (boss.getForm() == 1) //boss form 1 :: BARON
-		{
-			if (boss.isReloading())
+			if (spitterbulletArray[spitterb].isInitialised() == true)
 			{
-				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
-				{
-					CannonArray[cannonNo].setInitialised(false);
-				}
-				boss.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
-				boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
-				boss.setLoop(true);
-				if (fpscounter % 60 == 0) //for every second
-				{
-					BARON_RELOADING_TIMER--;
-				}
-				if (BARON_RELOADING_TIMER == 0) //if reload time is up
-				{
-					boss.changeMotion(boss.isReloading());
-					boss.setCurrentFrame(bossNS::BARON_CHANNEL_START_FRAME);
-					BARON_CHANNELING_TIMER = bossNS::BARON_CHANNELING_TIMER;
-				}
+				spitterbulletArray[spitterb].update(frameTime);
 			}
-			else if (boss.isChanneling())
+		}
+
+
+
+		for (int i = 0; i < 10; i++)
+		{
+			wallArray[i].update(frameTime);
+		}
+		if (clearCooldown != 180)
+		{
+			clearCooldown += 1;
+		}
+		if (input->isKeyDown(KILL_ALL))
+		{
+			if (clearCooldown == 180)
 			{
-				boss.setFrames(bossNS::BARON_CHANNEL_START_FRAME, bossNS::BARON_CHANNEL_END_FRAME);
-				boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
-				boss.setLoop(true);
-				if (fpscounter % 60 == 0)
+				clearAllMobs();
+				clearCooldown = 0;
+			}
+
+		}
+		else if (input->isKeyDown(BOSS_STAGE1)) //cheat code stage 1
+		{
+			stage = 4;
+			boss.setHP(bossNS::MAXHP);
+			boss.setX(bossNS::X); //reset position
+			boss.setY(bossNS::Y);
+		}
+		else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
+		{
+			stage = 5;
+			boss.setHP(bossNS::MAXHP / 2);
+			boss.setX(bossNS::X); //reset position
+			boss.setY(bossNS::Y);
+		}
+
+		if (checkStageClear() == true)
+		{
+			stage += 1;
+			stageSpawnComplete = false;
+			spawnbuffer = 30;
+			currentSpawn = 0;
+		}
+		if (stage == 1)
+		{
+			if (spawnbuffer == 30)
+			{
+				if (stageSpawnComplete == false)
 				{
-					BARON_CHANNELING_TIMER--;
-				}
-				if (BARON_CHANNELING_TIMER == 0) //if channel time is up
-				{
-					boss.changeMotion(boss.isChanneling());
-					boss.setCurrentFrame(bossNS::BARON_ATTACK_FRAME);
-					BARON_ATTACKING_TIMER = bossNS::BARON_ATTACKING_TIMER;
-					for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+					if (zombieStageOneSpawn != 0)
 					{
-						CannonArray[cannonNo].setX(Cannon::X); //set bullet positions
-						CannonArray[cannonNo].setY(Cannon::Y);
-						shoot = true;
+
+						zombieArray[zombieStageOneSpawn - 1].setInitialised(true);
+						zombieArray[zombieStageOneSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							zombieArray[zombieStageOneSpawn - 1].setX(0 + zombieArray[zombieStageOneSpawn - 1].getWidth());
+							zombieArray[zombieStageOneSpawn - 1].setY(0 + zombieArray[zombieStageOneSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							zombieArray[zombieStageOneSpawn - 1].setX(0 + zombieArray[zombieStageOneSpawn - 1].getWidth());
+							zombieArray[zombieStageOneSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageOneSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							zombieArray[zombieStageOneSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageOneSpawn - 1].getWidth());
+							zombieArray[zombieStageOneSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageOneSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							zombieArray[zombieStageOneSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageOneSpawn - 1].getWidth());
+							zombieArray[zombieStageOneSpawn - 1].setY(0 + zombieArray[zombieStageOneSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						zombieStageOneSpawn -= 1;
+					}
+					else
+					{
+						stageSpawnComplete = true;
 					}
 				}
 			}
-			else if (boss.isAttacking())
+			else
 			{
-				if (shoot)
+				spawnbuffer += 1;
+			}
+		}
+		if (stage == 2)
+		{
+			if (spawnbuffer == 30)
+			{
+				if (stageSpawnComplete == false)
+				{
+					if (zombieStageTwoSpawn != 0)
+					{
+						zombieArray[zombieStageTwoSpawn - 1].setInitialised(true);
+						zombieArray[zombieStageTwoSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							zombieArray[zombieStageTwoSpawn - 1].setX(0 + zombieArray[zombieStageTwoSpawn - 1].getWidth());
+							zombieArray[zombieStageTwoSpawn - 1].setY(0 + zombieArray[zombieStageTwoSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							zombieArray[zombieStageTwoSpawn - 1].setX(0 + zombieArray[zombieStageTwoSpawn - 1].getWidth());
+							zombieArray[zombieStageTwoSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageTwoSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							zombieArray[zombieStageTwoSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageTwoSpawn - 1].getWidth());
+							zombieArray[zombieStageTwoSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageTwoSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							zombieArray[zombieStageTwoSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageTwoSpawn - 1].getWidth());
+							zombieArray[zombieStageTwoSpawn - 1].setY(0 + zombieArray[zombieStageTwoSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						zombieStageTwoSpawn -= 1;
+
+					}
+					else if (TankStageTwoSpawn != 0)
+					{
+
+						tankArray[TankStageTwoSpawn - 1].setInitialised(true);
+						tankArray[TankStageTwoSpawn - 1].setStartFrame(0);
+						tankArray[TankStageTwoSpawn - 1].setEndFrame(0);
+						tankArray[TankStageTwoSpawn - 1].setHealth(5);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							tankArray[TankStageTwoSpawn - 1].setX(0 + tankArray[TankStageTwoSpawn - 1].getWidth());
+							tankArray[TankStageTwoSpawn - 1].setY(0 + tankArray[TankStageTwoSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							tankArray[TankStageTwoSpawn - 1].setX(0 + tankArray[TankStageTwoSpawn - 1].getWidth());
+							tankArray[TankStageTwoSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageTwoSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							tankArray[TankStageTwoSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageTwoSpawn - 1].getWidth());
+							tankArray[TankStageTwoSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageTwoSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							tankArray[TankStageTwoSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageTwoSpawn - 1].getWidth());
+							tankArray[TankStageTwoSpawn - 1].setY(0 + tankArray[TankStageTwoSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						TankStageTwoSpawn -= 1;
+					}
+					else
+					{
+						stageSpawnComplete = true;
+					}
+
+				}
+			}
+			else
+			{
+				spawnbuffer += 1;
+			}
+		}
+		else if (stage == 3)
+		{
+			if (spawnbuffer == 30)
+			{
+				if (stageSpawnComplete == false)
+				{
+					if (zombieStageThreeSpawn != 0)
+					{
+
+						zombieArray[zombieStageThreeSpawn - 1].setInitialised(true);
+						zombieArray[zombieStageThreeSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							zombieArray[zombieStageThreeSpawn - 1].setX(0 + zombieArray[zombieStageThreeSpawn - 1].getWidth());
+							zombieArray[zombieStageThreeSpawn - 1].setY(0 + zombieArray[zombieStageThreeSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							zombieArray[zombieStageThreeSpawn - 1].setX(0 + zombieArray[zombieStageThreeSpawn - 1].getWidth());
+							zombieArray[zombieStageThreeSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageThreeSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							zombieArray[zombieStageThreeSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageThreeSpawn - 1].getWidth());
+							zombieArray[zombieStageThreeSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageThreeSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							zombieArray[zombieStageThreeSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageThreeSpawn - 1].getWidth());
+							zombieArray[zombieStageThreeSpawn - 1].setY(0 + zombieArray[zombieStageThreeSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						zombieStageThreeSpawn -= 1;
+					}
+					else if (TankStageThreeSpawn != 0)
+					{
+
+						tankArray[TankStageThreeSpawn - 1].setInitialised(true);
+						tankArray[TankStageThreeSpawn - 1].setStartFrame(0);
+						tankArray[TankStageThreeSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							tankArray[TankStageThreeSpawn - 1].setX(0 + tankArray[TankStageThreeSpawn - 1].getWidth());
+							tankArray[TankStageThreeSpawn - 1].setY(0 + tankArray[TankStageThreeSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							tankArray[TankStageThreeSpawn - 1].setX(0 + tankArray[TankStageThreeSpawn - 1].getWidth());
+							tankArray[TankStageThreeSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageThreeSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							tankArray[TankStageThreeSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageThreeSpawn - 1].getWidth());
+							tankArray[TankStageThreeSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageThreeSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							tankArray[TankStageThreeSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageThreeSpawn - 1].getWidth());
+							tankArray[TankStageThreeSpawn - 1].setY(0 + tankArray[TankStageThreeSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						TankStageThreeSpawn -= 1;
+					}
+					else if (SpitterStageThreeSpawn != 0)
+					{
+
+						spitterArray[SpitterStageThreeSpawn - 1].setInitialised(true);
+						spitterArray[SpitterStageThreeSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							spitterArray[SpitterStageThreeSpawn - 1].setX(0 + spitterArray[SpitterStageThreeSpawn - 1].getWidth());
+							spitterArray[SpitterStageThreeSpawn - 1].setY(0 + spitterArray[SpitterStageThreeSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							spitterArray[SpitterStageThreeSpawn - 1].setX(0 + spitterArray[SpitterStageThreeSpawn - 1].getWidth());
+							spitterArray[SpitterStageThreeSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							spitterArray[SpitterStageThreeSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
+							spitterArray[SpitterStageThreeSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageThreeSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							spitterArray[SpitterStageThreeSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageThreeSpawn - 1].getWidth());
+							spitterArray[SpitterStageThreeSpawn - 1].setY(0 + spitterArray[SpitterStageThreeSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						SpitterStageThreeSpawn -= 1;
+					}
+					else
+					{
+						stageSpawnComplete = true;
+					}
+				}
+			}
+			else
+			{
+				spawnbuffer += 1;
+			}
+		}
+		else if (stage == 4)
+		{
+			if (!boss.isSpawn())
+			{
+				boss.setSpawn(true);
+			}
+			/////////////////////////////////////////////////////////////////////////////////
+			//////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
+			/////////////////////////////////////////////////////////////////////////////////
+			if (boss.getForm() == 1) //boss form 1 :: BARON
+			{
+				if (boss.isReloading())
 				{
 					for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
 					{
-						CannonArray[cannonNo].setInitialised(true);
-						CannonArray[cannonNo].setActive(true);
-						shoot = false;
+						CannonArray[cannonNo].setInitialised(false);
+					}
+					boss.setFrames(bossNS::BARON_START_FRAME, bossNS::BARON_END_FRAME);
+					boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+					boss.setLoop(true);
+					if (fpscounter % 60 == 0) //for every second
+					{
+						BARON_RELOADING_TIMER--;
+					}
+					if (BARON_RELOADING_TIMER == 0) //if reload time is up
+					{
+						boss.changeMotion(boss.isReloading());
+						boss.setCurrentFrame(bossNS::BARON_CHANNEL_START_FRAME);
+						BARON_CHANNELING_TIMER = bossNS::BARON_CHANNELING_TIMER;
 					}
 				}
-				for (int i = 0; i <= 4; i++)
+				else if (boss.isChanneling())
 				{
-					CannonArray[i].setVelocityX(400.0f);
+					boss.setFrames(bossNS::BARON_CHANNEL_START_FRAME, bossNS::BARON_CHANNEL_END_FRAME);
+					boss.setFrameDelay(bossNS::BARON_ANIMATION_DELAY);
+					boss.setLoop(true);
+					if (fpscounter % 60 == 0)
+					{
+						BARON_CHANNELING_TIMER--;
+					}
+					if (BARON_CHANNELING_TIMER == 0) //if channel time is up
+					{
+						boss.changeMotion(boss.isChanneling());
+						boss.setCurrentFrame(bossNS::BARON_ATTACK_FRAME);
+						BARON_ATTACKING_TIMER = bossNS::BARON_ATTACKING_TIMER;
+						for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+						{
+							CannonArray[cannonNo].setX(Cannon::X); //set bullet positions
+							CannonArray[cannonNo].setY(Cannon::Y);
+							shoot = true;
+						}
+					}
 				}
-				for (int i = 4; i <= 12; i++)
+				else if (boss.isAttacking())
 				{
-					CannonArray[i].setVelocityY(400.0f);
-				}
-				for (int i = 12; i <= 20; i++)
-				{
-					CannonArray[i].setVelocityX(-400.0f);
-				}
-				for (int i = 20; i <= 28; i++)
-				{
-					CannonArray[i].setVelocityY(-400.0f);
-				}
-				for (int i = 28; i < 32; i++)
-				{
-					CannonArray[i].setVelocityX(400.0f);
-				}
-				float Sy = 0.0f;
-				for (int i = 0; i < 4; i++)
-				{
-					CannonArray[i].setVelocityY(Sy);
-					Sy += 100.0f;
-				}
-				float Sx = 400.0f;
-				for (int i = 4; i < 12; i++)
-				{
-					CannonArray[i].setVelocityX(Sx);
-					Sx -= 100.0f;
-				}
-				float Wy = 400.0f;
-				for (int i = 13; i < 20; i++)
-				{
-					CannonArray[i].setVelocityY(Wy);
-					Wy -= 100.0f;
-				}
-				float Nx = -400.0f;
-				for (int i = 21; i < 28; i++)
-				{
-					CannonArray[i].setVelocityX(Nx);
-					Nx += 100.0f;
-				}
-				float Ey = -400.0f;
-				for (int i = 29; i < 32; i++)
-				{
-					CannonArray[i].setVelocityY(Ey);
-					Ey += 100.0f;
-				}
-				for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
-				{
-					CannonArray[cannonNo].update(frameTime);
-				}
-				boss.setFrames(bossNS::BARON_ATTACK_FRAME, bossNS::BARON_ATTACK_FRAME);	//no animation
-				if (fpscounter % 60 == 0)
-				{
-					BARON_ATTACKING_TIMER--;
-				}
-				if (BARON_ATTACKING_TIMER == 0) //if attack time is up
-				{
-					boss.changeMotion(boss.isAttacking());
-					boss.setCurrentFrame(bossNS::BARON_START_FRAME);
-					BARON_RELOADING_TIMER = bossNS::BARON_RELOADING_TIMER;
+					if (shoot)
+					{
+						for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+						{
+							CannonArray[cannonNo].setInitialised(true);
+							CannonArray[cannonNo].setActive(true);
+							shoot = false;
+						}
+					}
+					for (int i = 0; i <= 4; i++)
+					{
+						CannonArray[i].setVelocityX(400.0f);
+					}
+					for (int i = 4; i <= 12; i++)
+					{
+						CannonArray[i].setVelocityY(400.0f);
+					}
+					for (int i = 12; i <= 20; i++)
+					{
+						CannonArray[i].setVelocityX(-400.0f);
+					}
+					for (int i = 20; i <= 28; i++)
+					{
+						CannonArray[i].setVelocityY(-400.0f);
+					}
+					for (int i = 28; i < 32; i++)
+					{
+						CannonArray[i].setVelocityX(400.0f);
+					}
+					float Sy = 0.0f;
+					for (int i = 0; i < 4; i++)
+					{
+						CannonArray[i].setVelocityY(Sy);
+						Sy += 100.0f;
+					}
+					float Sx = 400.0f;
+					for (int i = 4; i < 12; i++)
+					{
+						CannonArray[i].setVelocityX(Sx);
+						Sx -= 100.0f;
+					}
+					float Wy = 400.0f;
+					for (int i = 13; i < 20; i++)
+					{
+						CannonArray[i].setVelocityY(Wy);
+						Wy -= 100.0f;
+					}
+					float Nx = -400.0f;
+					for (int i = 21; i < 28; i++)
+					{
+						CannonArray[i].setVelocityX(Nx);
+						Nx += 100.0f;
+					}
+					float Ey = -400.0f;
+					for (int i = 29; i < 32; i++)
+					{
+						CannonArray[i].setVelocityY(Ey);
+						Ey += 100.0f;
+					}
+					for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
+					{
+						CannonArray[cannonNo].update(frameTime);
+					}
+					boss.setFrames(bossNS::BARON_ATTACK_FRAME, bossNS::BARON_ATTACK_FRAME);	//no animation
+					if (fpscounter % 60 == 0)
+					{
+						BARON_ATTACKING_TIMER--;
+					}
+					if (BARON_ATTACKING_TIMER == 0) //if attack time is up
+					{
+						boss.changeMotion(boss.isAttacking());
+						boss.setCurrentFrame(bossNS::BARON_START_FRAME);
+						BARON_RELOADING_TIMER = bossNS::BARON_RELOADING_TIMER;
 
+					}
 				}
 			}
-		}
-		else if (boss.getForm() == 2) //boss form 2 :: NORAB
-		{
-			if (boss.isReloading())
+			else if (boss.getForm() == 2) //boss form 2 :: NORAB
 			{
-				boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
-				boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
-				boss.setLoop(true);
-				if (fpscounter % 60 == 0)
+				if (boss.isReloading())
 				{
-					NORAB_RELOADING_TIMER--;
+					boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
+					boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
+					boss.setLoop(true);
+					if (fpscounter % 60 == 0)
+					{
+						NORAB_RELOADING_TIMER--;
+					}
+					if (NORAB_RELOADING_TIMER == 0) //if reload time is up
+					{
+						boss.changeMotion(boss.isReloading());
+						boss.setCurrentFrame(bossNS::NORAB_CHANNEL_START_FRAME);
+						NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
+					}
 				}
-				if (NORAB_RELOADING_TIMER == 0) //if reload time is up
+				else if (boss.isChanneling())
 				{
-					boss.changeMotion(boss.isReloading());
-					boss.setCurrentFrame(bossNS::NORAB_CHANNEL_START_FRAME);
-					NORAB_CHANNELING_TIMER = bossNS::NORAB_CHANNELING_TIMER;
+					boss.setFrames(bossNS::NORAB_CHANNEL_START_FRAME, bossNS::NORAB_CHANNEL_END_FRAME);
+					boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
+					boss.setLoop(true);
+					if (fpscounter % 60 == 0)
+					{
+						NORAB_CHANNELING_TIMER--;
+					}
+					if (NORAB_CHANNELING_TIMER == 0) //if channel time is up
+					{
+						boss.changeMotion(boss.isChanneling());
+						boss.setCurrentFrame(bossNS::NORAB_ATTACK_FRAME);
+						NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
+					}
 				}
-			}
-			else if (boss.isChanneling())
-			{
-				boss.setFrames(bossNS::NORAB_CHANNEL_START_FRAME, bossNS::NORAB_CHANNEL_END_FRAME);
-				boss.setFrameDelay(bossNS::NORAB_ANIMATION_DELAY);
-				boss.setLoop(true);
-				if (fpscounter % 60 == 0)
+				else if (boss.isAttacking())
 				{
-					NORAB_CHANNELING_TIMER--;
-				}
-				if (NORAB_CHANNELING_TIMER == 0) //if channel time is up
-				{
-					boss.changeMotion(boss.isChanneling());
-					boss.setCurrentFrame(bossNS::NORAB_ATTACK_FRAME);
-					NORAB_ATTACKING_TIMER = bossNS::NORAB_ATTACKING_TIMER;
-				}
-			}
-			else if (boss.isAttacking())
-			{
-				boss.setCurrentFrame(bossNS::NORAB_ATTACK_FRAME);	//no animation			
-				VECTOR2 direction;
-				direction.x = player1.getX() - boss.getX();
-				direction.y = player1.getY() - boss.getY();
-				float hypotenuse = sqrt(direction.x * direction.x + direction.y * direction.y);
-				direction.x /= hypotenuse;
-				direction.y /= hypotenuse;
-				direction.x *= bossNS::CHARRRGE_SPEED;
-				direction.y *= bossNS::CHARRRGE_SPEED;
-				boss.setVelocity(direction);
-				boss.CHARRRGE(frameTime);
-				boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
-				float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
-				boss.setDegrees(angle);
-				if (fpscounter % 60 == 0)
-				{
-					NORAB_ATTACKING_TIMER--;
-				}
-				if (NORAB_ATTACKING_TIMER == 0) //if attack time is up
-				{
-					boss.changeMotion(boss.isAttacking());
-					boss.setCurrentFrame(bossNS::NORAB_START_FRAME);
-					angle = 0.0f;
+					boss.setCurrentFrame(bossNS::NORAB_ATTACK_FRAME);	//no animation			
+					VECTOR2 direction;
+					direction.x = player1.getX() - boss.getX();
+					direction.y = player1.getY() - boss.getY();
+					float hypotenuse = sqrt(direction.x * direction.x + direction.y * direction.y);
+					direction.x /= hypotenuse;
+					direction.y /= hypotenuse;
+					direction.x *= bossNS::CHARRRGE_SPEED;
+					direction.y *= bossNS::CHARRRGE_SPEED;
+					boss.setVelocity(direction);
+					boss.CHARRRGE(frameTime);
+					boss.setFrames(bossNS::NORAB_ATTACK_FRAME, bossNS::NORAB_ATTACK_FRAME);	//no animation
+					float angle = atan2(player1.getY() - boss.getY(), player1.getX() - boss.getX()) * (180 / PI) + 90;
 					boss.setDegrees(angle);
-					NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
+					if (fpscounter % 60 == 0)
+					{
+						NORAB_ATTACKING_TIMER--;
+					}
+					if (NORAB_ATTACKING_TIMER == 0) //if attack time is up
+					{
+						boss.changeMotion(boss.isAttacking());
+						boss.setCurrentFrame(bossNS::NORAB_START_FRAME);
+						angle = 0.0f;
+						boss.setDegrees(angle);
+						NORAB_RELOADING_TIMER = bossNS::NORAB_RELOADING_TIMER;
+					}
 				}
 			}
+			if (boss.hasShield() == true)
+			{
+				shield.update(frameTime);
+				shield.setX(shield.getprevX());
+				shield.setY(shield.getprevY());
+			}
 		}
-		if (boss.hasShield() == true)
-		{
-			shield.update(frameTime);
-			shield.setX(shield.getprevX());
-			shield.setY(shield.getprevY());
-		}
+
+		map.update(frameTime);
+		boss.update(frameTime);
 	}
-
-	map.update(frameTime);
-	boss.update(frameTime);
-
 }
 
 //=============================================================================
@@ -1159,6 +1105,11 @@ void dontdie::render()
 	{
 		_snprintf_s(buffer, BUF_SIZE, "%d ", (int)player1.getHp());
 		dxFont.print(buffer, 39, 0);
+	}
+
+	if (startScreen.isInitialised() == true)
+	{
+		startScreen.draw();
 	}
 
 	graphics->spriteEnd();

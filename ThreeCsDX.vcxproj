@@ -106,6 +106,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="spitter.cpp" />
     <ClCompile Include="spitterbullet.cpp" />
+    <ClCompile Include="start.cpp" />
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="dontdie.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="playerHealth.h" />
     <ClInclude Include="spitter.h" />
     <ClInclude Include="spitterbullet.h" />
+    <ClInclude Include="start.h" />
     <ClInclude Include="tank.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="dontdie.h" />
