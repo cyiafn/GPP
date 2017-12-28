@@ -29,6 +29,7 @@
 #include <vector>
 #include <string>
 #include "start.h"
+#include "instruction.h"
 
 namespace dontdieNS
 {
@@ -148,6 +149,12 @@ private:
 	Start startScreen;
 	TextureManager StartTexture;
 	Image start;
+
+	Instruction instructionScreen;
+	TextureManager InstructionTexture;
+	Image instruction;
+
+	int clickBuffer;
 public:
 	//Constructor
 	dontdie();

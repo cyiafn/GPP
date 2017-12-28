@@ -59,6 +59,7 @@ void dontdie::initialize(HWND hwnd)
 	this->smgBullets = 100000;
 	this->rifleBullets = 10000;
 	this->state = 0;
+	this->clickBuffer = 30;
 	
 	// 15 pixel high Arial
 	if (dxFontSmall->initialize(graphics, 15, true, false, "Arial") == false)
@@ -101,6 +102,8 @@ void dontdie::initialize(HWND hwnd)
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing start texture"));
 	}
+	if (!InstructionTexture.initialize(graphics, INSTRUCTION_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction texture"));
 	if (!tankTexture.initialize(graphics, TANK_IMAGE))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initalizing Tank texture"));
@@ -118,6 +121,8 @@ void dontdie::initialize(HWND hwnd)
 	// Map 
 	if (!startScreen.initialize(this, startNS::WIDTH, startNS::HEIGHT, startNS::TEXTURE_COLS, &StartTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing start"));
+	if (!instructionScreen.initialize(this, instructionNS::WIDTH, instructionNS::HEIGHT, instructionNS::TEXTURE_COLS, &InstructionTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction"));
 
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
@@ -337,14 +342,23 @@ void dontdie::update()
 		startScreen.update(frameTime);
 		if (input->getMouseLButton() == true)
 		{
-			state = 2;
+			state = 1;
 			startScreen.setInitialised(false);
+			this->clickBuffer = 0;
 		}
 
 	}
 	else if (state == 1)
 	{
-
+		instructionScreen.update(frameTime);
+		if (this->clickBuffer != 30) {
+			this->clickBuffer += 1;
+		}
+		if (input->getMouseLButton() == true && this->clickBuffer == 30)
+		{
+			state = 2;
+			instructionScreen.setInitialised(false);
+		}
 	}
 	else if (state == 2)
 	{
@@ -1107,6 +1121,11 @@ void dontdie::render()
 		dxFont.print(buffer, 39, 0);
 	}
 
+	if (instructionScreen.isInitialised() == true)
+	{
+		instructionScreen.draw();
+	}
+
 	if (startScreen.isInitialised() == true)
 	{
 		startScreen.draw();
@@ -1138,6 +1157,8 @@ void dontdie::releaseAll()
 	//SMGbulletTexture.onLostDevice();
 	//ShotgunbulletTexture.onLostDevice();
 	//RiflebulletTexture.onLostDevice();
+	InstructionTexture.onLostDevice();
+	StartTexture.onLostDevice();
 	return;
 }
 
@@ -1147,7 +1168,7 @@ void dontdie::releaseAll()
 //=============================================================================
 void dontdie::resetAll()
 {
-	zombieTexture.onLostDevice();
+	zombieTexture.onResetDevice();
 	mapTexture.onResetDevice();
 	wallTexture.onResetDevice();
 	playerTexture.onResetDevice();
@@ -1155,12 +1176,14 @@ void dontdie::resetAll()
 	bossMAXHPTexture.onResetDevice();
 	bossCURHPTexture.onResetDevice();
 	tankTexture.onResetDevice();
-	spitterTexture.onLostDevice();
-	spitterbulletTexture.onLostDevice();
+	spitterTexture.onResetDevice();
+	spitterbulletTexture.onResetDevice();
 	PbulletTexture.onResetDevice();
 	//SMGbulletTexture.onResetDevice();
 	//ShotgunbulletTexture.onResetDevice();
 	//RiflebulletTexture.onResetDevice();
+	InstructionTexture.onResetDevice();
+	StartTexture.onResetDevice();
 	Game::resetAll();
 	return;
 }

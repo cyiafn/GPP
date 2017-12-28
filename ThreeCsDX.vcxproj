@@ -102,6 +102,7 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="instruction.cpp" />
     <ClCompile Include="playerHealth.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="spitter.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="instruction.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerHealth.h" />
     <ClInclude Include="spitter.h" />
