@@ -18,6 +18,7 @@ Boss::Boss() : Entity()
 	edge.right = 64;
 	edge.bottom = 64;
 	collisionType = entityNS::BOX;
+	active = false;
 }
 
 
@@ -72,7 +73,7 @@ void Boss::update(float frameTime)
 		{
 			//WIN
 			spawn = false;
-			MessageBox(nullptr, TEXT("YOU WIN!!"), TEXT(""), MB_OK);			
+			died = true;
 		}
 	}
 	
@@ -126,6 +127,10 @@ bool Boss::isAttacking()
 {
 	return attacking;
 }
+bool Boss::hasDied()
+{
+	return died;
+}
 
 
 void Boss::changeMotion(bool motion)
@@ -158,4 +163,15 @@ void Boss::CHARRRGE(float frameTime)
 		spriteData.x += frameTime * velocity.x;        
 		spriteData.y += frameTime * velocity.y;
 	}
+}
+
+void Boss::setPrev(float x, float y)
+{
+	this->prevX = x;
+	this->prevY = y;
+}
+void Boss::revertLocation()
+{
+	this->spriteData.x = prevX;
+	this->spriteData.y = prevY;
 }

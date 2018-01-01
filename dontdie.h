@@ -111,7 +111,7 @@ private:
 	Player player1;
     //PlayerHealth player1health;
 	Bullet pistolBulletArray[100], smgBulletArray[100], shotgunBulletArray[100], rifleBulletArray[100];
-	BossCannon CannonArray[32];
+	BossCannon CannonArray[64];
 	Wall wallArray[10];
 	Zombie zombieArray[50];
 	Tank tankArray[10];
@@ -131,6 +131,9 @@ private:
 	int zombieStageThreeSpawn;
 	int TankStageThreeSpawn;
 	int SpitterStageThreeSpawn;
+	int zombieStageBossSpawn;
+	int TankStageBossSpawn;
+	int SpitterStageBossSpawn;
 	int currentSpawn;
 	float stageBufferTime;
 	float clearCooldown;

@@ -67,6 +67,9 @@ protected:
 	bool channeling = false;
 	bool attacking = false;
 	bool shieldOn = false; // for form 1
+	bool died = false; // for win screen
+	float prevX;
+	float prevY;
 
 public:
 	// constructor
@@ -85,7 +88,10 @@ public:
 	bool isReloading();
 	bool isChanneling();
 	bool isAttacking();
+	bool hasDied();
 	void changeMotion(bool motion);
+	void setPrev(float x, float y);
+	void revertLocation();
 
 	// inherited member functions
 	virtual void draw();

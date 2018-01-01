@@ -47,6 +47,9 @@ void dontdie::initialize(HWND hwnd)
 	this->zombieStageThreeSpawn = 35;
 	this->TankStageThreeSpawn = 5;
 	this->SpitterStageThreeSpawn = 10;
+	this->zombieStageBossSpawn = 20;
+	this->TankStageBossSpawn = 8;
+	this->SpitterStageBossSpawn = 10;
 	this->currentSpawn = 0;
 	this->stageSpawnComplete = false;
 	this->stageBufferTime = 180;
@@ -447,7 +450,7 @@ void dontdie::update()
 			if (!player1.isDead()) //if false
 			{
 				player1.hasDied(); //makes died true
-				MessageBox(nullptr, TEXT("YOU DIED!!"), TEXT(""), MB_OK);
+				state = 3;
 			}
 		
 			//player1.setHealth(20.0f);
@@ -515,12 +518,11 @@ void dontdie::update()
 		}
 		else if (input->isKeyDown(BOSS_STAGE2)) //cheat code stage 2
 		{
-			stage = 5;
+			stage = 4;
 			boss.setHP(bossNS::MAXHP / 2);
 			boss.setX(bossNS::X); //reset position
 			boss.setY(bossNS::Y);
 		}
-
 		if (checkStageClear() == true)
 		{
 			stage += 1;
@@ -777,9 +779,127 @@ void dontdie::update()
 		}
 		else if (stage == 4)
 		{
-			if (!boss.isSpawn())
+			if (!boss.getActive())
 			{
+				boss.setActive(true);
 				boss.setSpawn(true);
+			}
+			///////////////////////////////////////////////////////////////////////////////
+			////////////////////Mobs spawn/////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////////
+			if (spawnbuffer == 60)
+			{
+				if (stageSpawnComplete == false)
+				{
+					if (zombieStageBossSpawn != 0)
+					{
+						zombieArray[zombieStageBossSpawn - 1].setInitialised(true);
+						zombieArray[zombieStageBossSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							zombieArray[zombieStageBossSpawn - 1].setX(0 + zombieArray[zombieStageBossSpawn - 1].getWidth());
+							zombieArray[zombieStageBossSpawn - 1].setY(0 + zombieArray[zombieStageBossSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							zombieArray[zombieStageBossSpawn - 1].setX(0 + zombieArray[zombieStageBossSpawn - 1].getWidth());
+							zombieArray[zombieStageBossSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageBossSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							zombieArray[zombieStageBossSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageBossSpawn - 1].getWidth());
+							zombieArray[zombieStageBossSpawn - 1].setY(GAME_HEIGHT - zombieArray[zombieStageBossSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							zombieArray[zombieStageBossSpawn - 1].setX(GAME_WIDTH - zombieArray[zombieStageBossSpawn - 1].getWidth());
+							zombieArray[zombieStageBossSpawn - 1].setY(0 + zombieArray[zombieStageBossSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						zombieStageBossSpawn -= 1;
+					}
+					else if (TankStageBossSpawn != 0)
+					{
+
+						tankArray[TankStageBossSpawn - 1].setInitialised(true);
+						tankArray[TankStageBossSpawn - 1].setStartFrame(0);
+						tankArray[TankStageBossSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							tankArray[TankStageBossSpawn - 1].setX(0 + tankArray[TankStageBossSpawn - 1].getWidth());
+							tankArray[TankStageBossSpawn - 1].setY(0 + tankArray[TankStageBossSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							tankArray[TankStageBossSpawn - 1].setX(0 + tankArray[TankStageBossSpawn - 1].getWidth());
+							tankArray[TankStageBossSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageBossSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							tankArray[TankStageBossSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageBossSpawn - 1].getWidth());
+							tankArray[TankStageBossSpawn - 1].setY(GAME_HEIGHT - tankArray[TankStageBossSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							tankArray[TankStageBossSpawn - 1].setX(GAME_WIDTH - tankArray[TankStageBossSpawn - 1].getWidth());
+							tankArray[TankStageBossSpawn - 1].setY(0 + tankArray[TankStageBossSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						TankStageBossSpawn -= 1;
+					}
+					else if (SpitterStageBossSpawn != 0)
+					{
+
+						spitterArray[SpitterStageBossSpawn - 1].setInitialised(true);
+						spitterArray[SpitterStageBossSpawn - 1].setEndFrame(0);
+						spawnbuffer = 0;
+						if (currentSpawn == 0)
+						{
+							spitterArray[SpitterStageBossSpawn - 1].setX(0 + spitterArray[SpitterStageBossSpawn - 1].getWidth());
+							spitterArray[SpitterStageBossSpawn - 1].setY(0 + spitterArray[SpitterStageBossSpawn - 1].getHeight());
+							currentSpawn = 1;
+						}
+						else if (currentSpawn == 1)
+						{
+							spitterArray[SpitterStageBossSpawn - 1].setX(0 + spitterArray[SpitterStageBossSpawn - 1].getWidth());
+							spitterArray[SpitterStageBossSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageBossSpawn - 1].getHeight());
+							currentSpawn = 2;
+						}
+						else if (currentSpawn == 2)
+						{
+							spitterArray[SpitterStageBossSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageBossSpawn - 1].getWidth());
+							spitterArray[SpitterStageBossSpawn - 1].setY(GAME_HEIGHT - spitterArray[SpitterStageBossSpawn - 1].getHeight());
+							currentSpawn = 3;
+						}
+						else if (currentSpawn == 3)
+						{
+							spitterArray[SpitterStageBossSpawn - 1].setX(GAME_WIDTH - spitterArray[SpitterStageBossSpawn - 1].getWidth());
+							spitterArray[SpitterStageBossSpawn - 1].setY(0 + spitterArray[SpitterStageBossSpawn - 1].getHeight());
+							currentSpawn = 0;
+						}
+						SpitterStageBossSpawn -= 1;
+					}
+					else
+					{
+						stageSpawnComplete = true;
+					}
+				}
+			}
+			else
+			{
+				spawnbuffer += 1;
+			}
+			if (stageSpawnComplete == true)
+			{
+				stageSpawnComplete = false;
 			}
 			/////////////////////////////////////////////////////////////////////////////////
 			//////BOSS MOTIONS RELOADING -> CHANNELING -> ATTACKING -> RELOADING -> etc//////
@@ -839,56 +959,57 @@ void dontdie::update()
 							shoot = false;
 						}
 					}
-					for (int i = 0; i <= 4; i++)
+					for (int i = 0; i <= 8; i++)
 					{
 						CannonArray[i].setVelocityX(400.0f);
 					}
-					for (int i = 4; i <= 12; i++)
+					for (int i = 8; i <= 24; i++)
 					{
 						CannonArray[i].setVelocityY(400.0f);
 					}
-					for (int i = 12; i <= 20; i++)
+					for (int i = 24; i <= 40; i++)
 					{
 						CannonArray[i].setVelocityX(-400.0f);
 					}
-					for (int i = 20; i <= 28; i++)
+					for (int i = 40; i <= 56; i++)
 					{
 						CannonArray[i].setVelocityY(-400.0f);
 					}
-					for (int i = 28; i < 32; i++)
+					for (int i = 56; i < 64; i++)
 					{
 						CannonArray[i].setVelocityX(400.0f);
 					}
 					float Sy = 0.0f;
-					for (int i = 0; i < 4; i++)
+					for (int i = 0; i < 8; i++)
 					{
 						CannonArray[i].setVelocityY(Sy);
-						Sy += 100.0f;
+						Sy += 50.0f;
 					}
 					float Sx = 400.0f;
-					for (int i = 4; i < 12; i++)
+					for (int i = 8; i < 24; i++)
 					{
 						CannonArray[i].setVelocityX(Sx);
-						Sx -= 100.0f;
+						Sx -= 50.0f;
 					}
 					float Wy = 400.0f;
-					for (int i = 13; i < 20; i++)
+					for (int i = 24; i < 40; i++)
 					{
 						CannonArray[i].setVelocityY(Wy);
-						Wy -= 100.0f;
+						Wy -= 50.0f;
 					}
 					float Nx = -400.0f;
-					for (int i = 21; i < 28; i++)
+					for (int i = 40; i < 56; i++)
 					{
 						CannonArray[i].setVelocityX(Nx);
-						Nx += 100.0f;
+						Nx += 50.0f;
 					}
 					float Ey = -400.0f;
-					for (int i = 29; i < 32; i++)
+					for (int i = 56; i < 64; i++)
 					{
 						CannonArray[i].setVelocityY(Ey);
-						Ey += 100.0f;
+						Ey += 50.0f;
 					}
+
 					for (int cannonNo = 0; cannonNo < (sizeof(CannonArray) / sizeof(*CannonArray)); cannonNo++)
 					{
 						CannonArray[cannonNo].update(frameTime);
@@ -909,6 +1030,7 @@ void dontdie::update()
 			}
 			else if (boss.getForm() == 2) //boss form 2 :: NORAB
 			{
+				boss.setPrev(boss.getX(), boss.getY());
 				if (boss.isReloading())
 				{
 					boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
@@ -981,6 +1103,18 @@ void dontdie::update()
 
 		map.update(frameTime);
 		boss.update(frameTime);
+		if (boss.hasDied()) // win condition
+		{
+			state = 4;
+		}
+	}
+	else if (state == 3)
+	{
+		// LOSE SCREEN
+	}
+	else if (state == 4)
+	{
+		// WIN SCREEN
 	}
 }
 
@@ -1088,7 +1222,7 @@ void dontdie::render()
 			shotgunBulletArray[bullet].draw();
 		}
 	}
-	if (boss.isSpawn()) //if boss spawns
+	if (boss.getActive()) //if boss spawn
 	{
 		bossMAXHP.draw(); //draw MAXHP bar
 		if (boss.getHP() > 0)
@@ -1249,18 +1383,20 @@ void dontdie::collisions()
 			}
 		}
 	}
-	if (boss.getForm() == 2)
+	if (player1.collidesWith(boss, tempVector))
 	{
-		if (player1.collidesWith(boss, tempVector))
+		if (boss.getForm() == 2)
+		{
+			player1.damageMe(3);
+			player1.revertLocation();
+			boss.revertLocation();
+			NORAB_ATTACKING_TIMER = 0;
+		}
+		else
 		{
 			player1.damageMe(boss.getDamage());
-			if (player1.getHp() == 0)
-			{
-				player1.setX(GAME_WIDTH / 2);
-
-				player1.setY(GAME_HEIGHT / 4);
-			}
-		}
+		}	
+		boss.setPrev(boss.getX(), boss.getY());
 	}
 	for (int cannon = 0; cannon < (sizeof(CannonArray) / sizeof(*CannonArray)); cannon++)
 	{
