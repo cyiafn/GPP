@@ -103,6 +103,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="instruction.cpp" />
+    <ClCompile Include="lose.cpp" />
     <ClCompile Include="playerHealth.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="spitter.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="dontdie.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="wall.cpp" />
+    <ClCompile Include="win.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="zombie.cpp" />
   </ItemGroup>
@@ -131,6 +133,7 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="instruction.h" />
+    <ClInclude Include="lose.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerHealth.h" />
     <ClInclude Include="spitter.h" />
@@ -140,8 +143,12 @@
     <ClInclude Include="textDX.h" />
     <ClInclude Include="dontdie.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="win.h" />
     <ClInclude Include="zombie.h" />
     <ClInclude Include="wall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="music.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

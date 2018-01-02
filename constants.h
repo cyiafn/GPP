@@ -60,6 +60,8 @@ const char BOSS_HP[] = "pictures\\Health pixel.png";
 const char BOSS_MAX_HP[] = "pictures\\MAXHP pixel.png";
 const char BOSS_CUR_HP[] = "pictures\\CURHP pixel.png";
 const char START_IMAGE[] = "pictures\\start.png";
+const char WIN_IMAGE[] = "pictures\\win.png";
+const char LOSE_IMAGE[] = "pictures\\lose.png";
 // graphic images
 const char PLAYER_IMAGE[] = "pictures\\player.png"; // picture of Player
 const char HEALTH_IMAGE[] = "pictures\\heart.png"; //picture of Heart

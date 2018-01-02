@@ -5,7 +5,11 @@
 #include <string>
 #include "astar.h"
 #include "zombie.h"
+
 using namespace dontdieNS;
+//Sound Music
+//using Microsoft.DirectX.DirectSound;
+//using DS = Microsoft.DirectX.DirectSound;
 
 //=============================================================================
 // Constructor
@@ -37,6 +41,9 @@ dontdie::~dontdie()
 void dontdie::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd);
+	//Background Music
+	//backMusic = new Audio("music.mp3");
+	//backMusic.Play();
 	//ASTAR Algorithm MAP generation
 	this->spitterbulletID = 0;
 	this->spawnbuffer = 30;
@@ -107,6 +114,14 @@ void dontdie::initialize(HWND hwnd)
 	}
 	if (!InstructionTexture.initialize(graphics, INSTRUCTION_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction texture"));
+	if (!WinTexture.initialize(graphics, WIN_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing win texture"));
+	}
+	if (!LoseTexture.initialize(graphics, LOSE_IMAGE))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing lose texture"));
+	}
 	if (!tankTexture.initialize(graphics, TANK_IMAGE))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initalizing Tank texture"));
@@ -126,7 +141,10 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing start"));
 	if (!instructionScreen.initialize(this, instructionNS::WIDTH, instructionNS::HEIGHT, instructionNS::TEXTURE_COLS, &InstructionTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction"));
-
+	if (!winScreen.initialize(this, WinNS::WIDTH, WinNS::HEIGHT, WinNS::TEXTURE_COLS, &WinTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing win"));
+	if (!loseScreen.initialize(this, LoseNS::WIDTH, LoseNS::HEIGHT, LoseNS::TEXTURE_COLS, &LoseTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing lose"));
 	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
 	map.setFrames(0, 0);
@@ -340,6 +358,12 @@ void dontdie::reset()
 //=============================================================================
 void dontdie::update()
 {
+	//Background Music
+	/*if (backmusic.CurrentPosition == lastmusicposition)
+	{
+		backmusic.SeekCurrentPosition(0, SeekPositionFlags.AbsolutePositioning);
+	}
+	lastmusicposition = backmusic.CurrentPosition;*/
 	if (state == 0)
 	{
 		startScreen.update(frameTime);
@@ -436,6 +460,8 @@ void dontdie::update()
 						break;
 					}
 				}
+				/*SecondaryBuffer newshotsound = shotsound.Clone(sounddevice);
+				newshotsound.Play(0, BufferPlayFlags.Default);*/
 			}
 
 
@@ -450,6 +476,7 @@ void dontdie::update()
 			if (!player1.isDead()) //if false
 			{
 				player1.hasDied(); //makes died true
+				loseScreen.setInitialised(true);
 				state = 3;
 			}
 		
@@ -893,6 +920,7 @@ void dontdie::update()
 					}
 				}
 			}
+
 			else
 			{
 				spawnbuffer += 1;
@@ -1030,7 +1058,10 @@ void dontdie::update()
 			}
 			else if (boss.getForm() == 2) //boss form 2 :: NORAB
 			{
-				boss.setPrev(boss.getX(), boss.getY());
+				if (fpscounter % 5 == 0)
+				{
+					boss.setPrev(boss.getX(), boss.getY());
+				}
 				if (boss.isReloading())
 				{
 					boss.setFrames(bossNS::NORAB_START_FRAME, bossNS::NORAB_END_FRAME);
@@ -1105,16 +1136,19 @@ void dontdie::update()
 		boss.update(frameTime);
 		if (boss.hasDied()) // win condition
 		{
+			winScreen.setInitialised(true);
 			state = 4;
 		}
 	}
 	else if (state == 3)
 	{
 		// LOSE SCREEN
+		loseScreen.update(frameTime);
 	}
 	else if (state == 4)
 	{
 		// WIN SCREEN
+		winScreen.update(frameTime);
 	}
 }
 
@@ -1254,7 +1288,7 @@ void dontdie::render()
 		_snprintf_s(buffer, BUF_SIZE, "%d ", (int)player1.getHp());
 		dxFont.print(buffer, 39, 0);
 	}
-
+	
 	if (instructionScreen.isInitialised() == true)
 	{
 		instructionScreen.draw();
@@ -1264,6 +1298,15 @@ void dontdie::render()
 	{
 		startScreen.draw();
 	}
+	if (loseScreen.isInitialised() == true)
+	{
+		loseScreen.draw();
+	}
+	if (winScreen.isInitialised() == true)
+	{
+		winScreen.draw();
+	}
+
 
 	graphics->spriteEnd();
 

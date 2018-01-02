@@ -29,7 +29,15 @@
 #include <vector>
 #include <string>
 #include "start.h"
+#include "win.h"
+#include "lose.h"
 #include "instruction.h"
+
+//Background Music
+//using Microsoft.DirectX.AudioVideoPlayback;
+//Sound Effects
+//using Microsoft.DirectX.DirectSound;
+//using DS = Microsoft.DirectX.DirectSound;
 
 namespace dontdieNS
 {
@@ -139,6 +147,12 @@ private:
 	float clearCooldown;
 	
     // game variables
+	//Background Music
+	/*private Audio backMusic;
+	private double lastmusicposition;*/
+	//Sound Effects
+	/*private DS.Device sounddevice;
+	private SecondaryBuffer shotsound;*/
 
 	float pistolBuffer,smgBuffer,shotgunBuffer,rifleBuffer;
 	int pBullets,smgBullets,rifleBullets;
@@ -152,6 +166,10 @@ private:
 	Start startScreen;
 	TextureManager StartTexture;
 	Image start;
+	Win winScreen;
+	Lose loseScreen;
+	TextureManager WinTexture;
+	TextureManager LoseTexture;
 
 	Instruction instructionScreen;
 	TextureManager InstructionTexture;
@@ -176,6 +194,16 @@ public:
     void resetAll();
 	bool checkStageClear();
 	void clearAllMobs();
+	/*private void InitializeSound()
+	{
+		sounddevice = new DS.Device();
+		sounddevice.SetCooperativeLevel(this, CooperativeLevel.Normal);
+
+		BufferDescription description = new BufferDescription();
+		description.ControlEffects = false;
+		shotsound = new SecondaryBuffer("shot.wav", description, sounddevice);
+		shotsound.Play(0, BufferPlayFlags.Default);
+	}*/
 };
 
 #endif
