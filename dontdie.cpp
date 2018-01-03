@@ -41,7 +41,7 @@ dontdie::~dontdie()
 void dontdie::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd);
-	//Background Music
+
 	//backMusic = new Audio("music.mp3");
 	//backMusic.Play();
 	//ASTAR Algorithm MAP generation
@@ -56,7 +56,7 @@ void dontdie::initialize(HWND hwnd)
 	this->SpitterStageThreeSpawn = 10;
 	this->zombieStageBossSpawn = 20;
 	this->TankStageBossSpawn = 8;
-	this->SpitterStageBossSpawn = 10;
+	this->SpitterStageBossSpawn = 5;
 	this->currentSpawn = 0;
 	this->stageSpawnComplete = false;
 	this->stageBufferTime = 180;
@@ -70,6 +70,8 @@ void dontdie::initialize(HWND hwnd)
 	this->rifleBullets = 10000;
 	this->state = 0;
 	this->clickBuffer = 30;
+	player1.setX(GAME_WIDTH / 2);
+	player1.setY(GAME_HEIGHT / 2);
 	
 	// 15 pixel high Arial
 	if (dxFontSmall->initialize(graphics, 15, true, false, "Arial") == false)
@@ -145,7 +147,7 @@ void dontdie::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing win"));
 	if (!loseScreen.initialize(this, LoseNS::WIDTH, LoseNS::HEIGHT, LoseNS::TEXTURE_COLS, &LoseTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing lose"));
-	if (!map.initialize(graphics, 0, 0, 0, &mapTexture))
+	if (!map.initialize(graphics, TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_COLS, &mapTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing map"));
 	map.setFrames(0, 0);
 	map.setCurrentFrame(0);
@@ -154,19 +156,19 @@ void dontdie::initialize(HWND hwnd)
 	if (!wallArray[0].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[0].setX(GAME_WIDTH / 2);
-	wallArray[0].setY(GAME_HEIGHT / 4 - 64);
+	wallArray[0].setY(GAME_HEIGHT / 4 - 128);
 
 	if (!wallArray[1].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[1].setX(wallArray[0].getX() + 128);
 	wallArray[1].setY(GAME_HEIGHT / 4 - 64);
-	wallArray[1].setDegrees(90.0f);
+	//wallArray[1].setDegrees(90.0f);
 
 	if (!wallArray[2].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[2].setX(wallArray[0].getX() - 128);
 	wallArray[2].setY(GAME_HEIGHT / 4 - 64);
-	wallArray[2].setDegrees(90.0f);
+	//wallArray[2].setDegrees(90.0f);
 
 	if (!wallArray[3].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
@@ -182,19 +184,19 @@ void dontdie::initialize(HWND hwnd)
 	if (!wallArray[5].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[5].setX(GAME_WIDTH / 2);
-	wallArray[5].setY(GAME_HEIGHT / 2 + 128);
+	wallArray[5].setY(GAME_HEIGHT / 2 + 128+64);
 
 	if (!wallArray[6].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[6].setX(wallArray[0].getX() + 128);
 	wallArray[6].setY(GAME_HEIGHT / 2 + 128);
-	wallArray[6].setDegrees(90.0f);
+	//wallArray[6].setDegrees(90.0f);
 
 	if (!wallArray[7].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
 	wallArray[7].setX(wallArray[0].getX() - 128);
 	wallArray[7].setY(GAME_HEIGHT / 2 + 128);
-	wallArray[7].setDegrees(90.0f);
+	//wallArray[7].setDegrees(90.0f);
 
 	if (!wallArray[8].initialize(this, 0, 0, 0, &wallTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
@@ -359,15 +361,14 @@ void dontdie::reset()
 void dontdie::update()
 {
 	//Background Music
-	/*if (backmusic.CurrentPosition == lastmusicposition)
-	{
-		backmusic.SeekCurrentPosition(0, SeekPositionFlags.AbsolutePositioning);
-	}
-	lastmusicposition = backmusic.CurrentPosition;*/
+	audio->playCue(BM_MUSIC);
 	if (state == 0)
 	{
 		startScreen.update(frameTime);
-		if (input->getMouseLButton() == true)
+		if (this->clickBuffer != 30) {
+			this->clickBuffer += 1;
+		}
+		if (input->getMouseLButton() == true && this->clickBuffer == 30)
 		{
 			state = 1;
 			startScreen.setInitialised(false);
@@ -434,13 +435,15 @@ void dontdie::update()
 		}
 
 		if (input->getMouseLButton() == true)
-		{
+		{		
 			float clickY = input->getMouseY();
 			float clickX = input->getMouseX();
 			//if (stage == 1)
 			//{ 
 			if (player1.getPistolBuffer() == 30.0f)
 			{
+				audio->stopCue(GUN_SHOT);
+				audio->playCue(GUN_SHOT);			
 				player1.setPistolBuffer(0);
 				for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
 				{
@@ -460,8 +463,7 @@ void dontdie::update()
 						break;
 					}
 				}
-				/*SecondaryBuffer newshotsound = shotsound.Clone(sounddevice);
-				newshotsound.Play(0, BufferPlayFlags.Default);*/
+				
 			}
 
 
@@ -472,7 +474,6 @@ void dontdie::update()
 
 		if (player1.getHp() <= 0)
 		{
-			player1.setX(GAME_WIDTH / 2);
 			if (!player1.isDead()) //if false
 			{
 				player1.hasDied(); //makes died true
@@ -814,7 +815,7 @@ void dontdie::update()
 			///////////////////////////////////////////////////////////////////////////////
 			////////////////////Mobs spawn/////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////
-			if (spawnbuffer == 60)
+			if (spawnbuffer == 180)
 			{
 				if (stageSpawnComplete == false)
 				{
@@ -916,7 +917,10 @@ void dontdie::update()
 					}
 					else
 					{
-						stageSpawnComplete = true;
+						stageSpawnComplete = false;
+						zombieStageBossSpawn = 20;
+						TankStageBossSpawn = 8;
+						SpitterStageBossSpawn = 5;
 					}
 				}
 			}
@@ -1144,11 +1148,79 @@ void dontdie::update()
 	{
 		// LOSE SCREEN
 		loseScreen.update(frameTime);
+		clearAllMobs();
+		if (input->getMouseLButton() == true)
+		{			
+			startScreen.setInitialised(true);
+			instructionScreen.setInitialised(true);
+			loseScreen.setInitialised(false);
+			player1.setHp(20);
+			//revive boss
+			boss.setHP(500);
+			boss.setActive(false);
+			boss.setSpawn(false);
+			boss.setDied(false);
+			boss.setDegrees(0.0f);
+			for (int bossCannon = 0; bossCannon < (sizeof(CannonArray) / sizeof(*CannonArray)); bossCannon++)
+			{
+				if (CannonArray[bossCannon].isInitialised() == true)
+				{
+					CannonArray[bossCannon].setInitialised(false);
+				}
+			}
+			state = 0;
+			this->clickBuffer = 0;
+			stage = 0;
+			player1.setDied(false);
+			loseScreen.setCurrentFrame(0);
+			player1.setX(GAME_WIDTH / 2);
+			player1.setY(GAME_HEIGHT / 2);
+			zombieStageOneSpawn = 50;
+			zombieStageTwoSpawn = 45;
+			TankStageTwoSpawn = 5;
+			zombieStageThreeSpawn = 35;
+			TankStageThreeSpawn = 5;
+			SpitterStageThreeSpawn = 10;
+		}
 	}
 	else if (state == 4)
 	{
 		// WIN SCREEN
 		winScreen.update(frameTime);
+		clearAllMobs();
+		if (input->getMouseLButton() == true)
+		{
+			startScreen.setInitialised(true);
+			instructionScreen.setInitialised(true);
+			winScreen.setInitialised(false);
+			player1.setHp(20);
+			//revive boss
+			boss.setHP(500);
+			boss.setActive(false);
+			boss.setSpawn(false);
+			boss.setDied(false);
+			boss.setDegrees(0.0f);
+			for (int bossCannon = 0; bossCannon < (sizeof(CannonArray) / sizeof(*CannonArray)); bossCannon++)
+			{
+				if (CannonArray[bossCannon].isInitialised() == true)
+				{
+					CannonArray[bossCannon].setInitialised(false);
+				}
+			}
+			state = 0;
+			this->clickBuffer = 0;
+			stage = 0;
+			player1.setDied(false);
+			loseScreen.setCurrentFrame(0);
+			player1.setX(GAME_WIDTH / 2);
+			player1.setY(GAME_HEIGHT / 2);
+			zombieStageOneSpawn = 50;
+			zombieStageTwoSpawn = 45;
+			TankStageTwoSpawn = 5;
+			zombieStageThreeSpawn = 35;
+			TankStageThreeSpawn = 5;
+			SpitterStageThreeSpawn = 10;
+		}
 	}
 }
 
@@ -1162,14 +1234,14 @@ void dontdie::render()
 
 	graphics->spriteBegin();
 	//////////////////////////////////boss HP bar////////////////////////////////////
-	float bossHP = boss.getHP() / 4;  //500 pixel = 2000HP, 1 pixel = 4 HP
+	float bossHP = boss.getHP()/bossNS::MAXHP;  //500 pixel = 1HP
 	if (!bossCURHPTexture.initialize(graphics, BOSS_CUR_HP))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP texture"));
-	if (!bossCURHP.initialize(graphics, bossHP, 32, 1, &bossCURHPTexture))
+	if (!bossCURHP.initialize(graphics, bossHP*500, 32, 1, &bossCURHPTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Boss CURRENT HP BAR"));
 	bossCURHP.setX(110); //centerize the HP bar
 	bossCURHP.setY(GAME_HEIGHT - 32); //show the HP bar at the bottom
-
+	/////////////////////////////////////////////////////////////////////////////////
 	for (int row = 0; row < MAP_HEIGHT; row++)       // for each row of map
 	{
 		map.setY((float)(row*TEXTURE_SIZE)); // set tile Y
@@ -1185,6 +1257,15 @@ void dontdie::render()
 					map.draw();                // draw tile
 				}
 			}
+		}
+	}
+	//Put it on top
+	if (boss.isSpawn()) //if boss spawn
+	{
+		bossMAXHP.draw(); //draw MAXHP bar
+		if (boss.getHP() > 0)
+		{
+			bossCURHP.draw(); //draw boss current HP bar
 		}
 	}
 
@@ -1258,11 +1339,6 @@ void dontdie::render()
 	}
 	if (boss.getActive()) //if boss spawn
 	{
-		bossMAXHP.draw(); //draw MAXHP bar
-		if (boss.getHP() > 0)
-		{
-			bossCURHP.draw(); //draw boss current HP bar
-		}
 		boss.draw(); //draw my boss
 		if (boss.hasShield()) //draw my shield
 			shield.draw();
@@ -1377,20 +1453,11 @@ void dontdie::collisions()
 			{
 				spitterbulletArray[bullet].setInitialised(false);
 				player1.damageMe(2);
+				
 			}
 
 		}
 
-	}
-	for (int zombie = 0; zombie < (sizeof(zombieArray) / sizeof(*zombieArray)); zombie++)
-	{
-		if (zombieArray[zombie].isInitialised() == true)
-		{
-			if (zombieArray[zombie].collidesWith(player1, tempVector))
-			{
-				player1.damageMe(1);
-			}
-		}
 	}
 
 	for (int pistolb = 0; pistolb < (sizeof(pistolBulletArray) / sizeof(*pistolBulletArray)); pistolb++)
@@ -1403,6 +1470,8 @@ void dontdie::collisions()
 					{
 						if (pistolBulletArray[pistolb].collidesWith(zombieArray[zombie], tempVector))
 						{
+							audio->stopCue(MOB_DAMAGE);
+							audio->playCue(MOB_DAMAGE);
 							zombieArray[zombie].damageZombie(pistolBulletArray[pistolb].getpistolDamage());
 							pistolBulletArray[pistolb].setInitialized(false);
 							if (zombieArray[zombie].getHealth() <= 0)
@@ -1431,6 +1500,7 @@ void dontdie::collisions()
 		if (boss.getForm() == 2)
 		{
 			player1.damageMe(3);
+			
 			player1.revertLocation();
 			boss.revertLocation();
 			NORAB_ATTACKING_TIMER = 0;
@@ -1438,6 +1508,7 @@ void dontdie::collisions()
 		else
 		{
 			player1.damageMe(boss.getDamage());
+			
 		}	
 		boss.setPrev(boss.getX(), boss.getY());
 	}
@@ -1450,6 +1521,7 @@ void dontdie::collisions()
 				CannonArray[cannon].setInitialised(false);
 				CannonArray[cannon].setActive(false);
 				player1.damageMe(CannonArray[cannon].getdamage());
+				
 			}
 			for (int i = 0; i < (sizeof(wallArray) / sizeof(*wallArray)); i++)
 			{
@@ -1513,6 +1585,8 @@ void dontdie::collisions()
 				{
 					if (pistolBulletArray[pistolb].collidesWith(tankArray[tank] ,tempVector))
 					{
+						audio->stopCue(MOB_DAMAGE);
+						audio->playCue(MOB_DAMAGE);
 						if (tankArray[tank].getHealth() <= 0)
 						{
 							tankArray[tank].setInitialised(false);
@@ -1532,6 +1606,8 @@ void dontdie::collisions()
 				{
 					if (pistolBulletArray[pistolb].collidesWith(spitterArray[spitter], tempVector))
 					{
+						audio->stopCue(MOB_DAMAGE);
+						audio->playCue(MOB_DAMAGE);
 						if (spitterArray[spitter].getHealth() <= 0)
 						{
 							spitterArray[spitter].setInitialised(false);
@@ -1865,6 +1941,7 @@ void dontdie::ai()
 				player1.revertLocation();
 				zombieArray[zomb].revertLocation();
 				player1.damageMe(zombieArray[zomb].getDamage());
+				
 			}
 			zombieArray[zomb].setPrev(zombieArray[zomb].getX(), zombieArray[zomb].getY());
 		}
@@ -2178,6 +2255,7 @@ void dontdie::ai()
 				player1.revertLocation();
 				tankArray[tank].revertLocation();
 				player1.damageMe(tankArray[tank].getDamage());
+				
 			}
 			tankArray[tank].setPrev(tankArray[tank].getX(), tankArray[tank].getY());
 		}
@@ -2602,5 +2680,12 @@ void dontdie::clearAllMobs()
 	for (int spitter = 0; spitter < (sizeof(spitterArray) / sizeof(*spitterArray)); spitter++)
 	{
 		spitterArray[spitter].setInitialised(false);
+	}
+	for (int spitterbullet = 0; spitterbullet < (sizeof(spitterbulletArray) / sizeof(*spitterbulletArray)); spitterbullet++)
+	{
+		if (spitterbulletArray[spitterbullet].isInitialised() == true)
+		{
+			spitterbulletArray[spitterbullet].setInitialised(false);
+		}
 	}
 }

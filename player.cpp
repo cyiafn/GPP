@@ -40,6 +40,7 @@ Player::Player() : Entity()
 bool Player::initialize(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM)
 {
+	audio = gamePtr->getAudio();
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
@@ -147,6 +148,7 @@ void Player::revertLocation()
 
 void Player::damageMe(int damageValue)
 {
+	audio->playCue("scream");
 	this->hp = this->hp - damageValue;
 }
 

@@ -9,6 +9,7 @@
 
 #include "entity.h"
 #include "constants.h"
+#include "audio.h"
 #include "bullet.h"
 
 namespace playerNS
@@ -38,6 +39,7 @@ private:
 	float rifleBuffer;
 	bool died = false;
 	Bullet pistolBulletArray[2], smgBulletArray[10], ShotgunBullet, rifleBulletArray[5];
+	Audio *audio;
 
 public:
     // constructor
@@ -51,8 +53,10 @@ public:
 	void revertLocation();
 	void damageMe(int damageValue);
 	int getHp();
+	void setHp(int health) { this->hp = health; }
 	bool isDead() { return this->died; }
 	void hasDied() { this->died = true; }
+	void setDied(bool val) { this->died = val; }
 	void closeMsg() { this->died = false; }
 	float getPistolBuffer() { return this->pistolBuffer; };
 	void setPistolBuffer(float buffer);

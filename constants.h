@@ -74,12 +74,13 @@ const char BULLET_IMAGE[] = "pictures\\bullets.png"; //picture of Pistol Bullet
 const char ZOMBIE_IMAGE[] = "pictures\\zombie.png";  // game textures
 
 //environment images
-const char MAP_IMAGE[] = "pictures\\grassTile.png";  // Picture of background
-const char WALL_IMAGE[] = "pictures\\wall.png"; //picture of a wall
+const char MAP_IMAGE[] = "pictures\\moreTiles.png";  // Picture of background
+const char WALL_IMAGE[] = "pictures\\barrier.png"; //picture of a wall
 const char TANK_IMAGE[] = "pictures\\tank.png";
 const char SPITTER_IMAGE[] = "pictures\\spitter.png";
 const char SPITTERBULLET_IMAGE[] = "pictures\\spitterbullet.png";
 const char INSTRUCTION_IMAGE[] = "pictures\\instructions.png";
+
 
 // player movement
 const float ROTATION_RATE = 180.0f;             // degrees per second
@@ -89,10 +90,14 @@ const float PLAYER_SCALE = 1.5f;                  // starting player scale
 
 
 // audio files
-const char WAVE_BANK[] = "";
-const char SOUND_BANK[] = "";
+const char WAVE_BANK[] = "audio\\Win\\waveBank.xwb";
+const char SOUND_BANK[] = "audio\\Win\\soundBank.xsb";
 
 // audio cues
+const char BM_MUSIC[] = "music";
+const char GUN_SHOT[] = "gunshot";
+const char MOB_DAMAGE[] = "getHit";
+const char PLAYER_DAMAGE[] = "scream";
 
 // key mappings
 // In this game simple constants are used for key mappings. If variables were used

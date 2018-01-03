@@ -58,7 +58,7 @@ enum BOSS_STATUS {
 class Boss : public Entity
 { 
 protected:
-	int HP = 2000;
+	float HP = 500;
 	int form = 1;
 	int damage = 1;
 	bool spawn = false;
@@ -78,9 +78,10 @@ public:
 	//common functions
 	int getDamage();
 	void setDamage(int dmg);
-	int getHP();
-	void setHP(int hp) { this->HP = hp; }
+	float getHP();
+	void setHP(float hp) { this->HP = hp; }
 	int getForm();
+	void setForm(int fo) { this->form = fo; }
 	bool isSpawn();
 	void setSpawn(bool spawnVal) { this->spawn = spawnVal; }
 	void takesDamage(int dmgValue);
@@ -89,6 +90,7 @@ public:
 	bool isChanneling();
 	bool isAttacking();
 	bool hasDied();
+	void setDied(bool die) { this->died = die; }
 	void changeMotion(bool motion);
 	void setPrev(float x, float y);
 	void revertLocation();

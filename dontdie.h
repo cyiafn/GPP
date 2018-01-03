@@ -44,22 +44,22 @@ namespace dontdieNS
 
 	//const char FONT[] = "Arial Bold";  // font
 	const int TEXTURE_SIZE = 64;
-	const int TEXTURE_COLS = 1;
+	const int TEXTURE_COLS = 5;
 	const int MAP_HEIGHT = 9;
 	const int MAP_WIDTH = 12;
 	const float SCROLL_RATE = 10;
 	const int __ = -1;                  // empty tile
 
 	const int tileMap[MAP_HEIGHT][MAP_WIDTH] = {
+		 0,1,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,1,0,
+		 0,0,0,1,0,0,0,0,0,0,0,0,
 		 0,0,0,0,0,0,0,0,0,0,0,0,
 		 0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,0,0,0,0,0,0,0,0,0
+		 0,0,0,0,0,0,1,0,0,0,0,0,
+		 0,1,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,0,0,1,0,
+		 0,0,1,0,0,0,0,0,0,0,0,0
 	};
 }
 

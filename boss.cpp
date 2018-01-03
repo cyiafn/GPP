@@ -51,7 +51,7 @@ void Boss::update(float frameTime)
 	}
 	else if (input->isKeyDown(MINUS_HP))
 	{
-		this->HP -= 1;
+		this->HP -= 100;
 	}
 	//////////////////////////////////
 	// Boss Health Tracking :kappa: //
@@ -74,6 +74,12 @@ void Boss::update(float frameTime)
 			//WIN
 			spawn = false;
 			died = true;
+			//revive for next game
+			form = 1;
+			shieldOn = true;
+			channeling = false;
+			attacking = false;
+			reloading = true;
 		}
 	}
 	
@@ -89,7 +95,7 @@ void Boss::setDamage(int dmg)
 	damage = dmg;
 }
 
-int Boss::getHP()
+float Boss::getHP()
 {
 	return this->HP;
 }
